@@ -1,0 +1,30 @@
+{
+  "name": "squirkle-ui-monorepo",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.10.0",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @squirkle/docs dev",
+    "dev:vue2": "pnpm --filter @squirkle/playground-vue2 dev",
+    "dev:nuxt": "pnpm --filter @squirkle/playground-nuxt dev",
+    "build": "node scripts/build.mjs",
+    "build:docs": "pnpm --filter @squirkle/docs build",
+    "test": "vitest run",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.0",
+    "@vitejs/plugin-vue2": "^2.3.4",
+    "@vue/test-utils": "^2.4.6",
+    "happy-dom": "^20.0.0",
+    "typescript": "~5.9.0",
+    "vite": "^7.1.0",
+    "vitest": "^3.2.0",
+    "vue": "^3.5.0",
+    "vue-tsc": "^3.0.0",
+    "vue2": "npm:vue@2.7.16"
+  }
+}

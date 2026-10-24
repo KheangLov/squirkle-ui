@@ -1,0 +1,90 @@
+/* Squirkle design tokens. Colors come from the theme (packages/core/src/theme.ts); everything else lives here. */
+:root {
+  /* squircle — --sq-radius-scale (default 1) is set by appearance options */
+  --sq-smoothing: 0.6;
+  --sq-radius-none: 0px;
+  --sq-radius-xs: calc(6px * var(--sq-radius-scale, 1));
+  --sq-radius-sm: calc(10px * var(--sq-radius-scale, 1));
+  --sq-radius-md: calc(14px * var(--sq-radius-scale, 1));
+  --sq-radius-lg: calc(20px * var(--sq-radius-scale, 1));
+  --sq-radius-xl: calc(28px * var(--sq-radius-scale, 1));
+  --sq-radius-2xl: calc(36px * var(--sq-radius-scale, 1));
+  --sq-radius-pill: 9999px;
+
+  /* spacing (4px scale) */
+  --sq-space-0: 0px;
+  --sq-space-1: 4px;
+  --sq-space-2: 8px;
+  --sq-space-3: 12px;
+  --sq-space-4: 16px;
+  --sq-space-5: 20px;
+  --sq-space-6: 24px;
+  --sq-space-8: 32px;
+  --sq-space-10: 40px;
+  --sq-space-12: 48px;
+
+  /* typography */
+  /* Geist is the recommended UI face (load it from Google Fonts or self-host); system fonts are the fallback. */
+  --sq-font: 'Geist', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --sq-font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sq-text-2xs: 11px;
+  --sq-text-xs: 12px;
+  --sq-text-sm: 13px;
+  --sq-text-md: 14px;
+  --sq-text-lg: 16px;
+  --sq-text-xl: 18px;
+  --sq-text-2xl: 22px;
+  --sq-text-3xl: 28px;
+  --sq-text-4xl: 36px;
+  --sq-weight-regular: 400;
+  --sq-weight-medium: 500;
+  --sq-weight-semibold: 600;
+  --sq-weight-bold: 700;
+  --sq-leading: 1.5;
+
+  /* control sizes */
+  --sq-control-xs: 24px;
+  --sq-control-sm: 30px;
+  --sq-control-md: 38px;
+  --sq-control-lg: 46px;
+  --sq-control-xl: 56px;
+
+  /* elevation: box-shadow (native/css squircles) + drop-shadow filter (SVG squircles) */
+  --sq-elevation-0: none;
+  --sq-elevation-1: 0 1px 2px rgb(16 18 35 / 0.06), 0 1px 3px rgb(16 18 35 / 0.08);
+  --sq-elevation-2: 0 2px 6px rgb(16 18 35 / 0.07), 0 6px 16px rgb(16 18 35 / 0.07);
+  --sq-elevation-3: 0 4px 12px rgb(16 18 35 / 0.08), 0 12px 32px rgb(16 18 35 / 0.1);
+  --sq-elevation-4: 0 8px 20px rgb(16 18 35 / 0.1), 0 24px 56px rgb(16 18 35 / 0.14);
+  --sq-elevation-0-filter: none;
+  --sq-elevation-1-filter: drop-shadow(0 1px 2px rgb(16 18 35 / 0.1));
+  --sq-elevation-2-filter: drop-shadow(0 2px 6px rgb(16 18 35 / 0.08)) drop-shadow(0 6px 12px rgb(16 18 35 / 0.06));
+  --sq-elevation-3-filter: drop-shadow(0 4px 10px rgb(16 18 35 / 0.1)) drop-shadow(0 12px 24px rgb(16 18 35 / 0.08));
+  --sq-elevation-4-filter: drop-shadow(0 8px 16px rgb(16 18 35 / 0.12)) drop-shadow(0 24px 40px rgb(16 18 35 / 0.12));
+
+  /* motion */
+  --sq-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --sq-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --sq-duration-fast: 120ms;
+  --sq-duration: 200ms;
+  --sq-duration-slow: 320ms;
+
+  /* z-index */
+  --sq-z-app-bar: 1000;
+  --sq-z-drawer: 1005;
+  --sq-z-overlay: 2000;
+  --sq-z-tooltip: 2500;
+  --sq-z-snackbar: 3000;
+
+  /* state layers & focus */
+  --sq-hover-opacity: 8%;
+  --sq-press-opacity: 14%;
+  --sq-selected-opacity: 12%;
+  --sq-disabled-opacity: 0.45;
+  --sq-focus-ring: 0 0 0 3px color-mix(in srgb, var(--sq-primary) 35%, transparent);
+
+  /* breakpoints (reference values for JS; CSS media queries use the same numbers) */
+  --sq-bp-sm: 600px;
+  --sq-bp-md: 960px;
+  --sq-bp-lg: 1280px;
+  --sq-bp-xl: 1920px;
+}

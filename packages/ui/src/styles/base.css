@@ -1,0 +1,81 @@
+/* Squircle surface pattern: a surface sets --sq-bg, --sq-bd, --sq-bw, --sq-r, --sq-shadow and --sq-shadow-filter. */
+.sq-surface {
+  position: relative;
+  isolation: isolate;
+  background: var(--sq-paint, var(--sq-bg, transparent));
+  transition: background-color var(--sq-duration) var(--sq-ease), border-color var(--sq-duration) var(--sq-ease), box-shadow var(--sq-duration) var(--sq-ease);
+  border: var(--sq-bw, 0px) solid var(--sq-bd, transparent);
+  border-radius: var(--sq-r, var(--sq-radius-md));
+  box-shadow: var(--sq-shadow, none);
+}
+@supports (corner-shape: squircle) {
+  .sq-surface {
+    border-radius: calc(var(--sq-r, var(--sq-radius-md)) * (1 + var(--sq-smoothing)));
+    corner-shape: squircle;
+  }
+}
+/* Inner layers that copy the parent's radius must copy its corner shape too, or they clip with a circle. */
+@supports (corner-shape: squircle) {
+  .sq-table__wrapper, .sq-avatar__img, .sq-menu__scroll, .sq-img__clip, .sq-expansion-panel__header, .sq-card__image, .sq-progress-linear__bar { corner-shape: inherit; }
+}
+/* SVG fallback active (set by <SqShape>): the svg paints fill/stroke/shadow instead. */
+.sq-surface[data-sq-shape] {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+.sq-shape {
+  position: absolute;
+  inset: calc(var(--sq-bw, 0px) * -1);
+  z-index: -1;
+  overflow: visible;
+  pointer-events: none;
+  filter: var(--sq-shadow-filter, none);
+}
+.sq-shape-layers { display: contents; }
+.sq-shape--stroke { z-index: 10; filter: none; }
+.sq-shape__fill { fill: var(--sq-paint, var(--sq-bg, transparent)); transition: fill var(--sq-duration) var(--sq-ease); }
+.sq-shape__stroke { fill: none; stroke: var(--sq-bd, transparent); transition: stroke var(--sq-duration) var(--sq-ease); }
+
+/* Interactive state layer: --sq-state (0–14%) mixes the foreground into the surface. */
+.sq-interactive { --sq-paint: color-mix(in srgb, var(--sq-fg, currentColor) var(--sq-state, 0%), var(--sq-bg, transparent)); cursor: pointer; }
+.sq-interactive:hover { --sq-state: var(--sq-hover-opacity); }
+.sq-interactive:active { --sq-state: var(--sq-press-opacity); }
+
+/* Plain radius helper for dense elements (grid cells, list rows) — no per-item JS. */
+.sq-squircle { border-radius: var(--sq-r, var(--sq-radius-md)); }
+@supports (corner-shape: squircle) {
+  .sq-squircle { border-radius: calc(var(--sq-r, var(--sq-radius-md)) * (1 + var(--sq-smoothing))); corner-shape: squircle; }
+}
+
+.sq-app, .sq-root {
+  font-family: var(--sq-font);
+  font-size: var(--sq-text-md);
+  line-height: var(--sq-leading);
+  color: var(--sq-on-background);
+  -webkit-font-smoothing: antialiased;
+}
+[class^='sq-'], [class*=' sq-'], [class^='sq-']::before, [class^='sq-']::after { box-sizing: border-box; }
+
+.sq-focusable:focus-visible { outline: none; box-shadow: var(--sq-focus-ring); }
+.sq-disabled, [disabled].sq-btn { opacity: var(--sq-disabled-opacity); pointer-events: none; }
+.sq-portal, .sq-portal__layer { display: contents; }
+/* Portalled overlays live under <body>, outside .sq-app — give them the app's typography. */
+.sq-portal__layer { font-family: var(--sq-font); font-size: var(--sq-text-md); line-height: var(--sq-leading); color: var(--sq-on-surface); -webkit-font-smoothing: antialiased; }
+.sq-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+
+/* Transitions: both Vue 2 (-enter) and Vue 3 (-enter-from) class names. */
+.sq-fade-enter-active, .sq-fade-leave-active { transition: opacity var(--sq-duration) var(--sq-ease); }
+.sq-fade-enter, .sq-fade-enter-from, .sq-fade-leave-to { opacity: 0; }
+.sq-scale-enter-active, .sq-scale-leave-active { transition: opacity var(--sq-duration) var(--sq-ease), transform var(--sq-duration) var(--sq-ease-spring); }
+.sq-scale-enter, .sq-scale-enter-from, .sq-scale-leave-to { opacity: 0; transform: scale(0.94); }
+.sq-slide-y-enter-active, .sq-slide-y-leave-active { transition: opacity var(--sq-duration) var(--sq-ease), transform var(--sq-duration) var(--sq-ease); }
+.sq-slide-y-enter, .sq-slide-y-enter-from, .sq-slide-y-leave-to { opacity: 0; transform: translateY(12px); }
+.sq-expand-enter-active, .sq-expand-leave-active { transition: height var(--sq-duration) var(--sq-ease), opacity var(--sq-duration) var(--sq-ease); overflow: hidden; }
+.sq-expand-enter, .sq-expand-enter-from, .sq-expand-leave-to { opacity: 0; }
+
+@keyframes sq-spin { to { transform: rotate(360deg); } }
+@keyframes sq-shimmer { 100% { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) {
+  [class^='sq-'], [class*=' sq-'] { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@squirkle/nuxt",
+  "version": "0.1.0",
+  "description": "Nuxt 2, 3 and 4 module for Squirkle UI",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "src"
+  ],
+  "main": "./src/nuxt2.cjs",
+  "exports": {
+    ".": {
+      "import": "./src/module.mjs"
+    },
+    "./nuxt2": "./src/nuxt2.cjs"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^4.0.0"
+  },
+  "peerDependencies": {
+    "@squirkle/ui": "workspace:*"
+  },
+  "module": "./src/module.mjs"
+}

@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "types": ["vite/client"],
+    "baseUrl": ".",
+    "paths": {
+      "@squirkle/core": ["packages/core/src/index.ts"],
+      "@squirkle/ui": ["packages/ui/src/index.ts"],
+      "@squirkle/datagrid": ["packages/datagrid/src/index.ts"],
+      "@squirkle/swiper": ["packages/swiper/src/index.ts"],
+      "@squirkle/calendar": ["packages/calendar/src/index.ts"],
+      "@squirkle/map": ["packages/map/src/index.ts"],
+      "@squirkle/charts": ["packages/charts/src/index.ts"],
+      "@squirkle/icons": ["packages/icons/src/index.ts"]
+    }
+  },
+  "include": ["packages/*/src/**/*.ts", "packages/*/src/**/*.vue", "apps/docs/src/**/*.ts", "apps/docs/src/**/*.vue"],
+  "exclude": ["packages/nuxt/**", "**/node_modules/**", "**/dist/**"]
+}

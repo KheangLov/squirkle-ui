@@ -1,0 +1,11 @@
+# TESTING
+Purpose: how code is verified here.
+Read when: writing tests, running checks, or acting as test-verifier.
+
+- **Framework**: Vitest 3 + happy-dom (`vitest.config.ts`, aliases from `build/aliases.ts`). Command `pnpm test` (`vitest run`); single package `pnpm vitest run packages/datagrid`.
+- **Location**: `packages/<pkg>/test/*.test.ts`. Existing: `packages/core/test/core.test.ts` (squircle path, ticks, compare, month grid, theme CSS), `packages/datagrid/test/engine.test.ts` (filters, multi-sort, grouping, tree, pivot, layout, CSV/TSV, 100k-row perf budget < 400 ms), `packages/calendar/test/layout.test.ts` (overlap layout), `packages/map/test/cluster.test.ts` (clustering, 256 px raster tiles, 2,000-point perf budget < 30 ms, style presets). Theme contrast (every preset + brand colors ≥ 4.5:1) lives in `core.test.ts`.
+- **Pattern**: pure logic in `.ts` modules is tested directly; no component (mount) tests yet — `@vue/test-utils` is installed but unused.
+- **Type-check**: `pnpm typecheck` (vue-tsc, includes docs).
+- **Build check**: `pnpm build <pkg>` compiles Vue 3 + Vue 2 — required for any SFC change (catches Vue 2 compiler errors).
+- **Runtime check**: `pnpm dev` (docs, Vue 3), `pnpm build && pnpm dev:vue2` (Vue 2.7 dist smoke test, `apps/playground-vue2/src/App.vue`) and `pnpm build && pnpm dev:nuxt` (Nuxt 4 SSR + hydration, `apps/playground-nuxt`); production: `cd apps/playground-nuxt && npx nuxt build`, then launch entry `nuxt-preview` (:5183). Test client-only components on a full page load, not only after client navigation. Docs production: `pnpm build:docs`, then launch entry `docs-preview` (:5184); production builds hide component internals, so check canvas size, attribution and network (worker 200, glyph requests). SSR check: `curl` the page and confirm components render, `id="sq-theme-vars"` is in `<head>` and the server log is clean.
+- **Weak coverage**: no component tests, no visual regression, no Nuxt 2 runtime test, no a11y automation. Browser checks in background tabs are unreliable (rAF/scroll events paused). WebGL map canvases can look empty in pane screenshots — check `.sq-map__canvas` height and sample pixels in a MapLibre `render` callback instead.

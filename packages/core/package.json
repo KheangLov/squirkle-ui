@@ -1,0 +1,24 @@
+{
+  "name": "@squirkle/core",
+  "version": "0.1.0",
+  "description": "Framework-agnostic squircle geometry, color, date and data utilities for Squirkle UI",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "node ../../scripts/build.mjs core"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@squirkle/playground-nuxt",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev --port 5182",
+    "build": "nuxt build",
+    "preview": "nuxt preview --port 5182"
+  },
+  "dependencies": {
+    "@squirkle/nuxt": "workspace:*",
+    "@squirkle/ui": "workspace:*",
+    "@squirkle/core": "workspace:*",
+    "@squirkle/datagrid": "workspace:*",
+    "@squirkle/charts": "workspace:*",
+    "@squirkle/swiper": "workspace:*",
+    "@squirkle/calendar": "workspace:*",
+    "@squirkle/map": "workspace:*",
+    "@squirkle/icons": "workspace:*",
+    "leaflet": "^1.9.4",
+    "nuxt": "4.6.2",
+    "vue": "^3.5.0",
+    "maplibre-gl": "^6.15.0"
+  }
+}

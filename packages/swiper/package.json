@@ -1,0 +1,39 @@
+{
+  "name": "@squirkle/swiper",
+  "version": "0.1.0",
+  "description": "Touch swiper / carousel for Squirkle UI",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/vue3/index.cjs",
+  "module": "./dist/vue3/index.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/vue3/index.mjs",
+      "require": "./dist/vue3/index.cjs"
+    },
+    "./vue2": {
+      "import": "./dist/vue2/index.mjs",
+      "require": "./dist/vue2/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "peerDependencies": {
+    "vue": "^2.7.0 || ^3.3.0",
+    "@squirkle/ui": "workspace:*"
+  },
+  "dependencies": {
+    "@squirkle/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@squirkle/ui": "workspace:*"
+  },
+  "scripts": {
+    "build": "node ../../scripts/build.mjs swiper"
+  }
+}
