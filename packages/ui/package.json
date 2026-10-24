@@ -3,6 +3,25 @@
   "version": "0.1.0",
   "description": "Squircle-first Vue component library for Vue 2.7, Vue 3 and Nuxt 2/3/4",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KheangLov/squirkle-ui.git",
+    "directory": "packages/ui"
+  },
+  "homepage": "https://github.com/KheangLov/squirkle-ui#readme",
+  "bugs": {
+    "url": "https://github.com/KheangLov/squirkle-ui/issues"
+  },
+  "keywords": [
+    "vue",
+    "vue2",
+    "vue3",
+    "nuxt",
+    "components",
+    "ui",
+    "squircle",
+    "design-system"
+  ],
   "type": "module",
   "sideEffects": [
     "*.css"
@@ -12,24 +31,33 @@
   ],
   "main": "./dist/vue3/index.cjs",
   "module": "./dist/vue3/index.mjs",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/vue3/index.mjs",
       "require": "./dist/vue3/index.cjs"
     },
     "./vue2": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/vue2/index.mjs",
       "require": "./dist/vue2/index.cjs"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/styles.css",
+    "./dist/types/*": {
+      "types": "./dist/types/*.d.ts"
+    }
   },
   "peerDependencies": {
     "vue": "^2.7.0 || ^3.3.0"
   },
   "dependencies": {
-    "@squirkle/core": "workspace:*"
+    "@squirkle/core": "workspace:^"
   },
   "scripts": {
     "build": "node ../../scripts/build.mjs ui"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

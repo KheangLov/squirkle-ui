@@ -17,6 +17,13 @@ pnpm test
 pnpm typecheck
 ```
 
+## Install
+```bash
+npm i @squirkle/ui vue                 # core components
+npm i @squirkle/datagrid @squirkle/map # add-ons as needed
+npm i @squirkle/nuxt                   # Nuxt 2 / 3 / 4 module
+```
+
 ## Use
 ```ts
 // Vue 3

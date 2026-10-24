@@ -3,6 +3,20 @@
   "version": "0.1.0",
   "description": "Framework-agnostic squircle geometry, color, date and data utilities for Squirkle UI",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KheangLov/squirkle-ui.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/KheangLov/squirkle-ui#readme",
+  "bugs": {
+    "url": "https://github.com/KheangLov/squirkle-ui/issues"
+  },
+  "keywords": [
+    "squircle",
+    "design-tokens",
+    "theme"
+  ],
   "type": "module",
   "sideEffects": [
     "*.css"
@@ -12,13 +26,21 @@
   ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
+    },
+    "./dist/types/*": {
+      "types": "./dist/types/*.d.ts"
     }
   },
   "scripts": {
     "build": "node ../../scripts/build.mjs core"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

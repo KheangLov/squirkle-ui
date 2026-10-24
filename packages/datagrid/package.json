@@ -3,6 +3,22 @@
   "version": "0.1.0",
   "description": "Enterprise-grade virtualized data grid for Squirkle UI",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KheangLov/squirkle-ui.git",
+    "directory": "packages/datagrid"
+  },
+  "homepage": "https://github.com/KheangLov/squirkle-ui#readme",
+  "bugs": {
+    "url": "https://github.com/KheangLov/squirkle-ui/issues"
+  },
+  "keywords": [
+    "vue",
+    "datagrid",
+    "table",
+    "grid",
+    "virtual-scroll"
+  ],
   "type": "module",
   "sideEffects": [
     "*.css"
@@ -12,28 +28,37 @@
   ],
   "main": "./dist/vue3/index.cjs",
   "module": "./dist/vue3/index.mjs",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/vue3/index.mjs",
       "require": "./dist/vue3/index.cjs"
     },
     "./vue2": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/vue2/index.mjs",
       "require": "./dist/vue2/index.cjs"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/styles.css",
+    "./dist/types/*": {
+      "types": "./dist/types/*.d.ts"
+    }
   },
   "peerDependencies": {
     "vue": "^2.7.0 || ^3.3.0",
-    "@squirkle/ui": "workspace:*"
+    "@squirkle/ui": "workspace:^"
   },
   "dependencies": {
-    "@squirkle/core": "workspace:*"
+    "@squirkle/core": "workspace:^"
   },
   "devDependencies": {
-    "@squirkle/ui": "workspace:*"
+    "@squirkle/ui": "workspace:^"
   },
   "scripts": {
     "build": "node ../../scripts/build.mjs datagrid"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

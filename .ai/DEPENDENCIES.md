@@ -8,7 +8,7 @@ Read when: adding/upgrading a dependency (CONFIRM per G4) or touching an integra
 | vue2 → npm:vue@2.7.16 | Vue 2.7 SFC compiler for dual build | `build/vite.lib.mjs` | must stay 2.7.x | high (Vue 2 build) |
 | vite 7.3.7 | lib + docs build | all | plugin-vue2 supports vite ≤ 7 | medium — do not jump to vite 8 until plugin-vue2 does |
 | @vitejs/plugin-vue 6.0.10 / plugin-vue2 2.3.4 | SFC compilation | build | — | medium |
-| typescript 5.9.3, vue-tsc 3.3.13 | type-check | root | TS 7 not adopted | low |
+| typescript 5.9.3, vue-tsc 3.3.13 | type-check + `.d.ts` emit in `scripts/build.mjs` | root | TS 7 not adopted | low |
 | vitest 3.2.7, happy-dom 20 | tests | root | — | low |
 | vue-router 4.6.4 | docs routing | apps/docs | — | low |
 | leaflet 1.9.4 | raster maps | @squirkle/map (optional peer, lazy) | browser-only | medium |

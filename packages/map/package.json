@@ -3,6 +3,22 @@
   "version": "0.1.0",
   "description": "Vector (MapLibre) and raster (Leaflet) squircle maps with custom markers and clustering for Squirkle UI",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KheangLov/squirkle-ui.git",
+    "directory": "packages/map"
+  },
+  "homepage": "https://github.com/KheangLov/squirkle-ui#readme",
+  "bugs": {
+    "url": "https://github.com/KheangLov/squirkle-ui/issues"
+  },
+  "keywords": [
+    "vue",
+    "map",
+    "maplibre",
+    "leaflet",
+    "clustering"
+  ],
   "type": "module",
   "sideEffects": [
     "*.css"
@@ -12,29 +28,35 @@
   ],
   "main": "./dist/vue3/index.cjs",
   "module": "./dist/vue3/index.mjs",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/vue3/index.mjs",
       "require": "./dist/vue3/index.cjs"
     },
     "./vue2": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/vue2/index.mjs",
       "require": "./dist/vue2/index.cjs"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/styles.css",
+    "./dist/types/*": {
+      "types": "./dist/types/*.d.ts"
+    }
   },
   "peerDependencies": {
     "vue": "^2.7.0 || ^3.3.0",
-    "@squirkle/ui": "workspace:*",
+    "@squirkle/ui": "workspace:^",
     "leaflet": "^1.9.0",
     "maplibre-gl": "^6.0.0"
   },
   "dependencies": {
-    "@squirkle/core": "workspace:*",
+    "@squirkle/core": "workspace:^",
     "supercluster": "^9.1.0"
   },
   "devDependencies": {
-    "@squirkle/ui": "workspace:*",
+    "@squirkle/ui": "workspace:^",
     "leaflet": "^1.9.4",
     "@types/leaflet": "^1.9.0",
     "maplibre-gl": "^6.15.0"
@@ -49,5 +71,8 @@
     "leaflet": {
       "optional": true
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

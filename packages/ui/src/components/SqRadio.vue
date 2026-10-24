@@ -11,7 +11,7 @@ import { computed, defineComponent, inject, type WritableComputedRef } from 'vue
 import { useProxiedModel, vModel } from '../composables/model'
 import { colorValue } from '../composables/style'
 
-interface RadioGroupCtx { model: WritableComputedRef<unknown>; name: string; props: { color: string; disabled: boolean }; onBlur: () => void }
+export interface RadioGroupCtx { model: WritableComputedRef<unknown>; name: string; props: { color: string; disabled: boolean }; onBlur: () => void }
 
 export default defineComponent({
   name: 'SqRadio',

@@ -14,17 +14,19 @@ Read when: first task in a session, or any task touching build/scripts/packages.
 | `pnpm install` | install workspace | verified |
 | `pnpm dev` | docs on http://localhost:5180 (sources aliased via `build/aliases.ts`) | verified |
 | `pnpm dev:vue2` | Vue 2.7 playground on :5181, uses `dist/vue2` (run `pnpm build` first) | verified |
-| `pnpm build [pkg…]` | `scripts/build.mjs`: core → ui → add-ons, each Vue 3 + Vue 2 | verified |
+| `pnpm build [pkg…]` | `scripts/build.mjs`: core → ui → add-ons, each Vue 3 + Vue 2 + `dist/types` | verified |
 | `pnpm dev:nuxt` | Nuxt 4 playground on :5182 (built dist; `pnpm --filter @squirkle/playground-nuxt build` for prod) | verified |
 | `pnpm build:docs` | production docs build | verified |
-| `pnpm test` | Vitest, `packages/*/test/**/*.test.ts` (24 tests) | verified |
+| `pnpm test` | Vitest, `packages/*/test/**/*.test.ts` (36 tests) | verified |
 | `pnpm typecheck` | vue-tsc over packages + docs | verified (0 errors) |
 | lint | none configured | UNKNOWN — no ESLint in repo |
 | `node scripts/gen-index.mjs` | regenerate `packages/*/src/components/index.ts` after adding an SFC | verified |
 
 ## Constraints
 - Every SFC must compile for Vue 2.7 and Vue 3 (`.ai/CONVENTIONS.md`).
-- Deployment/publishing: UNKNOWN (no CI, no registry config). Never publish (G4).
+- Publishing: npm, scope `@squirkle` (org created by the user), `publishConfig.access: public`, internal deps `workspace:^` → `^x.y.z` on publish (ADR 0005). The agent never publishes or bumps versions (G3/G4); the user runs it.
+- Release check (agent may run): `pnpm build` → `pnpm pack --pack-destination <scratch>` per package → install tarballs in a scratch Vue 3 app (`vue-tsc` with `skipLibCheck: false` + `vite build`) and a Vue 2.7 app (`vite build`).
+- Release (user): create the npm org once → `npm login` → `pnpm -r publish --access public --dry-run` → `pnpm -r publish --access public`.
 - Nuxt 3/4 module: verified on Nuxt 4.6.2 (`apps/playground-nuxt`: dev + prod build, SSR HTML, hydration). Nuxt 2 module: NOT RUN (no Nuxt 2 app; syntax-checked only).
 
 Last synced: UNKNOWN (no commits yet — `/sync-ai` falls back to `git status`)

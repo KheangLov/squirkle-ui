@@ -3,6 +3,21 @@
   "version": "0.1.0",
   "description": "Nuxt 2, 3 and 4 module for Squirkle UI",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KheangLov/squirkle-ui.git",
+    "directory": "packages/nuxt"
+  },
+  "homepage": "https://github.com/KheangLov/squirkle-ui#readme",
+  "bugs": {
+    "url": "https://github.com/KheangLov/squirkle-ui/issues"
+  },
+  "keywords": [
+    "nuxt",
+    "nuxt-module",
+    "vue",
+    "squircle"
+  ],
   "type": "module",
   "files": [
     "src"
@@ -18,7 +33,10 @@
     "@nuxt/kit": "^4.0.0"
   },
   "peerDependencies": {
-    "@squirkle/ui": "workspace:*"
+    "@squirkle/ui": "workspace:^"
   },
-  "module": "./src/module.mjs"
+  "module": "./src/module.mjs",
+  "publishConfig": {
+    "access": "public"
+  }
 }

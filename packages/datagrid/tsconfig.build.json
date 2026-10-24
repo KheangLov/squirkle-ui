@@ -1,0 +1,44 @@
+// Emits .d.ts into dist/types; sibling packages resolve to their built types (built first by scripts/build.mjs).
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/types",
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@squirkle/core": [
+        "../core/dist/types/index.d.ts"
+      ],
+      "@squirkle/ui": [
+        "../ui/dist/types/index.d.ts"
+      ],
+      "@squirkle/swiper": [
+        "../swiper/dist/types/index.d.ts"
+      ],
+      "@squirkle/calendar": [
+        "../calendar/dist/types/index.d.ts"
+      ],
+      "@squirkle/map": [
+        "../map/dist/types/index.d.ts"
+      ],
+      "@squirkle/charts": [
+        "../charts/dist/types/index.d.ts"
+      ],
+      "@squirkle/icons": [
+        "../icons/dist/types/index.d.ts"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue"
+  ],
+  "exclude": [
+    "test",
+    "dist",
+    "node_modules"
+  ]
+}

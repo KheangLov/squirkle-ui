@@ -20,7 +20,7 @@ apps/docs, apps/playground-vue2 (consumers)
 - Same `src/` compiled twice: `dist/vue3` (`@vitejs/plugin-vue`) and `dist/vue2` (`@vitejs/plugin-vue2` with `vue2/compiler-sfc`, target es2019 for webpack 4).
 - `vue`, `@squirkle/*`, `leaflet` are external. In the Vue 2 build `output.paths` rewrites `@squirkle/<addon>` imports of ui to `@squirkle/ui/vue2`.
 - CSS: SFC `<style>` + `src/styles/*.css` → `dist/styles.css` (one file per package).
-- Types: no `.d.ts` emitted yet — UNKNOWN/planned (consumers get JS only).
+- Types: after the Vite builds, `vue-tsc -p packages/<pkg>/tsconfig.build.json` emits `dist/types` (one set for both `.` and `./vue2`; sibling `@squirkle/*` resolve to their built types, so build order matters). `scripts/build.mjs` then rewrites inferred `../../<pkg>/dist/types/x(.js)` refs to `@squirkle/<pkg>/dist/types/x`, served by each package's `./dist/types/*` export. Vue 2.7 TS users get these Vue 3-based types (NOT verified).
 
 ## Runtime model
 - `createSquirkle(options)` (`packages/ui/src/plugin.ts`) → `applyOptions` into the module-level `config` (`packages/ui/src/config.ts`) → registers components → writes theme CSS vars into `<style id="sq-theme-vars">` + `sq-theme--<name>` on `<html>` (watched).
