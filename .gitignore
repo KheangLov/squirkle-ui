@@ -5,9 +5,3 @@ dist
 coverage
 *.log
 .DS_Store
-
-# AI assistant: docs are shared; session logs and local config stay local
-.ai/tasks/
-.claude/*
-!.claude/skills/
-!.claude/agents/
