@@ -43,6 +43,3 @@ setMapWorkerUrl(workerUrl)
 export default defineConfig({ optimizeDeps: { exclude: ['maplibre-gl'] } })
 ```
 The Nuxt 3 / 4 module does both automatically when `addons` includes `'map'` and `maplibre-gl` is installed. Nuxt 2 (webpack) with the vector engine is not verified — use `engine="raster"` there.
-
-## For AI agents
-Start with `CLAUDE.md` → `.ai/CONTEXT_MAP.md`. Guardrails: `.ai/GUARDRAILS.md`.

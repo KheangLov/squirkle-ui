@@ -5,4 +5,9 @@ dist
 coverage
 *.log
 .DS_Store
-.ai/tasks/
+
+# AI assistant knowledge base and config (kept local)
+.ai/
+.claude/
+CLAUDE.md
+AGENTS.md
