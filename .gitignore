@@ -6,8 +6,8 @@ coverage
 *.log
 .DS_Store
 
-# AI assistant knowledge base and config (kept local)
-.ai/
-.claude/
-CLAUDE.md
-AGENTS.md
+# AI assistant: docs are shared; session logs and local config stay local
+.ai/tasks/
+.claude/*
+!.claude/skills/
+!.claude/agents/
