@@ -25,7 +25,7 @@ const route = useRoute()
 const entry = computed(() => bySlug(String(route.params.slug)))
 const usage = computed(() => {
   const e = entry.value!
-  const pkg = e.pkg ?? '@squirkle/ui'
+  const pkg = e.pkg ?? '@squirkle-ui/ui'
   return `import { ${e.name} } from '${pkg}'          // Vue 3 / Nuxt 3-4\nimport { ${e.name} } from '${pkg}/vue2'     // Vue 2.7 / Nuxt 2`
 })
 </script>

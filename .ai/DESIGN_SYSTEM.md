@@ -57,7 +57,7 @@ Customization (`ui/src/composables/theme.ts`): `setBrand(hex, { secondary?, acce
 - Lazy loading: `SqImg` (IntersectionObserver), `SqLazy`, Leaflet dynamic import.
 
 ## Icons & assets
-- `SqIcon icon=`: built-in names (`packages/ui/src/icons.ts` `builtinIcons`), Iconify `prefix:name`, `$alias` (`createSquirkle({ icons: { aliases } })`, presets `useIconPreset('lucide' | 'mdi')` in `@squirkle/icons`), or raw path data.
+- `SqIcon icon=`: built-in names (`packages/ui/src/icons.ts` `builtinIcons`), Iconify `prefix:name`, `$alias` (`createSquirkle({ icons: { aliases } })`, presets `useIconPreset('lucide' | 'mdi')` in `@squirkle-ui/icons`), or raw path data.
 - Add a built-in icon: append a 24×24 path to `builtinIcons`. No asset folders in packages.
 
 ## Chart palette (validated with the dataviz validator, 2026-10-24)

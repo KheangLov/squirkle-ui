@@ -1,11 +1,11 @@
 import { computed, reactive, ref, type Component } from 'vue'
-import * as ui from '@squirkle/ui'
-import { SqDataGrid } from '@squirkle/datagrid'
-import { SqSwiper } from '@squirkle/swiper'
-import { SqCalendar } from '@squirkle/calendar'
-import { SqMap } from '@squirkle/map'
-import { SqLineChart, SqBarChart, SqDonutChart, SqSparkline } from '@squirkle/charts'
-import { SqIconPicker } from '@squirkle/icons'
+import * as ui from '@squirkle-ui/ui'
+import { SqDataGrid } from '@squirkle-ui/datagrid'
+import { SqSwiper } from '@squirkle-ui/swiper'
+import { SqCalendar } from '@squirkle-ui/calendar'
+import { SqMap } from '@squirkle-ui/map'
+import { SqLineChart, SqBarChart, SqDonutChart, SqSparkline } from '@squirkle-ui/charts'
+import { SqIconPicker } from '@squirkle-ui/icons'
 
 export interface Example {
   title: string
@@ -20,7 +20,7 @@ export interface DocEntry {
   description: string
   component: Component
   examples: Example[]
-  /** Separate add-on package name, when not in @squirkle/ui. */
+  /** Separate add-on package name, when not in @squirkle-ui/ui. */
   pkg?: string
   /** Dedicated showcase route instead of the generic page. */
   route?: string
@@ -321,15 +321,15 @@ doc('SqInfiniteScroll', 'Data', 'Non-virtual infinite list with IntersectionObse
 doc('SqLazy', 'Data', 'Mounts content only when scrolled into view.', [{ title: 'Lazy', code: `<SqLazy min-height="80"><SqAlert type="success" text="I was rendered lazily." /></SqLazy>` }])
 
 /* ───────── Add-on packages ───────── */
-doc('SqDataGrid', 'Add-ons', 'Enterprise data grid (@squirkle/datagrid). See the dedicated showcase.', [], { component: SqDataGrid, pkg: '@squirkle/datagrid', route: '/datagrid' })
-doc('SqLineChart', 'Add-ons', 'Charts (@squirkle/charts): line/area, bar, donut, sparkline.', [], { component: SqLineChart, pkg: '@squirkle/charts', route: '/charts' })
-doc('SqBarChart', 'Add-ons', 'Grouped / stacked / horizontal bars with squircle ends.', [], { component: SqBarChart, pkg: '@squirkle/charts', route: '/charts' })
-doc('SqDonutChart', 'Add-ons', 'Pie / donut chart.', [], { component: SqDonutChart, pkg: '@squirkle/charts', route: '/charts' })
-doc('SqSparkline', 'Add-ons', 'Inline trend line.', [], { component: SqSparkline, pkg: '@squirkle/charts', route: '/charts' })
-doc('SqSwiper', 'Add-ons', 'Touch swiper with loop, effects, autoplay (@squirkle/swiper).', [], { component: SqSwiper, pkg: '@squirkle/swiper', route: '/swiper' })
-doc('SqCalendar', 'Add-ons', 'Event calendar (@squirkle/calendar).', [], { component: SqCalendar, pkg: '@squirkle/calendar', route: '/calendar' })
-doc('SqMap', 'Add-ons', 'Leaflet map with squircle markers (@squirkle/map).', [], { component: SqMap, pkg: '@squirkle/map', route: '/map' })
-doc('SqIconPicker', 'Add-ons', 'Iconify browser + helpers (@squirkle/icons).', [], { component: SqIconPicker, pkg: '@squirkle/icons', route: '/icons' })
+doc('SqDataGrid', 'Add-ons', 'Enterprise data grid (@squirkle-ui/datagrid). See the dedicated showcase.', [], { component: SqDataGrid, pkg: '@squirkle-ui/datagrid', route: '/datagrid' })
+doc('SqLineChart', 'Add-ons', 'Charts (@squirkle-ui/charts): line/area, bar, donut, sparkline.', [], { component: SqLineChart, pkg: '@squirkle-ui/charts', route: '/charts' })
+doc('SqBarChart', 'Add-ons', 'Grouped / stacked / horizontal bars with squircle ends.', [], { component: SqBarChart, pkg: '@squirkle-ui/charts', route: '/charts' })
+doc('SqDonutChart', 'Add-ons', 'Pie / donut chart.', [], { component: SqDonutChart, pkg: '@squirkle-ui/charts', route: '/charts' })
+doc('SqSparkline', 'Add-ons', 'Inline trend line.', [], { component: SqSparkline, pkg: '@squirkle-ui/charts', route: '/charts' })
+doc('SqSwiper', 'Add-ons', 'Touch swiper with loop, effects, autoplay (@squirkle-ui/swiper).', [], { component: SqSwiper, pkg: '@squirkle-ui/swiper', route: '/swiper' })
+doc('SqCalendar', 'Add-ons', 'Event calendar (@squirkle-ui/calendar).', [], { component: SqCalendar, pkg: '@squirkle-ui/calendar', route: '/calendar' })
+doc('SqMap', 'Add-ons', 'Leaflet map with squircle markers (@squirkle-ui/map).', [], { component: SqMap, pkg: '@squirkle-ui/map', route: '/map' })
+doc('SqIconPicker', 'Add-ons', 'Iconify browser + helpers (@squirkle-ui/icons).', [], { component: SqIconPicker, pkg: '@squirkle-ui/icons', route: '/icons' })
 
 doc('SqIcon', 'Content', 'Built-in icons, any Iconify icon (`mdi:home`, `lucide:heart` — loaded on demand), `$aliases`, or raw SVG paths.', [
   { title: 'Icon sources', code: `<div class="sq-d-flex sq-gap-3 sq-align-center"><SqIcon icon="check" size="large" /><SqIcon icon="lucide:rocket" size="x-large" color="primary" /><SqIcon icon="mdi:github" size="x-large" /><SqIcon icon="$heart" size="x-large" color="error" /><SqIcon icon="M12 2 2 22h20z" size="large" color="warning" /></div>` },

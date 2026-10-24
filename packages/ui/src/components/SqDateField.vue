@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, type PropType } from 'vue'
-import { formatDate } from '@squirkle/core'
+import { formatDate } from '@squirkle-ui/core'
 import SqMenu from './SqMenu.vue'
 import SqTextField from './SqTextField.vue'
 import SqDatePicker from './SqDatePicker.vue'

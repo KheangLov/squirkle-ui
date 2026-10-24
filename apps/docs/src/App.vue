@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { config, useTheme } from '@squirkle/ui'
+import { config, useTheme } from '@squirkle-ui/ui'
 import { categories, docState, registry, searchResults, type DocEntry } from './registry'
 import ThemeCustomizer from './components/ThemeCustomizer.vue'
 

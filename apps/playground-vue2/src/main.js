@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import { createSquirkle } from '@squirkle/ui/vue2'
-import '@squirkle/ui/styles.css'
-import '@squirkle/charts/styles.css'
-import '@squirkle/datagrid/styles.css'
-import '@squirkle/swiper/styles.css'
-import '@squirkle/calendar/styles.css'
+import { createSquirkle } from '@squirkle-ui/ui/vue2'
+import '@squirkle-ui/ui/styles.css'
+import '@squirkle-ui/charts/styles.css'
+import '@squirkle-ui/datagrid/styles.css'
+import '@squirkle-ui/swiper/styles.css'
+import '@squirkle-ui/calendar/styles.css'
 import App from './App.vue'
 
 Vue.use(createSquirkle())

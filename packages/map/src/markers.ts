@@ -1,5 +1,5 @@
 /** DOM builders for markers and cluster bubbles (shared by the vector and raster engines). */
-import { colorValue, resolveIcon } from '@squirkle/ui'
+import { colorValue, resolveIcon } from '@squirkle-ui/ui'
 
 export type MarkerShape = 'pin' | 'dot' | 'squircle' | 'avatar'
 

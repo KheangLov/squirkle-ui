@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, type PropType } from 'vue'
-import { SqBtn, SqCheckbox, SqSelect, SqTextField, SqVirtualScroll, config } from '@squirkle/ui'
+import { SqBtn, SqCheckbox, SqSelect, SqTextField, SqVirtualScroll, config } from '@squirkle-ui/ui'
 import type { CellValue, FilterCondition, FilterKind } from './types'
 
 const TEXT_OPS = [

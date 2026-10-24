@@ -18,5 +18,5 @@ for (const pkg of readdirSync(resolve(root, 'packages'))) {
     '',
   ].join('\n')
   writeFileSync(resolve(dir, 'index.ts'), body)
-  console.log(`@squirkle/${pkg}: ${names.length} components`)
+  console.log(`@squirkle-ui/${pkg}: ${names.length} components`)
 }

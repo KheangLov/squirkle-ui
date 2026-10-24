@@ -1,5 +1,5 @@
 {
-  "name": "@squirkle/playground-nuxt",
+  "name": "@squirkle-ui/playground-nuxt",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,15 +8,15 @@
     "preview": "nuxt preview --port 5182"
   },
   "dependencies": {
-    "@squirkle/nuxt": "workspace:*",
-    "@squirkle/ui": "workspace:*",
-    "@squirkle/core": "workspace:*",
-    "@squirkle/datagrid": "workspace:*",
-    "@squirkle/charts": "workspace:*",
-    "@squirkle/swiper": "workspace:*",
-    "@squirkle/calendar": "workspace:*",
-    "@squirkle/map": "workspace:*",
-    "@squirkle/icons": "workspace:*",
+    "@squirkle-ui/nuxt": "workspace:*",
+    "@squirkle-ui/ui": "workspace:*",
+    "@squirkle-ui/core": "workspace:*",
+    "@squirkle-ui/datagrid": "workspace:*",
+    "@squirkle-ui/charts": "workspace:*",
+    "@squirkle-ui/swiper": "workspace:*",
+    "@squirkle-ui/calendar": "workspace:*",
+    "@squirkle-ui/map": "workspace:*",
+    "@squirkle-ui/icons": "workspace:*",
     "leaflet": "^1.9.4",
     "nuxt": "4.6.2",
     "vue": "^3.5.0",

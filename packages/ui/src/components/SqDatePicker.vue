@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, nextTick, getCurrentInstance, ref, type PropType } from 'vue'
-import { addDays, addMonths, isSameDay, isSameMonth, monthGrid, startOfDay, toDate, toISODate, weekdayNames, type DateLike } from '@squirkle/core'
+import { addDays, addMonths, isSameDay, isSameMonth, monthGrid, startOfDay, toDate, toISODate, weekdayNames, type DateLike } from '@squirkle-ui/core'
 import SqShape from './SqShape.vue'
 import SqBtn from './SqBtn.vue'
 import SqIcon from './SqIcon.vue'

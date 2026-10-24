@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { toUnit } from '@squirkle/core'
+import { toUnit } from '@squirkle-ui/core'
 import SqShape from './SqShape.vue'
 import SqIcon from './SqIcon.vue'
 import { radiusValue, roundedProp, variantVars, type Variant } from '../composables/style'

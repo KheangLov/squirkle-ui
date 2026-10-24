@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted, getCurrentInstance, ref } from 'vue'
-import { toUnit } from '@squirkle/core'
+import { toUnit } from '@squirkle-ui/core'
 import SqShape from './SqShape.vue'
 import SqIcon from './SqIcon.vue'
 import { radiusValue, roundedProp } from '../composables/style'

@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { computed, defineComponent, h, reactive, ref, watch, type Component } from 'vue'
 import { useRoute } from 'vue-router'
-import * as ui from '@squirkle/ui'
+import * as ui from '@squirkle-ui/ui'
 import CodeBlock from '../components/CodeBlock.vue'
 
 const route = useRoute()

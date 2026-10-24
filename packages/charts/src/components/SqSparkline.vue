@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, type PropType } from 'vue'
-import { colorValue } from '@squirkle/ui'
+import { colorValue } from '@squirkle-ui/ui'
 import { smoothPath } from '../utils'
 
 /** Inline trend line for stat tiles and table cells (no axes, no tooltip). */

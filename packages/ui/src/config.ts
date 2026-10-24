@@ -1,5 +1,5 @@
 import { reactive, version } from 'vue'
-import { appearanceCss, createThemeCss, defaultThemes, isBrowser, mergeThemes, type Appearance, type ThemeDefinition, type ThemeMap } from '@squirkle/core'
+import { appearanceCss, createThemeCss, defaultThemes, isBrowser, mergeThemes, type Appearance, type ThemeDefinition, type ThemeMap } from '@squirkle-ui/core'
 
 export const isVue2 = version.startsWith('2.')
 

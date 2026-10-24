@@ -5,7 +5,7 @@ Compile one SFC source tree twice (Vue 3 + Vue 2.7) instead of using vue-demi re
 The library must run on Vue 2.7, Vue 3 and Nuxt 2/3/4 (user requirement, 2026-10-24).
 
 ## Decision
-`build/vite.lib.mjs` builds `dist/vue3` with `@vitejs/plugin-vue` and `dist/vue2` with `@vitejs/plugin-vue2` + `vue2/compiler-sfc`; consumers pick `@squirkle/<pkg>` or `@squirkle/<pkg>/vue2`.
+`build/vite.lib.mjs` builds `dist/vue3` with `@vitejs/plugin-vue` and `dist/vue2` with `@vitejs/plugin-vue2` + `vue2/compiler-sfc`; consumers pick `@squirkle-ui/<pkg>` or `@squirkle-ui/<pkg>/vue2`.
 
 ## Alternatives
 - vue-demi + `h()` render functions: `h` signatures differ between versions; templates would be lost.

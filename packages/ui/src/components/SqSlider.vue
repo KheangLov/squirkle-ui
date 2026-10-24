@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, ref, type PropType } from 'vue'
-import { clamp } from '@squirkle/core'
+import { clamp } from '@squirkle-ui/core'
 import { useProxiedModel, vModel } from '../composables/model'
 import { colorValue } from '../composables/style'
 

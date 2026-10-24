@@ -6,7 +6,7 @@ import vue2 from '@vitejs/plugin-vue2'
 
 const require = createRequire(import.meta.url)
 
-const EXTERNAL = [/^vue$/, /^@squirkle\//, /^leaflet/, /^maplibre-gl/, /^supercluster/]
+const EXTERNAL = [/^vue$/, /^@squirkle-ui\//, /^leaflet/, /^maplibre-gl/, /^supercluster/]
 
 /**
  * @param {{ pkgDir: string, vue: 0 | 2 | 3 }} opts  vue: 0 = framework-agnostic package
@@ -37,8 +37,8 @@ export function libConfig({ pkgDir, vue }) {
         external: (id) => EXTERNAL.some((re) => re.test(id)),
         output: {
           exports: 'named',
-          // Vue 2 build of an add-on must import the Vue 2 build of @squirkle/ui.
-          paths: vue === 2 ? (id) => (/^@squirkle\/(?!core)[a-z]+$/.test(id) ? `${id}/vue2` : id) : undefined,
+          // Vue 2 build of an add-on must import the Vue 2 build of @squirkle-ui/ui.
+          paths: vue === 2 ? (id) => (/^@squirkle-ui\/(?!core)[a-z]+$/.test(id) ? `${id}/vue2` : id) : undefined,
         },
       },
     },

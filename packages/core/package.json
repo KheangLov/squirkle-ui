@@ -1,5 +1,5 @@
 {
-  "name": "@squirkle/core",
+  "name": "@squirkle-ui/core",
   "version": "0.1.0",
   "description": "Framework-agnostic squircle geometry, color, date and data utilities for Squirkle UI",
   "license": "MIT",

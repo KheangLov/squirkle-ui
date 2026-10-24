@@ -9,25 +9,25 @@
     "rootDir": "src",
     "baseUrl": ".",
     "paths": {
-      "@squirkle/core": [
+      "@squirkle-ui/core": [
         "../core/dist/types/index.d.ts"
       ],
-      "@squirkle/ui": [
+      "@squirkle-ui/ui": [
         "../ui/dist/types/index.d.ts"
       ],
-      "@squirkle/datagrid": [
+      "@squirkle-ui/datagrid": [
         "../datagrid/dist/types/index.d.ts"
       ],
-      "@squirkle/calendar": [
+      "@squirkle-ui/calendar": [
         "../calendar/dist/types/index.d.ts"
       ],
-      "@squirkle/map": [
+      "@squirkle-ui/map": [
         "../map/dist/types/index.d.ts"
       ],
-      "@squirkle/charts": [
+      "@squirkle-ui/charts": [
         "../charts/dist/types/index.d.ts"
       ],
-      "@squirkle/icons": [
+      "@squirkle-ui/icons": [
         "../icons/dist/types/index.d.ts"
       ]
     }

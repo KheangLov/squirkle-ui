@@ -3,7 +3,7 @@ Purpose: project-specific review checklist used in Phase 7 and by the `code-revi
 Read when: reviewing any diff.
 
 ## Correctness & architecture
-- [ ] Package boundaries hold: `core` imports nothing from Vue; add-ons import `@squirkle/ui` / `@squirkle/core` only via package names (never relative paths across packages) — see `.ai/ARCHITECTURE.md`.
+- [ ] Package boundaries hold: `core` imports nothing from Vue; add-ons import `@squirkle-ui/ui` / `@squirkle-ui/core` only via package names (never relative paths across packages) — see `.ai/ARCHITECTURE.md`.
 - [ ] Datagrid data logic lives in `packages/datagrid/src/engine.ts` (pure, tested), not in the `.vue` file.
 - [ ] No breaking change to a public prop/emit/slot without a note in the report.
 

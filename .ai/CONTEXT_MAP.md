@@ -6,7 +6,7 @@ Always binding: `.ai/GUARDRAILS.md` (compact copy in CLAUDE.md). Session rules: 
 
 | Task type | Read first | Read if needed | Skip |
 |---|---|---|---|
-| New UI component in `@squirkle/ui` | DESIGN_SYSTEM, COMPONENTS (grep), CONVENTIONS | ARCHITECTURE, TESTING, PROMPT_ENGINEERING | DEPENDENCIES, SECURITY |
+| New UI component in `@squirkle-ui/ui` | DESIGN_SYSTEM, COMPONENTS (grep), CONVENTIONS | ARCHITECTURE, TESTING, PROMPT_ENGINEERING | DEPENDENCIES, SECURITY |
 | Change an existing component | COMPONENTS (grep the row), CONVENTIONS | FEATURES, CODE_REVIEW | PERFORMANCE |
 | UI from Figma (`/figma-ui`) | DESIGN_SYSTEM, FIGMA, COMPONENTS (grep) | CONVENTIONS, TESTING | DEPENDENCIES |
 | Vue 2 / dual-build bug | CONVENTIONS § Vue 2/3, ARCHITECTURE § Build model | TESTING (playground-vue2), PROMPT_ENGINEERING § G lessons | DESIGN_SYSTEM |

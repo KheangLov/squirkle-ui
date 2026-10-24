@@ -35,7 +35,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, type PropType } from 'vue'
-import { toUnit } from '@squirkle/core'
+import { toUnit } from '@squirkle-ui/core'
 import SqPortal from './SqPortal.vue'
 import SqShape from './SqShape.vue'
 import { vModel } from '../composables/model'

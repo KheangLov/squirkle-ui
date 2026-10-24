@@ -54,7 +54,7 @@
 
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue'
-import { config, themePresets, useTheme, type SquircleMode } from '@squirkle/ui'
+import { config, themePresets, useTheme, type SquircleMode } from '@squirkle-ui/ui'
 
 const open = defineModel<boolean>({ default: false })
 const theme = useTheme()

@@ -11,10 +11,10 @@ Read when: adding/upgrading a dependency (CONFIRM per G4) or touching an integra
 | typescript 5.9.3, vue-tsc 3.3.13 | type-check + `.d.ts` emit in `scripts/build.mjs` | root | TS 7 not adopted | low |
 | vitest 3.2.7, happy-dom 20 | tests | root | — | low |
 | vue-router 4.6.4 | docs routing | apps/docs | — | low |
-| leaflet 1.9.4 | raster maps | @squirkle/map (optional peer, lazy) | browser-only | medium |
-| maplibre-gl 6.15.0 | vector maps (default engine) | @squirkle/map (optional peer + dev, lazy chunk ~800 kB) | browser-only; WebGL; worker file is not bundled → `setMapWorkerUrl` with a bundler `?url` (README); `optimizeDeps.exclude` as a safety net | medium |
-| supercluster 9.1.0 | marker clustering | @squirkle/map (dependency) | pure JS | low |
-| @nuxt/kit 4.6.2 | Nuxt 3/4 module | @squirkle/nuxt | ESM only | low |
+| leaflet 1.9.4 | raster maps | @squirkle-ui/map (optional peer, lazy) | browser-only | medium |
+| maplibre-gl 6.15.0 | vector maps (default engine) | @squirkle-ui/map (optional peer + dev, lazy chunk ~800 kB) | browser-only; WebGL; worker file is not bundled → `setMapWorkerUrl` with a bundler `?url` (README); `optimizeDeps.exclude` as a safety net | medium |
+| supercluster 9.1.0 | marker clustering | @squirkle-ui/map (dependency) | pure JS | low |
+| @nuxt/kit 4.6.2 | Nuxt 3/4 module | @squirkle-ui/nuxt | ESM only | low |
 | nuxt 4.6.2 | SSR playground | apps/playground-nuxt | dev-only consumer | low |
 
 ## Integrations

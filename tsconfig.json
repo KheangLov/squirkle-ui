@@ -13,14 +13,14 @@
     "types": ["vite/client"],
     "baseUrl": ".",
     "paths": {
-      "@squirkle/core": ["packages/core/src/index.ts"],
-      "@squirkle/ui": ["packages/ui/src/index.ts"],
-      "@squirkle/datagrid": ["packages/datagrid/src/index.ts"],
-      "@squirkle/swiper": ["packages/swiper/src/index.ts"],
-      "@squirkle/calendar": ["packages/calendar/src/index.ts"],
-      "@squirkle/map": ["packages/map/src/index.ts"],
-      "@squirkle/charts": ["packages/charts/src/index.ts"],
-      "@squirkle/icons": ["packages/icons/src/index.ts"]
+      "@squirkle-ui/core": ["packages/core/src/index.ts"],
+      "@squirkle-ui/ui": ["packages/ui/src/index.ts"],
+      "@squirkle-ui/datagrid": ["packages/datagrid/src/index.ts"],
+      "@squirkle-ui/swiper": ["packages/swiper/src/index.ts"],
+      "@squirkle-ui/calendar": ["packages/calendar/src/index.ts"],
+      "@squirkle-ui/map": ["packages/map/src/index.ts"],
+      "@squirkle-ui/charts": ["packages/charts/src/index.ts"],
+      "@squirkle-ui/icons": ["packages/icons/src/index.ts"]
     }
   },
   "include": ["packages/*/src/**/*.ts", "packages/*/src/**/*.vue", "apps/docs/src/**/*.ts", "apps/docs/src/**/*.vue"],

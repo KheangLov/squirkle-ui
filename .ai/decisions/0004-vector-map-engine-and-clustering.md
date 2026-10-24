@@ -1,5 +1,5 @@
 # Decision
-`@squirkle/map` renders vector tiles with MapLibre GL by default and keeps Leaflet as `engine="raster"`; clustering uses supercluster for both engines.
+`@squirkle-ui/map` renders vector tiles with MapLibre GL by default and keeps Leaflet as `engine="raster"`; clustering uses supercluster for both engines.
 
 ## Context
 The map needed modern vector basemaps that follow light/dark, custom markers and clustering of thousands of points, without dropping Leaflet users or adding API-key providers.

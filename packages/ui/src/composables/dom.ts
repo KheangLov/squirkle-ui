@@ -1,5 +1,5 @@
 import { onBeforeUnmount, onMounted, watch, type Ref } from 'vue'
-import { isBrowser } from '@squirkle/core'
+import { isBrowser } from '@squirkle-ui/core'
 
 export function useResizeObserver(target: Ref<Element | null | undefined>, cb: (entry: ResizeObserverEntry) => void) {
   let ro: ResizeObserver | undefined

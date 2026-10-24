@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted, onUpdated, ref, watch, type PropType } from 'vue'
-import { getByPath, toUnit } from '@squirkle/core'
+import { getByPath, toUnit } from '@squirkle-ui/core'
 import { useVirtual } from '../composables/virtual'
 import { config } from '../config'
 import SqProgressCircular from './SqProgressCircular.vue'

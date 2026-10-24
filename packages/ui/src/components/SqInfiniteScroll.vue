@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { toUnit } from '@squirkle/core'
+import { toUnit } from '@squirkle-ui/core'
 import SqProgressCircular from './SqProgressCircular.vue'
 import SqBtn from './SqBtn.vue'
 

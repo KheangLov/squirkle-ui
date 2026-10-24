@@ -1,5 +1,5 @@
 {
-  "name": "@squirkle/calendar",
+  "name": "@squirkle-ui/calendar",
   "version": "0.1.0",
   "description": "Event calendar (month / week / day) for Squirkle UI",
   "license": "MIT",
@@ -46,13 +46,13 @@
   },
   "peerDependencies": {
     "vue": "^2.7.0 || ^3.3.0",
-    "@squirkle/ui": "workspace:^"
+    "@squirkle-ui/ui": "workspace:^"
   },
   "dependencies": {
-    "@squirkle/core": "workspace:^"
+    "@squirkle-ui/core": "workspace:^"
   },
   "devDependencies": {
-    "@squirkle/ui": "workspace:^"
+    "@squirkle-ui/ui": "workspace:^"
   },
   "scripts": {
     "build": "node ../../scripts/build.mjs calendar"

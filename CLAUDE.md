@@ -7,7 +7,7 @@ Squircle-first Vue component library (one source → Vue 2.7 + Vue 3 builds, Nux
 pnpm install          # install workspace
 pnpm dev              # docs + playground (Vue 3, sources aliased) → http://localhost:5180
 pnpm dev:vue2         # Vue 2.7 smoke playground (uses built dist — run pnpm build first)
-pnpm dev:nuxt         # Nuxt 4 SSR playground for @squirkle/nuxt (built dist) → :5182
+pnpm dev:nuxt         # Nuxt 4 SSR playground for @squirkle-ui/nuxt (built dist) → :5182
 pnpm build [pkg…]     # dual Vue 2/3 library builds (scripts/build.mjs)
 pnpm test             # Vitest (packages/*/test)
 pnpm typecheck        # vue-tsc over packages + docs

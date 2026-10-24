@@ -6,7 +6,7 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
         "--filter",
-        "@squirkle/docs",
+        "@squirkle-ui/docs",
         "dev"
       ],
       "port": 5180
@@ -16,7 +16,7 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
         "--filter",
-        "@squirkle/playground-vue2",
+        "@squirkle-ui/playground-vue2",
         "dev"
       ],
       "port": 5181
@@ -26,7 +26,7 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
         "--filter",
-        "@squirkle/playground-nuxt",
+        "@squirkle-ui/playground-nuxt",
         "dev"
       ],
       "port": 5182
@@ -45,7 +45,7 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
         "--filter",
-        "@squirkle/docs",
+        "@squirkle-ui/docs",
         "preview",
         "--port",
         "5184",

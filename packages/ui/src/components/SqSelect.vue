@@ -74,7 +74,7 @@
 <script lang="ts">
 import { useUid } from '../composables/id'
 import { computed, defineComponent, nextTick, ref, watch, type PropType } from 'vue'
-import { getByPath } from '@squirkle/core'
+import { getByPath } from '@squirkle-ui/core'
 import SqField from './SqField.vue'
 import SqIcon from './SqIcon.vue'
 import SqChip from './SqChip.vue'

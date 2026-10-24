@@ -23,7 +23,7 @@ const rewriteSiblingTypes = (dir) => {
     else if (f.endsWith('.d.ts')) {
       const s = readFileSync(f, 'utf8')
       // `.js` is dropped: the `./dist/types/*` export appends `.d.ts` itself.
-      const out = s.replace(SIBLING, (_, q, dep, sub) => `${q}@squirkle/${dep}${sub ? `/dist/types${sub.replace(/\.js$/, '')}` : ''}${q}`)
+      const out = s.replace(SIBLING, (_, q, dep, sub) => `${q}@squirkle-ui/${dep}${sub ? `/dist/types${sub.replace(/\.js$/, '')}` : ''}${q}`)
       if (out !== s) writeFileSync(f, out)
     }
   }
@@ -44,5 +44,5 @@ for (const pkg of pkgs) {
   // Type declarations (dist/types) for both Vue builds; throws on any type error.
   execFileSync(resolve(root, 'node_modules/.bin/vue-tsc'), ['-p', resolve(pkgDir, 'tsconfig.build.json')], { stdio: 'inherit' })
   rewriteSiblingTypes(resolve(pkgDir, 'dist/types'))
-  console.log(`✓ @squirkle/${pkg} (${Date.now() - started}ms)`)
+  console.log(`✓ @squirkle-ui/${pkg} (${Date.now() - started}ms)`)
 }

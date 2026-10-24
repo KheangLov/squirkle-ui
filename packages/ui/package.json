@@ -1,5 +1,5 @@
 {
-  "name": "@squirkle/ui",
+  "name": "@squirkle-ui/ui",
   "version": "0.1.0",
   "description": "Squircle-first Vue component library for Vue 2.7, Vue 3 and Nuxt 2/3/4",
   "license": "MIT",
@@ -52,7 +52,7 @@
     "vue": "^2.7.0 || ^3.3.0"
   },
   "dependencies": {
-    "@squirkle/core": "workspace:^"
+    "@squirkle-ui/core": "workspace:^"
   },
   "scripts": {
     "build": "node ../../scripts/build.mjs ui"

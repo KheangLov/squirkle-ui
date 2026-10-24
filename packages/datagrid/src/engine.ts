@@ -3,7 +3,7 @@
  *   rows → quick filter → column filters → sort → group / tree (+ aggregation) → flatten (+ detail rows)
  * Every stage is a separate function so the Vue layer can cache each one in its own computed.
  */
-import { compareValues, getByPath, toDate } from '@squirkle/core'
+import { compareValues, getByPath, toDate } from '@squirkle-ui/core'
 import type { AggFunc, CellValue, ColumnDef, DisplayRow, FilterCondition, FilterModel, RowData, SortItem } from './types'
 
 export const colIdOf = <T extends RowData>(c: ColumnDef<T>) => c.colId ?? c.field ?? c.headerName ?? ''

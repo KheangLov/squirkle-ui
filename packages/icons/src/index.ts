@@ -1,4 +1,4 @@
-import { addCollection, addIcons, applyOptions, resolveIcon } from '@squirkle/ui'
+import { addCollection, addIcons, applyOptions, resolveIcon } from '@squirkle-ui/ui'
 import SqIconPicker from './SqIconPicker.vue'
 
 export { SqIconPicker, addCollection, addIcons }

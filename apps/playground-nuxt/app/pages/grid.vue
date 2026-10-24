@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ColumnDef } from '@squirkle/datagrid'
+import type { ColumnDef } from '@squirkle-ui/datagrid'
 
 const rows = markRaw(Array.from({ length: 20000 }, (_, i) => ({ id: i + 1, name: `User ${i + 1}`, team: ['Core', 'Web', 'Ops'][i % 3], score: (i * 37) % 100 })))
 const columns: ColumnDef[] = [

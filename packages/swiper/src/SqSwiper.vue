@@ -45,8 +45,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch, type PropType } from 'vue'
-import { getByPath } from '@squirkle/core'
-import { SqBtn, SqShape, radiusValue, useProxiedModel, vModel } from '@squirkle/ui'
+import { getByPath } from '@squirkle-ui/core'
+import { SqBtn, SqShape, radiusValue, useProxiedModel, vModel } from '@squirkle-ui/ui'
 
 type Effect = 'slide' | 'fade' | 'coverflow' | 'cards'
 interface Responsive { slidesPerView?: number; spaceBetween?: number }

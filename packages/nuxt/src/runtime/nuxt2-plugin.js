@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { createSquirkle, getThemeCss, config } from '@squirkle/ui/vue2'
-<% options.addons.forEach(function (a) { %>import * as addon_<%= a %> from '@squirkle/<%= a %>/vue2'
+import { createSquirkle, getThemeCss, config } from '@squirkle-ui/ui/vue2'
+<% options.addons.forEach(function (a) { %>import * as addon_<%= a %> from '@squirkle-ui/<%= a %>/vue2'
 <% }) %>
 Vue.use(createSquirkle(<%= JSON.stringify(options.runtime) %>))
 <% options.addons.forEach(function (a) { %>for (const name of addon_<%= a %>.componentNames || []) Vue.component(name, addon_<%= a %>[name])

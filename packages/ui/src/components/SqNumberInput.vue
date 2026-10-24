@@ -34,7 +34,7 @@
 <script lang="ts">
 import { useUid } from '../composables/id'
 import { computed, defineComponent, ref, type PropType } from 'vue'
-import { clamp } from '@squirkle/core'
+import { clamp } from '@squirkle-ui/core'
 import SqField from './SqField.vue'
 import SqIcon from './SqIcon.vue'
 import { fieldShellProps, pickShellProps } from '../composables/field'

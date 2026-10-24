@@ -1,5 +1,5 @@
 import { onBeforeUnmount, onMounted, ref, type Ref } from 'vue'
-import { niceTicks } from '@squirkle/core'
+import { niceTicks } from '@squirkle-ui/core'
 
 export interface DonutDatum { label: string; value: number; color?: string }
 

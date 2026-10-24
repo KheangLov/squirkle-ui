@@ -1,7 +1,7 @@
 <template>
   <div class="doc-page" style="max-width:1200px">
     <h1>Calendar</h1>
-    <p class="lead"><code>@squirkle/calendar</code> — month, week and day views with overlapping-event layout, all-day lane, live "now" line, and drag to move / resize (snaps to 15 min).</p>
+    <p class="lead"><code>@squirkle-ui/calendar</code> — month, week and day views with overlapping-event layout, all-day lane, live "now" line, and drag to move / resize (snaps to 15 min).</p>
     <SqCalendar v-model="date" v-model:view="view" :events="events" editable @event-change="onChange" @click:time="add" @click:event="picked = $event.title" />
     <div class="sq-mt-2 sq-text-muted">Click an empty time slot (week/day view) to add an event · Last clicked: {{ picked }}</div>
   </div>
@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { CalendarEvent } from '@squirkle/calendar'
+import type { CalendarEvent } from '@squirkle-ui/calendar'
 
 const today = new Date()
 const at = (d: number, h: number, m = 0) => new Date(today.getFullYear(), today.getMonth(), today.getDate() + d, h, m)

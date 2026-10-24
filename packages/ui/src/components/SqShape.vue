@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, getCurrentInstance, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { getSquirclePath, getSquircleStrokePath, supportsNativeSquircle } from '@squirkle/core'
+import { getSquirclePath, getSquircleStrokePath, supportsNativeSquircle } from '@squirkle-ui/core'
 import { config } from '../config'
 
 /**

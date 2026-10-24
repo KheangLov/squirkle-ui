@@ -219,11 +219,11 @@
 
 <script lang="ts">
 import { computed, defineComponent, nextTick, onBeforeUnmount, onMounted, ref, toRaw, watch, type PropType } from 'vue'
-import { clamp, downloadText, formatDate, getByPath, toUnit } from '@squirkle/core'
+import { clamp, downloadText, formatDate, getByPath, toUnit } from '@squirkle-ui/core'
 import {
   SqBtn, SqCheckbox, SqChip, SqDivider, SqEmptyState, SqIcon, SqListItem, SqMenu, SqPagination, SqProgressCircular, SqShape, SqTextField,
   config, useProxiedModel,
-} from '@squirkle/ui'
+} from '@squirkle-ui/ui'
 import SqGridFilter from './GridFilter.vue'
 import {
   aggregate, allGroupIds, colIdOf, filterKindOf, filterRows, flatten, groupRows, makeGetter, parseTsv, pivotRows, rowLayout, sortIndices, toCsv, treeRows,

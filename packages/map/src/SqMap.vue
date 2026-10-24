@@ -21,8 +21,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, getCurrentInstance, markRaw, onBeforeUnmount, onMounted, ref, shallowRef, watch, type PropType } from 'vue'
-import { toUnit } from '@squirkle/core'
-import { SqBtn, SqProgressCircular, SqShape, config, iconStoreVersion, radiusValue } from '@squirkle/ui'
+import { toUnit } from '@squirkle-ui/core'
+import { SqBtn, SqProgressCircular, SqShape, config, iconStoreVersion, radiusValue } from '@squirkle-ui/ui'
 import { createRasterAdapter, createVectorAdapter, resolveMapStyle, type LatLng, type MapAdapter, type MarkerHandle } from './adapters'
 import { clusterElement, markerAnchor, markerElement, type MapMarker, type MarkerShape } from './markers'
 import { clusterLeaves, clustersFor, createClusterIndex, expansionZoom, padBBox, type ClusterIndex, type ClusterOptions } from './cluster'

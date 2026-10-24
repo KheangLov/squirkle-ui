@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, type PropType } from 'vue'
-import { toUnit } from '@squirkle/core'
+import { toUnit } from '@squirkle-ui/core'
 import { config } from '../config'
 
 export default defineComponent({

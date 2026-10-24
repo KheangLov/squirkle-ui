@@ -3,39 +3,39 @@
     <template v-if="page === 'installation'">
       <h1>Installation</h1>
       <p class="lead">One package per concern. The core is required; add-ons are optional and tree-shakeable.</p>
-      <CodeBlock lang="bash" code="pnpm add @squirkle/ui
+      <CodeBlock lang="bash" code="pnpm add @squirkle-ui/ui
 # optional add-ons
-pnpm add @squirkle/datagrid @squirkle/charts @squirkle/swiper @squirkle/calendar @squirkle/icons
-pnpm add @squirkle/map leaflet" />
+pnpm add @squirkle-ui/datagrid @squirkle-ui/charts @squirkle-ui/swiper @squirkle-ui/calendar @squirkle-ui/icons
+pnpm add @squirkle-ui/map leaflet" />
       <h2>Vue 3</h2>
       <CodeBlock lang="ts" code="import { createApp } from 'vue'
-import { createSquirkle } from '@squirkle/ui'
-import '@squirkle/ui/styles.css'
+import { createSquirkle } from '@squirkle-ui/ui'
+import '@squirkle-ui/ui/styles.css'
 
 createApp(App)
   .use(createSquirkle({ theme: { defaultTheme: 'light' }, squircle: { mode: 'auto', smoothing: 0.6 } }))
   .mount('#app')" />
       <h2>Vue 2.7</h2>
       <CodeBlock lang="ts" code="import Vue from 'vue'
-import { createSquirkle } from '@squirkle/ui/vue2'
-import '@squirkle/ui/styles.css'
+import { createSquirkle } from '@squirkle-ui/ui/vue2'
+import '@squirkle-ui/ui/styles.css'
 
 Vue.use(createSquirkle())
 new Vue({ render: (h) => h(App) }).$mount('#app')" />
       <h2>Nuxt 3 / Nuxt 4</h2>
       <CodeBlock lang="ts" code="// nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ['@squirkle/nuxt'],
+  modules: ['@squirkle-ui/nuxt'],
   squirkle: { addons: ['datagrid', 'charts'], theme: { defaultTheme: 'dark' } },
 })" />
       <h2>Nuxt 2</h2>
       <CodeBlock lang="js" code="// nuxt.config.js
 export default {
-  buildModules: [['@squirkle/nuxt/nuxt2', { addons: ['datagrid'] }]],
+  buildModules: [['@squirkle-ui/nuxt/nuxt2', { addons: ['datagrid'] }]],
 }" />
       <h2>Tree-shaking</h2>
       <CodeBlock lang="ts" code="app.use(createSquirkle({ components: false }))   // no global registration
-import { SqBtn, SqCard } from '@squirkle/ui'          // import what you use" />
+import { SqBtn, SqCard } from '@squirkle-ui/ui'          // import what you use" />
     </template>
 
     <template v-else-if="page === 'theming'">
@@ -54,7 +54,7 @@ const theme = useTheme()   // theme.name.value = 'dark' · theme.toggle()" />
       <div class="sq-d-flex sq-flex-wrap sq-gap-2 sq-mb-4">
         <SqBtn v-for="(p, key) in themePresets" :key="key" variant="tonal" size="small" @click="theme.applyPreset(String(key))"><span class="doc-dot" :style="{ background: p.primary }"></span>{{ p.label }}</SqBtn>
       </div>
-      <CodeBlock lang="ts" code="import { useTheme, createBrandTheme, presetThemes } from '@squirkle/ui'
+      <CodeBlock lang="ts" code="import { useTheme, createBrandTheme, presetThemes } from '@squirkle-ui/ui'
 
 const theme = useTheme()
 theme.applyPreset('ocean')                       // iris · ocean · forest · sunset · rose · graphite · mint
@@ -102,7 +102,7 @@ createSquirkle({ theme: { themes: createBrandTheme('#0bb5c4') }, appearance: { r
         <div style="flex:1;min-width:220px"><SqSlider v-model="r" :min="0" :max="100" label="Radius" thumb-label /><SqSlider v-model="s" :min="0" :max="1" :step="0.05" label="Smoothing" thumb-label /></div>
       </div>
       <p class="sq-text-muted">Dashed: circular border-radius. Solid: squircle with the same radius.</p>
-      <CodeBlock lang="ts" code="import { getSquirclePath } from '@squirkle/core'
+      <CodeBlock lang="ts" code="import { getSquirclePath } from '@squirkle-ui/core'
 getSquirclePath({ width: 200, height: 120, radius: 32, smoothing: 0.6 })  // → SVG path d" />
     </template>
 
@@ -112,10 +112,10 @@ getSquirclePath({ width: 200, height: 120, radius: 32, smoothing: 0.6 })  // →
       <SqTable density="compact">
         <thead><tr><th>Target</th><th>Import</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td>Vue 3.3+</td><td><code>@squirkle/ui</code></td><td>ESM + CJS</td></tr>
-          <tr><td>Vue 2.7</td><td><code>@squirkle/ui/vue2</code></td><td>ES2019 output for webpack 4</td></tr>
-          <tr><td>Nuxt 3 / 4</td><td><code>@squirkle/nuxt</code></td><td>auto-imported components, SSR theme CSS</td></tr>
-          <tr><td>Nuxt 2.17</td><td><code>@squirkle/nuxt/nuxt2</code></td><td>plugin + transpile config</td></tr>
+          <tr><td>Vue 3.3+</td><td><code>@squirkle-ui/ui</code></td><td>ESM + CJS</td></tr>
+          <tr><td>Vue 2.7</td><td><code>@squirkle-ui/ui/vue2</code></td><td>ES2019 output for webpack 4</td></tr>
+          <tr><td>Nuxt 3 / 4</td><td><code>@squirkle-ui/nuxt</code></td><td>auto-imported components, SSR theme CSS</td></tr>
+          <tr><td>Nuxt 2.17</td><td><code>@squirkle-ui/nuxt/nuxt2</code></td><td>plugin + transpile config</td></tr>
         </tbody>
       </SqTable>
       <h2>v-model in both versions</h2>
@@ -129,8 +129,8 @@ getSquirclePath({ width: 200, height: 120, radius: 32, smoothing: 0.6 })  // →
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { getSquirclePath, supportsNativeSquircle } from '@squirkle/core'
-import { themePresets, useTheme } from '@squirkle/ui'
+import { getSquirclePath, supportsNativeSquircle } from '@squirkle-ui/core'
+import { themePresets, useTheme } from '@squirkle-ui/ui'
 import CodeBlock from '../components/CodeBlock.vue'
 
 const route = useRoute()

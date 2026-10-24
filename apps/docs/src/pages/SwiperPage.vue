@@ -1,7 +1,7 @@
 <template>
   <div class="doc-page">
     <h1>Swiper</h1>
-    <p class="lead"><code>@squirkle/swiper</code> — touch & mouse drag, true infinite loop without cloned slides, effects, autoplay, keyboard, breakpoints and three pagination styles.</p>
+    <p class="lead"><code>@squirkle-ui/swiper</code> — touch & mouse drag, true infinite loop without cloned slides, effects, autoplay, keyboard, breakpoints and three pagination styles.</p>
     <h2>Loop + autoplay</h2>
     <SqSwiper v-model="i" :items="photos" loop :autoplay="3500" :height="340">
       <template #default="{ item }"><div class="doc-slide" :style="{ backgroundImage: `url(${item.src})` }"><span>{{ item.title }}</span></div></template>

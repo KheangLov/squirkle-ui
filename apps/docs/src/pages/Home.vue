@@ -46,14 +46,14 @@ import { registry } from '../registry'
 
 const count = registry.filter((r) => !r.pkg).length
 const pkgs = [
-  { name: '@squirkle/ui', desc: `${count} core components`, to: '/components' },
-  { name: '@squirkle/datagrid', desc: 'AG Grid-style enterprise grid', to: '/datagrid' },
-  { name: '@squirkle/charts', desc: 'Line, bar, donut, sparkline', to: '/charts' },
-  { name: '@squirkle/swiper', desc: 'Touch carousel & effects', to: '/swiper' },
-  { name: '@squirkle/calendar', desc: 'Month / week / day events', to: '/calendar' },
-  { name: '@squirkle/map', desc: 'Leaflet with squircle pins', to: '/map' },
-  { name: '@squirkle/icons', desc: 'Iconify picker & presets', to: '/icons' },
-  { name: '@squirkle/nuxt', desc: 'Nuxt 2 / 3 / 4 module', to: '/guide/installation' },
+  { name: '@squirkle-ui/ui', desc: `${count} core components`, to: '/components' },
+  { name: '@squirkle-ui/datagrid', desc: 'AG Grid-style enterprise grid', to: '/datagrid' },
+  { name: '@squirkle-ui/charts', desc: 'Line, bar, donut, sparkline', to: '/charts' },
+  { name: '@squirkle-ui/swiper', desc: 'Touch carousel & effects', to: '/swiper' },
+  { name: '@squirkle-ui/calendar', desc: 'Month / week / day events', to: '/calendar' },
+  { name: '@squirkle-ui/map', desc: 'Leaflet with squircle pins', to: '/map' },
+  { name: '@squirkle-ui/icons', desc: 'Iconify picker & presets', to: '/icons' },
+  { name: '@squirkle-ui/nuxt', desc: 'Nuxt 2 / 3 / 4 module', to: '/guide/installation' },
 ]
 const weeks = Array.from({ length: 12 }, (_, i) => `W${i + 1}`)
 const web = [12, 14, 13, 17, 19, 18, 22, 25, 24, 27, 30, 33].map((v) => v * 1000)

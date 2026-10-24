@@ -1,5 +1,5 @@
 {
-  "name": "@squirkle/nuxt",
+  "name": "@squirkle-ui/nuxt",
   "version": "0.1.0",
   "description": "Nuxt 2, 3 and 4 module for Squirkle UI",
   "license": "MIT",
@@ -33,7 +33,7 @@
     "@nuxt/kit": "^4.0.0"
   },
   "peerDependencies": {
-    "@squirkle/ui": "workspace:^"
+    "@squirkle-ui/ui": "workspace:^"
   },
   "module": "./src/module.mjs",
   "publishConfig": {

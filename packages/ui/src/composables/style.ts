@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { toUnit } from '@squirkle/core'
+import { toUnit } from '@squirkle-ui/core'
 
 export const THEME_COLORS = ['primary', 'secondary', 'accent', 'success', 'info', 'warning', 'error', 'surface', 'surface-variant'] as const
 

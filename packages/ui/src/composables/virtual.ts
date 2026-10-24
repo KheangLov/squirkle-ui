@@ -1,5 +1,5 @@
 import { computed, onBeforeUnmount, ref, shallowRef, watch, type Ref } from 'vue'
-import { rafThrottle } from '@squirkle/core'
+import { rafThrottle } from '@squirkle-ui/core'
 
 export interface VirtualOptions {
   /** Number of items. */

@@ -1,5 +1,5 @@
 import { computed, inject, type Ref } from 'vue'
-import { createBrandTheme, defaultThemes, presetThemes, type Appearance } from '@squirkle/core'
+import { createBrandTheme, defaultThemes, presetThemes, type Appearance } from '@squirkle-ui/core'
 import { config, setAppearance } from '../config'
 
 /**

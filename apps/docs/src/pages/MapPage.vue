@@ -1,7 +1,7 @@
 <template>
   <div class="doc-page" style="max-width:1200px">
     <h1>Map</h1>
-    <p class="lead"><code>@squirkle/map</code> — vector tiles with MapLibre GL (default) or raster tiles with Leaflet, squircle markers, clustering and themed popups. Both engines are optional peer dependencies loaded on demand (SSR-safe).</p>
+    <p class="lead"><code>@squirkle-ui/map</code> — vector tiles with MapLibre GL (default) or raster tiles with Leaflet, squircle markers, clustering and themed popups. Both engines are optional peer dependencies loaded on demand (SSR-safe).</p>
 
     <div class="sq-d-flex sq-flex-wrap sq-gap-3 sq-align-center sq-mb-4">
       <SqBtnToggle v-model="engine" mandatory><SqBtn value="vector" variant="text">Vector</SqBtn><SqBtn value="raster" variant="text">Raster</SqBtn></SqBtnToggle>
@@ -39,7 +39,7 @@ markers: { lat, lng, title, popup, color, shape: 'pin' | 'dot' | 'squircle' | 'a
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { MapMarker } from '@squirkle/map'
+import type { MapMarker } from '@squirkle-ui/map'
 
 const engine = ref<'vector' | 'raster'>('vector')
 const style = ref('auto')

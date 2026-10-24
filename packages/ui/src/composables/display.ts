@@ -1,5 +1,5 @@
 import { computed, reactive } from 'vue'
-import { isBrowser } from '@squirkle/core'
+import { isBrowser } from '@squirkle-ui/core'
 
 /** Breakpoints (px) — same numbers as --sq-bp-* in styles/tokens.css. */
 export const breakpoints = { sm: 600, md: 960, lg: 1280, xl: 1920 }

@@ -31,8 +31,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref, watch, type PropType } from 'vue'
-import { debounce } from '@squirkle/core'
-import { SqIcon, SqProgressCircular, SqSelect, SqShape, SqTextField, SqVirtualScroll, config, useProxiedModel, vModel } from '@squirkle/ui'
+import { debounce } from '@squirkle-ui/core'
+import { SqIcon, SqProgressCircular, SqSelect, SqShape, SqTextField, SqVirtualScroll, config, useProxiedModel, vModel } from '@squirkle-ui/ui'
 
 /** Searchable Iconify browser (uses the configured Iconify API host). v-model = icon name, e.g. `mdi:home`. */
 export default defineComponent({

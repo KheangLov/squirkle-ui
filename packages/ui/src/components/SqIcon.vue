@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { toUnit } from '@squirkle/core'
+import { toUnit } from '@squirkle-ui/core'
 import { resolveIcon } from '../icons'
 import { colorValue } from '../composables/style'
 

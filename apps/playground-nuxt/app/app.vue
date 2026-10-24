@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTheme } from '@squirkle/ui'
+import { useTheme } from '@squirkle-ui/ui'
 
 const { isDark, toggle } = useTheme()
 </script>

@@ -1,5 +1,5 @@
 {
-  "name": "@squirkle/playground-vue2",
+  "name": "@squirkle-ui/playground-vue2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "vue": "2.7.16",
-    "@squirkle/ui": "workspace:*",
-    "@squirkle/datagrid": "workspace:*",
-    "@squirkle/charts": "workspace:*",
-    "@squirkle/swiper": "workspace:*",
-    "@squirkle/calendar": "workspace:*"
+    "@squirkle-ui/ui": "workspace:*",
+    "@squirkle-ui/datagrid": "workspace:*",
+    "@squirkle-ui/charts": "workspace:*",
+    "@squirkle-ui/swiper": "workspace:*",
+    "@squirkle-ui/calendar": "workspace:*"
   },
   "devDependencies": {
     "@vitejs/plugin-vue2": "^2.3.4",

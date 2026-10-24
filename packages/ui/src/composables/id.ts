@@ -1,5 +1,5 @@
 import * as vue from 'vue'
-import { nextId } from '@squirkle/core'
+import { nextId } from '@squirkle-ui/core'
 
 // Namespace import: `useId` exists only in Vue 3.5+, and a named import would fail to link in Vue 2.
 const vueUseId = (vue as unknown as { useId?: () => string }).useId

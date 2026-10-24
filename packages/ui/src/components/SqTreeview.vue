@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, type PropType } from 'vue'
-import { getByPath } from '@squirkle/core'
+import { getByPath } from '@squirkle-ui/core'
 import SqIcon from './SqIcon.vue'
 import { useProxiedModel, vModel } from '../composables/model'
 

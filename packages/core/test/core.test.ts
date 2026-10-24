@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getSquirclePath, getSquircleStrokePath, niceTicks, compareValues, monthGrid, createThemeCss, defaultThemes, onColor, contrastRatio, createBrandTheme, themePresets, presetThemes, appearanceCss, luminance, isHexColor } from '@squirkle/core'
+import { getSquirclePath, getSquircleStrokePath, niceTicks, compareValues, monthGrid, createThemeCss, defaultThemes, onColor, contrastRatio, createBrandTheme, themePresets, presetThemes, appearanceCss, luminance, isHexColor } from '@squirkle-ui/core'
 
 describe('squircle', () => {
   it('starts and closes the path inside the box', () => {

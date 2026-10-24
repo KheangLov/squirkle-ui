@@ -1,7 +1,7 @@
 <template>
   <div class="doc-page" style="max-width:1200px">
     <h1>Charts</h1>
-    <p class="lead"><code>@squirkle/charts</code> — dependency-free SVG charts with squircle bar ends, a validated colorblind-safe palette (light &amp; dark), hover tooltips, legends and an accessible data table in every chart.</p>
+    <p class="lead"><code>@squirkle-ui/charts</code> — dependency-free SVG charts with squircle bar ends, a validated colorblind-safe palette (light &amp; dark), hover tooltips, legends and an accessible data table in every chart.</p>
     <SqRow>
       <SqCol cols="12" md="8"><SqLineChart title="Revenue" subtitle="Monthly, USD" area :labels="months" :series="[{ name: 'Subscriptions', data: subs }, { name: 'Services', data: services }]" :format="usd" /></SqCol>
       <SqCol cols="12" md="4"><SqDonutChart title="Traffic sources" :data="sources" total-label="Visits" /></SqCol>

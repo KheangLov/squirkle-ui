@@ -53,11 +53,11 @@
 </template>
 
 <script>
-import { config } from '@squirkle/ui/vue2'
-import { SqDataGrid } from '@squirkle/datagrid/vue2'
-import { SqBarChart } from '@squirkle/charts/vue2'
-import { SqSwiper } from '@squirkle/swiper/vue2'
-import { SqCalendar } from '@squirkle/calendar/vue2'
+import { config } from '@squirkle-ui/ui/vue2'
+import { SqDataGrid } from '@squirkle-ui/datagrid/vue2'
+import { SqBarChart } from '@squirkle-ui/charts/vue2'
+import { SqSwiper } from '@squirkle-ui/swiper/vue2'
+import { SqCalendar } from '@squirkle-ui/calendar/vue2'
 
 // Freezing the array (not the rows) stops Vue 2 from observing 10k objects while keeping cells editable.
 const rows = Object.freeze(Array.from({ length: 10000 }, (_, i) => ({ id: i + 1, name: 'User ' + (i + 1), team: ['Core', 'Web', 'Ops'][i % 3], score: (i * 37) % 100 })))

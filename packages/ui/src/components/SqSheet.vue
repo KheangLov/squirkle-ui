@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { toUnit } from '@squirkle/core'
+import { toUnit } from '@squirkle-ui/core'
 import SqShape from './SqShape.vue'
 import { colorValue, elevationVars, onColorValue, radiusValue, roundedProp } from '../composables/style'
 

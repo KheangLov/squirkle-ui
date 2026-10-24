@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, getCurrentInstance, onBeforeUnmount, onMounted, ref } from 'vue'
-import { toUnit } from '@squirkle/core'
+import { toUnit } from '@squirkle-ui/core'
 
 /** Renders its content only once it scrolls into view. */
 export default defineComponent({

@@ -1,5 +1,5 @@
 import { watch, type Component } from 'vue'
-import { isBrowser } from '@squirkle/core'
+import { isBrowser } from '@squirkle-ui/core'
 import { applyOptions, config, isVue2, syncThemeToDocument, type SquirkleOptions } from './config'
 import * as components from './components'
 

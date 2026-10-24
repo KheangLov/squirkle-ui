@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { clamp, toUnit } from '@squirkle/core'
+import { clamp, toUnit } from '@squirkle-ui/core'
 import { colorValue } from '../composables/style'
 
 export default defineComponent({

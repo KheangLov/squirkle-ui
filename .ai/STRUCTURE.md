@@ -21,5 +21,5 @@ Read when: locating where something lives or where a new file goes.
 | `packages/*/test/` | Vitest specs | `core.test.ts`, `engine.test.ts`, `layout.test.ts` | vitest | — |
 | `apps/docs/src/` | docs + playground | `registry.ts`, `App.vue`, `pages/*.vue`, `components/DocExample.vue` | all packages, vue-router | examples are runtime-compiled templates |
 | `apps/playground-vue2/` | Vue 2.7 smoke test | `src/App.vue`, `vite.config.js` | built dist | pins `vue` to Vue 2 runtime |
-| `apps/playground-nuxt/` | Nuxt 4 SSR test of `@squirkle/nuxt` | `nuxt.config.ts`, `app/app.vue`, `app/pages/{index,grid}.vue` | nuxt 4.6.2, built dist | `.nuxt`/`.output` gitignored |
+| `apps/playground-nuxt/` | Nuxt 4 SSR test of `@squirkle-ui/nuxt` | `nuxt.config.ts`, `app/app.vue`, `app/pages/{index,grid}.vue` | nuxt 4.6.2, built dist | `.nuxt`/`.output` gitignored |
 | `.claude/` | agent config | `settings.json`, `skills/`, `agents/`, `launch.json` | — | settings edits need confirmation (G4) |

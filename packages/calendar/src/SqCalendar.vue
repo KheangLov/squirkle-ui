@@ -87,8 +87,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, nextTick, onBeforeUnmount, onMounted, ref, watch, type PropType } from 'vue'
-import { addDays, addMonths, isSameDay, isSameMonth, monthGrid, startOfWeek, toISODate, toUnit, weekdayNames } from '@squirkle/core'
-import { SqBtn, SqBtnToggle, SqShape, colorValue, config, useProxiedModel, vModel } from '@squirkle/ui'
+import { addDays, addMonths, isSameDay, isSameMonth, monthGrid, startOfWeek, toISODate, toUnit, weekdayNames } from '@squirkle-ui/core'
+import { SqBtn, SqBtnToggle, SqShape, colorValue, config, useProxiedModel, vModel } from '@squirkle-ui/ui'
 import { eventsOnDay, layoutDay, normalizeEvent, type CalendarEvent, type Placed } from './layout'
 
 type View = 'month' | 'week' | 'day'

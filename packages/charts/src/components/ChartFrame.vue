@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
-import { SqShape } from '@squirkle/ui'
+import { SqShape } from '@squirkle-ui/ui'
 
 /** Card, caption, legend and an accessible data table shared by every chart (internal). */
 export default defineComponent({

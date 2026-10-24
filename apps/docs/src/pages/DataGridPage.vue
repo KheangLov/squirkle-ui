@@ -1,7 +1,7 @@
 <template>
   <div class="doc-page" style="max-width:1320px">
     <h1>DataGrid</h1>
-    <p class="lead"><code>@squirkle/datagrid</code> — an AG Grid-inspired enterprise grid in a squircle frame. Everything below runs on 100,000 client rows or an infinite server-side model.</p>
+    <p class="lead"><code>@squirkle-ui/datagrid</code> — an AG Grid-inspired enterprise grid in a squircle frame. Everything below runs on 100,000 client rows or an infinite server-side model.</p>
     <SqTabs v-model="demo" variant="segmented" :items="demos" class="sq-mb-4" />
 
     <template v-if="demo === 'Enterprise'">
@@ -66,7 +66,7 @@
 
 <script setup lang="ts">
 import { markRaw, ref } from 'vue'
-import type { ColumnDef, Datasource } from '@squirkle/datagrid'
+import type { ColumnDef, Datasource } from '@squirkle-ui/datagrid'
 
 const demos = ['Enterprise', 'Server-side infinite', 'Tree data', 'Pivot', 'Master / detail']
 const demo = ref('Enterprise')

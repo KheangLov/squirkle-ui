@@ -9,10 +9,10 @@
 
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
-import { toUnit } from '@squirkle/core'
+import { toUnit } from '@squirkle-ui/core'
 import SqShape from './SqShape.vue'
 
-/** Styled native table. For sorting, filtering, virtualization and big data use SqDataGrid (@squirkle/datagrid). */
+/** Styled native table. For sorting, filtering, virtualization and big data use SqDataGrid (@squirkle-ui/datagrid). */
 export default defineComponent({
   name: 'SqTable',
   components: { SqShape },

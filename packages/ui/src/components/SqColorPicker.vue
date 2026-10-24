@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, ref, watch, type PropType } from 'vue'
-import { clamp } from '@squirkle/core'
+import { clamp } from '@squirkle-ui/core'
 import SqShape from './SqShape.vue'
 import { useProxiedModel, vModel } from '../composables/model'
 

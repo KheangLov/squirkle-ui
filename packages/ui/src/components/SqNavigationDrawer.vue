@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, watch, type PropType } from 'vue'
-import { toUnit } from '@squirkle/core'
+import { toUnit } from '@squirkle-ui/core'
 import SqShape from './SqShape.vue'
 import { useProxiedModel, vModel } from '../composables/model'
 import { useDisplay } from '../composables/display'

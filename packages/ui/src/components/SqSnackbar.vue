@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, ref, watch, type PropType } from 'vue'
-import { isBrowser } from '@squirkle/core'
+import { isBrowser } from '@squirkle-ui/core'
 import SqPortal from './SqPortal.vue'
 import SqShape from './SqShape.vue'
 import SqIcon from './SqIcon.vue'

@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
-import { getByPath } from '@squirkle/core'
+import { getByPath } from '@squirkle-ui/core'
 import SqListItem from './SqListItem.vue'
 import SqListSubheader from './SqListSubheader.vue'
 import SqDivider from './SqDivider.vue'

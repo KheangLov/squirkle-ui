@@ -14,26 +14,26 @@ const ADDON_COMPONENTS = {
 }
 
 export default defineNuxtModule({
-  meta: { name: '@squirkle/nuxt', configKey: 'squirkle', compatibility: { nuxt: '>=3.0.0' } },
+  meta: { name: '@squirkle-ui/nuxt', configKey: 'squirkle', compatibility: { nuxt: '>=3.0.0' } },
   defaults: { addons: [], prefix: 'Sq', css: true, theme: undefined, squircle: undefined, appearance: undefined, icons: undefined, locale: undefined },
   async setup(options, nuxt) {
     const addons = (options.addons ?? []).filter((a) => a in ADDON_COMPONENTS)
     const pkgs = ['ui', ...addons]
-    const { componentNames: uiNames } = await import('@squirkle/ui')
+    const { componentNames: uiNames } = await import('@squirkle-ui/ui')
     for (const pkg of pkgs) {
       for (const name of pkg === 'ui' ? uiNames : ADDON_COMPONENTS[pkg]) {
-        addComponent({ name: name.replace(/^Sq/, options.prefix), export: name, filePath: `@squirkle/${pkg}`, mode: pkg === 'map' ? 'client' : 'all' })
+        addComponent({ name: name.replace(/^Sq/, options.prefix), export: name, filePath: `@squirkle-ui/${pkg}`, mode: pkg === 'map' ? 'client' : 'all' })
       }
     }
-    if (options.css) for (const pkg of pkgs) nuxt.options.css.push(`@squirkle/${pkg}/styles.css`)
-    nuxt.options.build.transpile.push(...pkgs.map((p) => `@squirkle/${p}`), '@squirkle/core')
+    if (options.css) for (const pkg of pkgs) nuxt.options.css.push(`@squirkle-ui/${pkg}/styles.css`)
+    nuxt.options.build.transpile.push(...pkgs.map((p) => `@squirkle-ui/${p}`), '@squirkle-ui/core')
     if (addons.includes('map')) addMapSupport(nuxt.options.rootDir)
 
     const runtimeOptions = { theme: options.theme, squircle: options.squircle, appearance: options.appearance, icons: options.icons, locale: options.locale }
     addPluginTemplate({
       filename: 'squirkle.plugin.mjs',
       getContents: () => `import { defineNuxtPlugin, useHead } from '#imports'
-import { createSquirkle, getThemeCss, config } from '@squirkle/ui'
+import { createSquirkle, getThemeCss, config } from '@squirkle-ui/ui'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(createSquirkle({ ...${JSON.stringify(runtimeOptions)}, components: false }))
@@ -64,7 +64,7 @@ function addMapSupport(rootDir) {
       filename: 'squirkle.map-worker.client.mjs',
       mode: 'client',
       getContents: () => `import { defineNuxtPlugin } from '#imports'
-import { setMapWorkerUrl } from '@squirkle/map'
+import { setMapWorkerUrl } from '@squirkle-ui/map'
 import workerUrl from ${JSON.stringify(worker.replace(/\\/g, '/') + '?url')}
 
 export default defineNuxtPlugin(() => setMapWorkerUrl(workerUrl))
@@ -75,6 +75,6 @@ export default defineNuxtPlugin(() => setMapWorkerUrl(workerUrl))
   extendViteConfig((config) => {
     config.optimizeDeps = config.optimizeDeps || {}
     config.optimizeDeps.exclude = add(config.optimizeDeps.exclude, ['maplibre-gl'])
-    config.optimizeDeps.include = add(config.optimizeDeps.include, ['@squirkle/map > supercluster', ...(hasLeaflet ? ['leaflet'] : [])])
+    config.optimizeDeps.include = add(config.optimizeDeps.include, ['@squirkle-ui/map > supercluster', ...(hasLeaflet ? ['leaflet'] : [])])
   })
 }
