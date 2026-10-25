@@ -16,6 +16,7 @@ Read when: first task in a session, or any task touching build/scripts/packages.
 | `pnpm dev:vue2` | `examples/vue2-vite` on :5181, uses `dist/vue2` (run `pnpm build` first) | verified |
 | `pnpm build [pkg…]` | `scripts/build.mjs`: core → ui → add-ons, each Vue 3 + Vue 2 + `dist/types` | verified |
 | `pnpm dev:nuxt` | `examples/nuxt4` on :5182 (built dist; `pnpm --filter @squirkle-ui/example-nuxt4 build` for prod) | verified |
+| `pnpm build:pages` | builds packages, docs, Storybook and every example with sub-path bases and assembles `_site/` (`PAGES_BASE`, default `/squirkle-ui/`); deployed by `.github/workflows/pages.yml` | verified locally (CI run NOT RUN) |
 | `pnpm examples:build [name…]` | builds every `examples/*` app against built packages; fails if a Showcase copy drifts | verified (all 7; `nuxt2` is installed in place with its own lockfile) |
 | `pnpm build:docs` | production docs build | verified |
 | `pnpm test` | Vitest, `packages/*/test/**/*.test.ts` (47 tests) | verified |

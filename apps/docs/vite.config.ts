@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url'
 import { aliases } from '../../build/aliases'
 
 export default defineConfig({
+  // GitHub Pages serves the site under a sub-path (scripts/pages.mjs sets BASE_PATH); local dev stays at `/`.
+  base: process.env.BASE_PATH || '/',
   plugins: [vue()],
   resolve: {
     alias: {

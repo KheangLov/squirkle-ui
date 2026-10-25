@@ -1,5 +1,7 @@
 # Examples
 
+Live: [https://kheanglov.github.io/squirkle-ui/examples/](https://kheanglov.github.io/squirkle-ui/examples/)
+
 One app per supported framework and version. Every example renders the same page — [`shared/Showcase.vue`](shared/Showcase.vue), copied into each app — with a section per package: ui (forms, date & time field, dialog, timeline), datagrid, charts, swiper, calendar, map, icons and editor.
 
 The examples install the packages with `workspace:*` (`nuxt2`: `link:`, see below) and load their **built** output through each package's `exports` (or the `vue2/` + `styles.css` fallbacks for webpack 4), exactly like an app installed from npm. Build the packages first:

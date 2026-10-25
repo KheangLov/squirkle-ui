@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 // Smoke test of the built Vue 2 bundles (packages/*/dist/vue2). Run `pnpm build` first.
 // `vue` is pinned to this app's Vue 2.7 so library dist files never pick up the workspace's Vue 3.
 export default defineConfig({
+  base: process.env.BASE_PATH || '/', // sub-path when built for GitHub Pages (scripts/pages.mjs)
   plugins: [vue2()],
   resolve: {
     alias: [{ find: /^vue$/, replacement: fileURLToPath(new URL('./node_modules/vue/dist/vue.runtime.esm.js', import.meta.url)) }],
