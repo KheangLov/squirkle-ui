@@ -20,9 +20,10 @@
       "@squirkle-ui/calendar": ["packages/calendar/src/index.ts"],
       "@squirkle-ui/map": ["packages/map/src/index.ts"],
       "@squirkle-ui/charts": ["packages/charts/src/index.ts"],
-      "@squirkle-ui/icons": ["packages/icons/src/index.ts"]
+      "@squirkle-ui/icons": ["packages/icons/src/index.ts"],
+      "@squirkle-ui/editor": ["packages/editor/src/index.ts"]
     }
   },
-  "include": ["packages/*/src/**/*.ts", "packages/*/src/**/*.vue", "apps/docs/src/**/*.ts", "apps/docs/src/**/*.vue"],
+  "include": ["packages/*/src/**/*.ts", "packages/*/src/**/*.vue", "apps/docs/src/**/*.ts", "apps/docs/src/**/*.vue", "apps/storybook/stories/**/*.ts", "apps/storybook/.storybook/*.ts"],
   "exclude": ["packages/nuxt/**", "**/node_modules/**", "**/dist/**"]
 }

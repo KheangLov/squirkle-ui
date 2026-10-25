@@ -5,6 +5,7 @@ Iconify icon picker and icon presets for [Squirkle UI](https://www.npmjs.com/pac
 ## Install
 ```bash
 npm i @squirkle-ui/icons @squirkle-ui/ui
+pnpm add @squirkle-ui/icons @squirkle-ui/ui
 ```
 Or get every component and add-on with [`squirkle-ui`](https://www.npmjs.com/package/squirkle-ui) and import from `squirkle-ui/icons`.
 

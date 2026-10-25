@@ -12,6 +12,7 @@ export const router = createRouter({
     { path: '/datagrid', component: () => import('./pages/DataGridPage.vue') },
     { path: '/charts', component: () => import('./pages/ChartsPage.vue') },
     { path: '/swiper', component: () => import('./pages/SwiperPage.vue') },
+    { path: '/editor', component: () => import('./pages/EditorPage.vue') },
     { path: '/calendar', component: () => import('./pages/CalendarPage.vue') },
     { path: '/map', component: () => import('./pages/MapPage.vue') },
     { path: '/icons', component: () => import('./pages/IconsPage.vue') },

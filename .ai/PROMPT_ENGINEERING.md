@@ -23,7 +23,7 @@ Failure signals: banned words survive ("improve", "clean up", "handle properly",
 | "use the right color" | exact token from `.ai/DESIGN_SYSTEM.md` (e.g. `--sq-primary`) |
 | "follow conventions" | the convention + its `.ai/CONVENTIONS.md` section |
 | "add tests" | test file path, cases, framework (Vitest + happy-dom) |
-| "works in Vue 2" | "`pnpm build <pkg>` passes and `apps/playground-vue2` renders it without console errors" |
+| "works in Vue 2" | "`pnpm build <pkg>` passes and `examples/vue2-vite` (and `vue2-webpack` for webpack) renders it without console errors" |
 | "etc." | the complete list |
 
 ## C. Role Rules
@@ -118,6 +118,12 @@ Scan entries for the same task type before drafting. Consolidate; keep under ~40
 - 2026-10-24 | add-on (third-party CSS) | MapLibre's lazily loaded CSS (`.maplibregl-map { position: relative }`) overrode SqMap's equal-specificity rule and collapsed the map to 0 px; DOM checks passed while nothing was visible | scope container rules with two classes when a lazily loaded library styles the same element; verify element size/pixels, not only DOM presence
 - 2026-10-24 | add-on (bundler) | MapLibre's web worker fails under Vite dep pre-bundling (docs, Vue 2 playground, Nuxt dev) | for libraries that spawn workers, list bundler integration in Risks and test in a plain consumer app, not only the docs
 - 2026-10-24 | add-on (Nuxt client-only) | `SqMap` mounted from `onMounted` while Nuxt's `createClientOnly` still rendered a hydration placeholder (ref null) → spinner forever on full page loads; client navigation hid it | for `mode: 'client'` components, wait for the template ref before mounting; always test a full SSR load in a foreground tab
+- 2026-10-25 | component (CSS grid) | a `display: none` grid cell shifted SqTimelineItem's dot and body into the wrong columns (body squeezed to 32 px) | give every grid child an explicit `grid-column` when a sibling can be hidden
+- 2026-10-25 | docs (styling a component) | a class rule setting `--sq-bg` on SqBtn lost to the inline variables SqBtn writes itself | change component looks through its props (`variant`, `color`), not by overriding its CSS variables from outside
+- 2026-10-25 | add-on (third-party editor) | Tiptap 3 StarterKit's `trailingNode` appended `<p></p>` on mount, rewriting v-model with no user edit | check that mounting a wrapped library emits no model update; disable extensions that normalize content on load
+- 2026-10-25 | packaging (webpack 4) | Nuxt 2 / webpack 4 ignore `exports`, so `<pkg>/vue2`, `<pkg>/styles.css` and Tiptap's `@tiptap/pm/*` never resolved; the Nuxt 2 path had only been syntax-checked | every documented import path needs a real consumer build per bundler — run `pnpm examples:build`
+- 2026-10-25 | packaging (Vue 2 build) | Rollup turned `vue.useId` (namespace access) into `import { useId } from 'vue'`; Vite tolerated it, webpack 5 failed the build | feature-detect optional framework APIs with `Reflect.get(ns, 'name')`, and build the Vue 2 output with webpack 5 too
+- 2026-10-25 | examples (monorepo) | linked packages resolved the repo root's Vue 3 inside Vue 2 apps (editor never mounted; Nuxt 2 `vue-server-renderer` version mismatch) | Vue 2 examples pin `vue`; check bundles for a second Vue before trusting a Vue 2 result
 - 2026-10-24 | add-on (worker assets) | MapLibre builds its worker URL from `import.meta.url`; neither dev pre-bundling nor production builds provide that file | for libraries that load sibling files at runtime, verify the production build output contains them and pass explicit URLs (`?url`)
 - 2026-10-24 | context (token trim) | planned to cut CLAUDE.md to ~300 tokens by moving its guardrail block, which G3 protects; real saving was ~200, not ~500 | trim around always-loaded guardrails; measure section sizes before promising a token saving
 - 2026-10-24 | release (npm) | `pnpm -r publish` put 0.1.0 on npm with no README in the registry metadata although tarballs contained README.md | after a first publish, check `npm view <pkg> readmeFilename`; upload with `npm publish <tgz>` (npm reads README via fullReadJson)

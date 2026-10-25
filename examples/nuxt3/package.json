@@ -1,0 +1,26 @@
+{
+  "name": "@squirkle-ui/example-nuxt3",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev --port 5187",
+    "build": "nuxt build",
+    "preview": "nuxt preview --port 5187"
+  },
+  "dependencies": {
+    "@squirkle-ui/calendar": "workspace:*",
+    "@squirkle-ui/charts": "workspace:*",
+    "@squirkle-ui/core": "workspace:*",
+    "@squirkle-ui/datagrid": "workspace:*",
+    "@squirkle-ui/editor": "workspace:*",
+    "@squirkle-ui/icons": "workspace:*",
+    "@squirkle-ui/map": "workspace:*",
+    "@squirkle-ui/nuxt": "workspace:*",
+    "@squirkle-ui/swiper": "workspace:*",
+    "@squirkle-ui/ui": "workspace:*",
+    "leaflet": "^1.9.4",
+    "maplibre-gl": "^6.15.0",
+    "nuxt": "3.21.11",
+    "vue": "^3.5.0"
+  }
+}

@@ -24,7 +24,9 @@
     "*.css"
   ],
   "files": [
-    "dist"
+    "dist",
+    "vue2",
+    "styles.css"
   ],
   "main": "./dist/vue3/index.cjs",
   "module": "./dist/vue3/index.mjs",

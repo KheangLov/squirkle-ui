@@ -1,0 +1,9 @@
+# Standalone install (excluded from the repo workspace): Nuxt 2's own packages must resolve this app's Vue 2.
+# The Squirkle packages are linked from ../../packages (built dist — run `pnpm build` at the repo root first).
+packages: []
+allowBuilds:
+  esbuild: true
+  # banner and legacy native install scripts, not needed
+  core-js: false
+  fsevents: false
+  nuxt: false

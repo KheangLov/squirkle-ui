@@ -23,7 +23,8 @@
     "design-system",
     "datagrid",
     "charts",
-    "map"
+    "map",
+    "editor"
   ],
   "type": "module",
   "sideEffects": [
@@ -117,7 +118,18 @@
       "import": "./dist/icons/vue2.mjs",
       "require": "./dist/icons/vue2.cjs"
     },
-    "./icons/styles.css": "./dist/icons/styles.css"
+    "./icons/styles.css": "./dist/icons/styles.css",
+    "./editor": {
+      "types": "./dist/editor/index.d.ts",
+      "import": "./dist/editor/index.mjs",
+      "require": "./dist/editor/index.cjs"
+    },
+    "./editor/vue2": {
+      "types": "./dist/editor/vue2.d.ts",
+      "import": "./dist/editor/vue2.mjs",
+      "require": "./dist/editor/vue2.cjs"
+    },
+    "./editor/styles.css": "./dist/editor/styles.css"
   },
   "peerDependencies": {
     "leaflet": "^1.9.0",
@@ -137,6 +149,7 @@
     "@squirkle-ui/charts": "workspace:^",
     "@squirkle-ui/core": "workspace:^",
     "@squirkle-ui/datagrid": "workspace:^",
+    "@squirkle-ui/editor": "workspace:^",
     "@squirkle-ui/icons": "workspace:^",
     "@squirkle-ui/map": "workspace:^",
     "@squirkle-ui/swiper": "workspace:^",

@@ -8,9 +8,9 @@
 
       <section>
         <h4>Mode</h4>
-        <SqBtnToggle :model-value="isDark ? 'dark' : 'light'" mandatory @update:model-value="setMode">
-          <SqBtn value="light" prepend-icon="sun" variant="text">Light</SqBtn>
-          <SqBtn value="dark" prepend-icon="moon" variant="text">Dark</SqBtn>
+        <SqBtnToggle class="doc-custom__mode" :model-value="isDark ? 'dark' : 'light'" mandatory @update:model-value="setMode">
+          <SqBtn value="light" prepend-icon="sun" :variant="isDark ? 'text' : 'elevated'" color="surface">Light</SqBtn>
+          <SqBtn value="dark" prepend-icon="moon" :variant="isDark ? 'elevated' : 'text'" color="surface">Dark</SqBtn>
         </SqBtnToggle>
       </section>
 
@@ -25,7 +25,7 @@
 
       <section>
         <h4>Custom brand color</h4>
-        <SqColorPicker :model-value="state.brand ?? themePresets[state.preset].primary" flat :swatches="[]" @update:model-value="pickBrand" />
+        <SqColorPicker class="doc-custom__color" :model-value="state.brand ?? themePresets[state.preset].primary" flat :swatches="[]" @update:model-value="pickBrand" />
       </section>
 
       <section>
@@ -139,4 +139,7 @@ watch(isDark, (d) => { if (state.dark !== d) { state.dark = d; save() } })
 .doc-custom__preview { flex-direction: row !important; flex-wrap: wrap; align-items: center; padding: 12px; border-radius: var(--sq-radius-lg); background: var(--sq-surface-variant); }
 .doc-custom__actions { display: flex; justify-content: space-between; }
 .doc-custom .sq-color-picker { width: 100%; }
+.doc-custom__mode { display: flex; width: 100%; }
+.doc-custom__mode > .sq-btn { flex: 1; }
+.doc-custom__color .sq-color-picker__area { height: 132px; }
 </style>

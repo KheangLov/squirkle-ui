@@ -5,6 +5,7 @@ Month / week / day calendar with events for [Squirkle UI](https://www.npmjs.com/
 ## Install
 ```bash
 npm i @squirkle-ui/calendar @squirkle-ui/ui
+pnpm add @squirkle-ui/calendar @squirkle-ui/ui
 ```
 Or get every component and add-on with [`squirkle-ui`](https://www.npmjs.com/package/squirkle-ui) and import from `squirkle-ui/calendar`.
 

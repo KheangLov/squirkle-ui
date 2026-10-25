@@ -3,7 +3,7 @@
     <section class="doc-hero">
       <SqChip color="primary" prepend-icon="lucide:sparkles" class="sq-mb-4">Vue 2.7 · Vue 3 · Nuxt 2 / 3 / 4</SqChip>
       <h1>Every corner, <span>continuously curved.</span></h1>
-      <p>Squirkle UI is a squircle-first component library — {{ count }} components, an enterprise data grid, virtual &amp; infinite scrolling for big data, and add-on packages for charts, swiper, calendar, maps and Iconify.</p>
+      <p>Squirkle UI is a squircle-first component library — {{ count }} components, an enterprise data grid, virtual &amp; infinite scrolling for big data, and add-on packages for charts, swiper, calendar, maps, Iconify and a rich-text editor.</p>
       <div class="sq-d-flex sq-justify-center sq-gap-3 sq-flex-wrap">
         <SqBtn size="large" to="/guide/installation" append-icon="chevronRight">Get started</SqBtn>
         <SqBtn size="large" variant="tonal" to="/components">Browse components</SqBtn>
@@ -47,12 +47,13 @@ import { registry } from '../registry'
 const count = registry.filter((r) => !r.pkg).length
 const pkgs = [
   { name: '@squirkle-ui/ui', desc: `${count} core components`, to: '/components' },
-  { name: '@squirkle-ui/datagrid', desc: 'AG Grid-style enterprise grid', to: '/datagrid' },
+  { name: '@squirkle-ui/datagrid', desc: 'Enterprise data grid', to: '/datagrid' },
   { name: '@squirkle-ui/charts', desc: 'Line, bar, donut, sparkline', to: '/charts' },
   { name: '@squirkle-ui/swiper', desc: 'Touch carousel & effects', to: '/swiper' },
   { name: '@squirkle-ui/calendar', desc: 'Month / week / day events', to: '/calendar' },
   { name: '@squirkle-ui/map', desc: 'Leaflet with squircle pins', to: '/map' },
   { name: '@squirkle-ui/icons', desc: 'Iconify picker & presets', to: '/icons' },
+  { name: '@squirkle-ui/editor', desc: 'Tiptap rich-text editor', to: '/editor' },
   { name: '@squirkle-ui/nuxt', desc: 'Nuxt 2 / 3 / 4 module', to: '/guide/installation' },
 ]
 const weeks = Array.from({ length: 12 }, (_, i) => `W${i + 1}`)

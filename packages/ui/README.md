@@ -1,10 +1,11 @@
 # @squirkle-ui/ui
 
-The core of [Squirkle UI](https://www.npmjs.com/package/squirkle-ui): **86 squircle-first Vue components** for Vue 2.7 and Vue 3, with theming, forms and validation, overlays and virtual scrolling. Add-ons (data grid, charts, map, …) are separate packages — or install everything at once with [`squirkle-ui`](https://www.npmjs.com/package/squirkle-ui).
+The core of [Squirkle UI](https://www.npmjs.com/package/squirkle-ui): **88 squircle-first Vue components** for Vue 2.7 and Vue 3, with theming, forms and validation, overlays and virtual scrolling. Add-ons (data grid, charts, map, …) are separate packages — or install everything at once with [`squirkle-ui`](https://www.npmjs.com/package/squirkle-ui).
 
 ## Install
 ```bash
 npm i @squirkle-ui/ui vue
+pnpm add @squirkle-ui/ui vue
 ```
 
 ## Setup
@@ -78,7 +79,7 @@ theme.reset()
 | Layout | SqApp, SqAppBar, SqNavigationDrawer, SqMain, SqContainer, SqRow, SqCol, SqToolbar, SqBottomNavigation, SqFooter, SqThemeProvider |
 | Buttons | SqBtn, SqBtnGroup, SqBtnToggle, SqSpeedDial |
 | Content | SqCard (+ SqCardTitle, SqCardText, SqCardActions), SqSheet, SqAvatar, SqBadge, SqChip, SqChipGroup, SqDivider, SqKbd, SqImg, SqTimeline, SqTimelineItem, SqEmptyState, SqTable, SqIcon |
-| Forms | SqForm, SqField, SqTextField, SqTextarea, SqNumberInput, SqOtpInput, SqSelect, SqAutocomplete, SqCombobox, SqCheckbox, SqRadioGroup, SqRadio, SqSwitch, SqSlider, SqRangeSlider, SqFileInput, SqColorPicker, SqDatePicker, SqDateField, SqTimePicker |
+| Forms | SqForm, SqField, SqTextField, SqTextarea, SqNumberInput, SqOtpInput, SqSelect, SqAutocomplete, SqCombobox, SqCheckbox, SqRadioGroup, SqRadio, SqSwitch, SqSlider, SqRangeSlider, SqFileInput, SqColorPicker, SqDatePicker, SqDateField, SqTimePicker, SqDateTimePicker, SqDateTimeField |
 | Navigation | SqTabs, SqTab, SqWindow, SqWindowItem, SqBreadcrumbs, SqPagination, SqStepper, SqList, SqListItem, SqListSubheader, SqListGroup, SqTreeview, SqSlideGroup, SqExpansionPanels, SqExpansionPanel |
 | Overlays | SqDialog, SqBottomSheet, SqMenu, SqTooltip, SqOverlay |
 | Feedback | SqAlert, SqBanner, SqSnackbar, SqProgressLinear, SqProgressCircular, SqSkeleton, SqRating |

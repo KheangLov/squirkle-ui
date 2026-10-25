@@ -38,6 +38,7 @@
         @keydown="onKeydown"
       />
       <span v-if="!multiple && !searching && selectedItems.length && !searchable && !combobox" class="sq-select__selection sq-select__selection--single">{{ selectedItems[0].title }}</span>
+      <span v-else-if="placeholder && !hasValue && !searchable && !combobox && (!label || focused || menu)" class="sq-select__selection sq-select__selection--single sq-select__placeholder">{{ placeholder }}</span>
     </SqField>
     <SqPortal>
       <transition name="sq-scale">
@@ -276,6 +277,7 @@ export default defineComponent({
 .sq-select__input--hidden { position: absolute; opacity: 0; width: 1px !important; min-width: 0 !important; pointer-events: none; }
 .sq-select__selection { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0; }
 .sq-select__selection--single { order: -1; }
+.sq-select__placeholder { color: var(--sq-muted); opacity: 0.8; }
 .sq-select__menu { padding: 4px; }
 .sq-select__menu .sq-virtual-scroll { contain: content; }
 .sq-select__option { display: flex; align-items: center; gap: var(--sq-space-2); height: 100%; padding: 0 var(--sq-space-3); border-radius: var(--sq-radius-sm); cursor: pointer; font-size: var(--sq-text-md); }

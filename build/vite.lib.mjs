@@ -6,7 +6,7 @@ import vue2 from '@vitejs/plugin-vue2'
 
 const require = createRequire(import.meta.url)
 
-const EXTERNAL = [/^vue$/, /^@squirkle-ui\//, /^leaflet/, /^maplibre-gl/, /^supercluster/]
+const EXTERNAL = [/^vue$/, /^@squirkle-ui\//, /^leaflet/, /^maplibre-gl/, /^supercluster/, /^@tiptap\//]
 
 /**
  * @param {{ pkgDir: string, vue: 0 | 2 | 3 }} opts  vue: 0 = framework-agnostic package

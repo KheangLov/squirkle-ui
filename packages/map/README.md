@@ -5,6 +5,7 @@ MapLibre vector maps (or Leaflet raster) with squircle markers and clustering fo
 ## Install
 ```bash
 npm i @squirkle-ui/map @squirkle-ui/ui maplibre-gl
+pnpm add @squirkle-ui/map @squirkle-ui/ui maplibre-gl
 ```
 Or get every component and add-on with [`squirkle-ui`](https://www.npmjs.com/package/squirkle-ui) and import from `squirkle-ui/map`.
 

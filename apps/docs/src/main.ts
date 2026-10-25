@@ -8,6 +8,7 @@ import { SqMap, setMapWorkerUrl } from '@squirkle-ui/map'
 import mapWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import { SqLineChart, SqBarChart, SqDonutChart, SqSparkline } from '@squirkle-ui/charts'
 import { SqIconPicker, useIconPreset } from '@squirkle-ui/icons'
+import { SqEditor } from '@squirkle-ui/editor'
 import App from './App.vue'
 import { router } from './router'
 import './docs.css'
@@ -17,6 +18,6 @@ app.use(createSquirkle({ theme: { defaultTheme: 'light' } }))
 useIconPreset('lucide')
 // Bundlers don't copy MapLibre's worker file; `?url` serves it in dev and emits it on build.
 setMapWorkerUrl(mapWorkerUrl)
-for (const [name, c] of Object.entries({ SqDataGrid, SqSwiper, SqCalendar, SqMap, SqLineChart, SqBarChart, SqDonutChart, SqSparkline, SqIconPicker })) app.component(name, c)
+for (const [name, c] of Object.entries({ SqDataGrid, SqSwiper, SqCalendar, SqMap, SqLineChart, SqBarChart, SqDonutChart, SqSparkline, SqIconPicker, SqEditor })) app.component(name, c)
 app.use(router)
 app.mount('#app')

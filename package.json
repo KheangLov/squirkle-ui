@@ -8,10 +8,13 @@
   },
   "scripts": {
     "dev": "pnpm --filter @squirkle-ui/docs dev",
-    "dev:vue2": "pnpm --filter @squirkle-ui/playground-vue2 dev",
-    "dev:nuxt": "pnpm --filter @squirkle-ui/playground-nuxt dev",
+    "dev:vue2": "pnpm --filter @squirkle-ui/example-vue2-vite dev",
+    "dev:nuxt": "pnpm --filter @squirkle-ui/example-nuxt4 dev",
+    "storybook": "pnpm --filter @squirkle-ui/storybook storybook",
     "build": "node scripts/build.mjs",
     "build:docs": "pnpm --filter @squirkle-ui/docs build",
+    "build:storybook": "pnpm --filter @squirkle-ui/storybook build",
+    "examples:build": "node scripts/examples.mjs",
     "test": "vitest run",
     "typecheck": "vue-tsc --noEmit -p tsconfig.json"
   },

@@ -9,7 +9,7 @@ import { dirname, join, resolve } from 'node:path'
 import { libConfig } from '../build/vite.lib.mjs'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const ORDER = ['core', 'ui', 'datagrid', 'swiper', 'calendar', 'map', 'charts', 'icons']
+const ORDER = ['core', 'ui', 'datagrid', 'swiper', 'calendar', 'map', 'charts', 'icons', 'editor']
 const requested = process.argv.slice(2)
 const pkgs = requested.length ? ORDER.filter((p) => requested.includes(p)) : ORDER
 
@@ -29,6 +29,17 @@ const rewriteSiblingTypes = (dir) => {
   }
 }
 
+// webpack 4 (Nuxt 2, Vue CLI 4) ignores `exports`, so `<pkg>/vue2` and `<pkg>/styles.css` must also exist as real paths.
+// Exports-aware bundlers keep using the `exports` map; these files are only a fallback (listed in each package's `files`).
+const writeWebpack4Entries = (pkgDir) => {
+  const dir = resolve(pkgDir, 'vue2')
+  mkdirSync(dir, { recursive: true })
+  const entry = { private: true, main: '../dist/vue2/index.cjs', module: '../dist/vue2/index.mjs', types: '../dist/types/index.d.ts', sideEffects: ['*.css'] }
+  writeFileSync(resolve(dir, 'package.json'), JSON.stringify(entry, null, 2) + '\n')
+  const css = resolve(pkgDir, 'dist/styles.css')
+  if (existsSync(css)) copyFileSync(css, resolve(pkgDir, 'styles.css'))
+}
+
 for (const pkg of pkgs) {
   const pkgDir = resolve(root, 'packages', pkg)
   const started = Date.now()
@@ -40,6 +51,7 @@ for (const pkg of pkgs) {
     const css = resolve(pkgDir, 'dist/vue3/styles.css')
     if (existsSync(css)) copyFileSync(css, resolve(pkgDir, 'dist/styles.css'))
     rmSync(resolve(pkgDir, 'dist/vue2/styles.css'), { force: true })
+    writeWebpack4Entries(pkgDir)
   }
   // Type declarations (dist/types) for both Vue builds; throws on any type error.
   execFileSync(resolve(root, 'node_modules/.bin/vue-tsc'), ['-p', resolve(pkgDir, 'tsconfig.build.json')], { stdio: 'inherit' })

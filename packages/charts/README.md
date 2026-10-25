@@ -5,6 +5,7 @@ SVG charts that follow the theme for [Squirkle UI](https://www.npmjs.com/package
 ## Install
 ```bash
 npm i @squirkle-ui/charts @squirkle-ui/ui
+pnpm add @squirkle-ui/charts @squirkle-ui/ui
 ```
 Or get every component and add-on with [`squirkle-ui`](https://www.npmjs.com/package/squirkle-ui) and import from `squirkle-ui/charts`.
 

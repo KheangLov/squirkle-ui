@@ -32,11 +32,15 @@ export default defineComponent({
 </script>
 
 <style>
-.sq-timeline-item { position: relative; display: grid; grid-template-columns: 0 32px 1fr; gap: var(--sq-space-3); padding-bottom: var(--sq-space-5); }
+.sq-timeline-item { position: relative; display: grid; grid-template-columns: 32px minmax(0, 1fr); column-gap: var(--sq-space-3); padding-bottom: var(--sq-space-5); }
 .sq-timeline-item__opposite { display: none; }
-.sq-timeline--alternate .sq-timeline-item { grid-template-columns: 1fr 32px 1fr; }
-.sq-timeline--alternate .sq-timeline-item__opposite { display: block; text-align: end; color: var(--sq-muted); font-size: var(--sq-text-sm); padding-top: 4px; }
-.sq-timeline--alternate .sq-timeline-item:nth-child(even) .sq-timeline-item__body { grid-column: 1; grid-row: 1; text-align: end; }
+.sq-timeline-item__dot { grid-column: 1; grid-row: 1; justify-self: center; }
+.sq-timeline-item__body { grid-column: 2; grid-row: 1; min-width: 0; }
+.sq-timeline--alternate .sq-timeline-item { grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr); }
+.sq-timeline--alternate .sq-timeline-item__opposite { display: block; grid-column: 1; grid-row: 1; text-align: end; color: var(--sq-muted); font-size: var(--sq-text-sm); padding-top: 4px; }
+.sq-timeline--alternate .sq-timeline-item__dot { grid-column: 2; }
+.sq-timeline--alternate .sq-timeline-item__body { grid-column: 3; }
+.sq-timeline--alternate .sq-timeline-item:nth-child(even) .sq-timeline-item__body { grid-column: 1; text-align: end; }
 .sq-timeline--alternate .sq-timeline-item:nth-child(even) .sq-timeline-item__opposite { grid-column: 3; text-align: start; }
 .sq-timeline-item__dot { --sq-r: var(--sq-radius-sm); position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--sq-c); color: #fff; box-shadow: 0 0 0 4px var(--sq-background); }
 .sq-timeline-item__dot--small { width: 14px; height: 14px; margin: 9px; --sq-r: var(--sq-radius-xs); }

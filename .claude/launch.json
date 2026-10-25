@@ -16,7 +16,7 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
         "--filter",
-        "@squirkle-ui/playground-vue2",
+        "@squirkle-ui/example-vue2-vite",
         "dev"
       ],
       "port": 5181
@@ -26,7 +26,7 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
         "--filter",
-        "@squirkle-ui/playground-nuxt",
+        "@squirkle-ui/example-nuxt4",
         "dev"
       ],
       "port": 5182
@@ -35,9 +35,11 @@
       "name": "nuxt-preview",
       "runtimeExecutable": "node",
       "runtimeArgs": [
-        "apps/playground-nuxt/.output/server/index.mjs"
+        "examples/nuxt4/.output/server/index.mjs"
       ],
-      "env": { "PORT": "5183" },
+      "env": {
+        "PORT": "5183"
+      },
       "port": 5183
     },
     {
@@ -52,6 +54,100 @@
         "--strictPort"
       ],
       "port": 5184
+    },
+    {
+      "name": "storybook",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@squirkle-ui/storybook",
+        "storybook"
+      ],
+      "port": 6006
+    },
+    {
+      "name": "example-vue3-vite",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@squirkle-ui/example-vue3-vite",
+        "dev"
+      ],
+      "port": 5185
+    },
+    {
+      "name": "example-vue3-all-in-one",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@squirkle-ui/example-vue3-all-in-one",
+        "dev"
+      ],
+      "port": 5186
+    },
+    {
+      "name": "example-vue2-webpack",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@squirkle-ui/example-vue2-webpack",
+        "dev"
+      ],
+      "port": 5189
+    },
+    {
+      "name": "example-nuxt3",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@squirkle-ui/example-nuxt3",
+        "dev"
+      ],
+      "port": 5187
+    },
+    {
+      "name": "example-nuxt2",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "examples/nuxt2",
+        "dev"
+      ],
+      "port": 5188
+    },
+    {
+      "name": "example-vue2-vite-preview",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@squirkle-ui/example-vue2-vite",
+        "preview",
+        "--port",
+        "5191",
+        "--strictPort"
+      ],
+      "port": 5191
+    },
+    {
+      "name": "example-nuxt3-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "examples/nuxt3/.output/server/index.mjs"
+      ],
+      "env": {
+        "PORT": "5193"
+      },
+      "port": 5193
+    },
+    {
+      "name": "example-nuxt2-preview",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "examples/nuxt2",
+        "start"
+      ],
+      "port": 5188
     }
   ]
 }
