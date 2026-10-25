@@ -1,6 +1,6 @@
 {
   "name": "@squirkle-ui/calendar",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Event calendar (month / week / day) for Squirkle UI",
   "license": "MIT",
   "repository": {
