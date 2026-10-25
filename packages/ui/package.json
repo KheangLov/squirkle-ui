@@ -1,6 +1,6 @@
 {
   "name": "@squirkle-ui/ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Squircle-first Vue component library for Vue 2.7, Vue 3 and Nuxt 2/3/4",
   "license": "MIT",
   "repository": {

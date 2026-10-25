@@ -1,6 +1,6 @@
 {
   "name": "squirkle-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Squircle-first Vue component library for Vue 2.7, Vue 3 and Nuxt — all components and add-ons in one package",
   "license": "MIT",
   "repository": {
@@ -120,9 +120,9 @@
     "./icons/styles.css": "./dist/icons/styles.css"
   },
   "peerDependencies": {
-    "vue": "^2.7.0 || ^3.3.0",
     "leaflet": "^1.9.0",
-    "maplibre-gl": "^6.0.0"
+    "maplibre-gl": "^6.0.0",
+    "vue": "^2.7.0 || ^3.3.0"
   },
   "peerDependenciesMeta": {
     "leaflet": {
@@ -133,14 +133,14 @@
     }
   },
   "dependencies": {
-    "@squirkle-ui/core": "workspace:^",
-    "@squirkle-ui/ui": "workspace:^",
-    "@squirkle-ui/datagrid": "workspace:^",
-    "@squirkle-ui/swiper": "workspace:^",
     "@squirkle-ui/calendar": "workspace:^",
-    "@squirkle-ui/map": "workspace:^",
     "@squirkle-ui/charts": "workspace:^",
-    "@squirkle-ui/icons": "workspace:^"
+    "@squirkle-ui/core": "workspace:^",
+    "@squirkle-ui/datagrid": "workspace:^",
+    "@squirkle-ui/icons": "workspace:^",
+    "@squirkle-ui/map": "workspace:^",
+    "@squirkle-ui/swiper": "workspace:^",
+    "@squirkle-ui/ui": "workspace:^"
   },
   "scripts": {
     "build": "node ../../scripts/build.mjs squirkle-ui"

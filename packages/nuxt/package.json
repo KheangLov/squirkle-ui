@@ -1,6 +1,6 @@
 {
   "name": "@squirkle-ui/nuxt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Nuxt 2, 3 and 4 module for Squirkle UI",
   "license": "MIT",
   "repository": {

@@ -1,6 +1,6 @@
 {
   "name": "@squirkle-ui/swiper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Touch swiper / carousel for Squirkle UI",
   "license": "MIT",
   "repository": {
@@ -45,8 +45,8 @@
     }
   },
   "peerDependencies": {
-    "vue": "^2.7.0 || ^3.3.0",
-    "@squirkle-ui/ui": "workspace:^"
+    "@squirkle-ui/ui": "workspace:^",
+    "vue": "^2.7.0 || ^3.3.0"
   },
   "dependencies": {
     "@squirkle-ui/core": "workspace:^"
