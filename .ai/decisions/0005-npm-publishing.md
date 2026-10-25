@@ -8,7 +8,10 @@ The packages shipped JavaScript only, had no LICENSE/README in the package folde
 - Types: `packages/<pkg>/tsconfig.build.json` + `vue-tsc` after the Vite builds → `dist/types`; `types` first in `exports` for `.` and `./vue2`; `./dist/types/*` export for cross-package inferred types (`scripts/build.mjs` rewrites sibling paths).
 - Manifests: `publishConfig.access: public`, `repository` (+ `directory`), `homepage`, `bugs`, `keywords`; internal deps `workspace:^`.
 - LICENSE (MIT, KheangLov) at the root and in each package; a README per package.
+- All-in-one `squirkle-ui` package (re-exports + subpaths) so users can `npm i squirkle-ui`; full documentation READMEs on every package.
 - Release: verified with `pnpm pack` + scratch consumer apps; published by the user with `pnpm -r publish --access public`.
+
+- Upload since 0.1.1: `scripts/release.mjs` packs with pnpm and the user uploads with `npm publish <tgz>`, because `pnpm publish` sent no README (0.1.0 pages were empty) while npm 11's tarball read includes it.
 
 ## Alternatives
 `vite-plugin-dts` (new dependency); separate Vue 2 type builds (two type sets to maintain); unscoped names; Changesets for versioning (deferred).

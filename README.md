@@ -19,10 +19,13 @@ pnpm typecheck
 
 ## Install
 ```bash
+npm i squirkle-ui vue                     # everything: components + add-ons (squirkle-ui/datagrid, …)
+# or pick packages:
 npm i @squirkle-ui/ui vue                 # core components
 npm i @squirkle-ui/datagrid @squirkle-ui/map # add-ons as needed
 npm i @squirkle-ui/nuxt                   # Nuxt 2 / 3 / 4 module
 ```
+Full documentation for npm users: [`packages/squirkle-ui/README.md`](packages/squirkle-ui/README.md).
 
 ## Use
 ```ts

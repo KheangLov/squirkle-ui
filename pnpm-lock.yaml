@@ -236,6 +236,42 @@ importers:
         specifier: workspace:^
         version: link:../ui
 
+  packages/squirkle-ui:
+    dependencies:
+      '@squirkle-ui/calendar':
+        specifier: workspace:^
+        version: link:../calendar
+      '@squirkle-ui/charts':
+        specifier: workspace:^
+        version: link:../charts
+      '@squirkle-ui/core':
+        specifier: workspace:^
+        version: link:../core
+      '@squirkle-ui/datagrid':
+        specifier: workspace:^
+        version: link:../datagrid
+      '@squirkle-ui/icons':
+        specifier: workspace:^
+        version: link:../icons
+      '@squirkle-ui/map':
+        specifier: workspace:^
+        version: link:../map
+      '@squirkle-ui/swiper':
+        specifier: workspace:^
+        version: link:../swiper
+      '@squirkle-ui/ui':
+        specifier: workspace:^
+        version: link:../ui
+      leaflet:
+        specifier: ^1.9.0
+        version: 1.9.4
+      maplibre-gl:
+        specifier: ^6.0.0
+        version: 6.15.0
+      vue:
+        specifier: ^2.7.0 || ^3.3.0
+        version: 3.5.44(typescript@5.9.3)
+
   packages/swiper:
     dependencies:
       '@squirkle-ui/core':

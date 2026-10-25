@@ -21,6 +21,7 @@ apps/docs, apps/playground-vue2 (consumers)
 - `vue`, `@squirkle-ui/*`, `leaflet` are external. In the Vue 2 build `output.paths` rewrites `@squirkle-ui/<addon>` imports of ui to `@squirkle-ui/ui/vue2`.
 - CSS: SFC `<style>` + `src/styles/*.css` → `dist/styles.css` (one file per package).
 - Types: after the Vite builds, `vue-tsc -p packages/<pkg>/tsconfig.build.json` emits `dist/types` (one set for both `.` and `./vue2`; sibling `@squirkle-ui/*` resolve to their built types, so build order matters). `scripts/build.mjs` then rewrites inferred `../../<pkg>/dist/types/x(.js)` refs to `@squirkle-ui/<pkg>/dist/types/x`, served by each package's `./dist/types/*` export. Vue 2.7 TS users get these Vue 3-based types (NOT verified).
+- `squirkle-ui` (all-in-one): `scripts/build.mjs` generates `packages/squirkle-ui/dist` last — thin `.mjs`/`.cjs`/`.d.ts` re-exports of `@squirkle-ui/ui` (root, `/vue2`), `/core` and `/<addon>`(`/vue2`), default re-exported only when the source package has one; stylesheets are copied (not `@import`ed). Nuxt users keep `@squirkle-ui/nuxt` (its `@squirkle-ui/<pkg>` resolution needs those names installed).
 
 ## Runtime model
 - `createSquirkle(options)` (`packages/ui/src/plugin.ts`) → `applyOptions` into the module-level `config` (`packages/ui/src/config.ts`) → registers components → writes theme CSS vars into `<style id="sq-theme-vars">` + `sq-theme--<name>` on `<html>` (watched).
