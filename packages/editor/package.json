@@ -1,0 +1,68 @@
+{
+  "name": "@squirkle-ui/editor",
+  "version": "0.1.0",
+  "description": "Rich-text editor (Tiptap) for Squirkle UI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KheangLov/squirkle-ui.git",
+    "directory": "packages/editor"
+  },
+  "homepage": "https://github.com/KheangLov/squirkle-ui#readme",
+  "bugs": {
+    "url": "https://github.com/KheangLov/squirkle-ui/issues"
+  },
+  "keywords": [
+    "vue",
+    "editor",
+    "rich-text",
+    "tiptap",
+    "wysiwyg"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist",
+    "vue2",
+    "styles.css"
+  ],
+  "main": "./dist/vue3/index.cjs",
+  "module": "./dist/vue3/index.mjs",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/vue3/index.mjs",
+      "require": "./dist/vue3/index.cjs"
+    },
+    "./vue2": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/vue2/index.mjs",
+      "require": "./dist/vue2/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./dist/types/*": {
+      "types": "./dist/types/*.d.ts"
+    }
+  },
+  "peerDependencies": {
+    "@squirkle-ui/ui": "workspace:^",
+    "vue": "^2.7.0 || ^3.3.0"
+  },
+  "dependencies": {
+    "@tiptap/core": "^3.32.0",
+    "@tiptap/pm": "^3.32.0",
+    "@tiptap/starter-kit": "^3.32.0"
+  },
+  "devDependencies": {
+    "@squirkle-ui/ui": "workspace:^"
+  },
+  "scripts": {
+    "build": "node ../../scripts/build.mjs editor"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

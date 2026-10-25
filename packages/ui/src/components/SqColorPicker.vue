@@ -133,7 +133,7 @@ export default defineComponent({
 .sq-color-picker__slider--hue { background: linear-gradient(to right, red, #ff0, lime, cyan, blue, #f0f, red); }
 .sq-color-picker__slider--alpha { background: linear-gradient(to right, transparent, var(--sq-cp-color)), repeating-conic-gradient(#ccc 0 25%, #fff 0 50%) 0 0 / 8px 8px; }
 .sq-color-picker__knob { position: absolute; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgb(0 0 0 / 0.35); pointer-events: none; }
-.sq-color-picker__hex { --sq-r: var(--sq-radius-sm); width: 100%; height: 34px; padding: 0 10px; border: 1px solid var(--sq-border-strong); background: var(--sq-surface); color: var(--sq-on-surface); font-family: var(--sq-font-mono); font-size: var(--sq-text-sm); text-transform: uppercase; outline: none; }
+.sq-color-picker__hex { --sq-r: var(--sq-radius-md); box-sizing: border-box; width: 100%; height: var(--sq-control-md); padding: 0 var(--sq-space-3); border: 1px solid var(--sq-border-strong); background: var(--sq-surface); color: var(--sq-on-surface); font-family: var(--sq-font-mono); font-size: var(--sq-text-sm); text-transform: uppercase; outline: none; }
 .sq-color-picker__hex:focus { border-color: var(--sq-primary); box-shadow: var(--sq-focus-ring); }
 .sq-color-picker__swatches { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
 .sq-color-picker__swatch { --sq-r: 6px; aspect-ratio: 1; border: 0; cursor: pointer; transition: transform var(--sq-duration-fast) var(--sq-ease-spring); }

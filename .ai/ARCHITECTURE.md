@@ -8,10 +8,10 @@ Read when: adding a package/component, changing build config, cross-package work
       ↑
 @squirkle-ui/ui    (components, plugin, composables, tokens)
       ↑
-datagrid · charts · swiper · calendar · map · icons   (import ui + core by package name only)
+datagrid · charts · swiper · calendar · map · icons · editor   (import ui + core by package name only)
       ↑
 @squirkle-ui/nuxt  (Node-side module; imports ui only for componentNames)
-apps/docs, apps/playground-vue2 (consumers)
+apps/docs, apps/storybook, examples/* (consumers; examples use built dist like npm users)
 ```
 - ui never imports an add-on. Add-ons never import each other.
 - Cross-package imports use package names; `build/aliases.ts` maps them to sources for docs/tests/type-check.

@@ -13,4 +13,5 @@ export const aliases = {
   '@squirkle-ui/map': r('map/src/index.ts'),
   '@squirkle-ui/charts': r('charts/src/index.ts'),
   '@squirkle-ui/icons': r('icons/src/index.ts'),
+  '@squirkle-ui/editor': r('editor/src/index.ts'),
 }

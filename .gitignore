@@ -6,3 +6,7 @@ coverage
 *.log
 .DS_Store
 .release
+storybook-static
+# generated webpack 4 entry points (scripts/build.mjs)
+packages/*/vue2/
+packages/*/styles.css

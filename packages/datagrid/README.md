@@ -5,6 +5,7 @@ Data grid: sort, filter, group, aggregate, pivot, tree data, master/detail, pinn
 ## Install
 ```bash
 npm i @squirkle-ui/datagrid @squirkle-ui/ui
+pnpm add @squirkle-ui/datagrid @squirkle-ui/ui
 ```
 Or get every component and add-on with [`squirkle-ui`](https://www.npmjs.com/package/squirkle-ui) and import from `squirkle-ui/datagrid`.
 

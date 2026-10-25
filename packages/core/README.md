@@ -5,6 +5,7 @@ Framework-agnostic core of [Squirkle UI](https://www.npmjs.com/package/squirkle-
 ## Install
 ```bash
 npm i @squirkle-ui/core
+pnpm add @squirkle-ui/core
 ```
 
 ## Usage

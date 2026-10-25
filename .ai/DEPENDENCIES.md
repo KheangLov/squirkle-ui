@@ -14,8 +14,11 @@ Read when: adding/upgrading a dependency (CONFIRM per G4) or touching an integra
 | leaflet 1.9.4 | raster maps | @squirkle-ui/map (optional peer, lazy) | browser-only | medium |
 | maplibre-gl 6.15.0 | vector maps (default engine) | @squirkle-ui/map (optional peer + dev, lazy chunk ~800 kB) | browser-only; WebGL; worker file is not bundled → `setMapWorkerUrl` with a bundler `?url` (README); `optimizeDeps.exclude` as a safety net | medium |
 | supercluster 9.1.0 | marker clustering | @squirkle-ui/map (dependency) | pure JS | low |
+| @tiptap/core, @tiptap/pm, @tiptap/starter-kit 3.32.0 | rich-text editing | @squirkle-ui/editor (dependencies, external in `build/vite.lib.mjs`) | framework-free core keeps one source for Vue 2/3; ES2020+ syntax (Nuxt 2 transpiles it) | medium |
+| storybook, @storybook/vue3-vite, @storybook/addon-docs 10.6.3 | component workbench | apps/storybook (dev only) | Vue 3 only; ESM-only | low |
 | @nuxt/kit 4.6.2 | Nuxt 3/4 module | @squirkle-ui/nuxt | ESM only | low |
-| nuxt 4.6.2 | SSR playground | apps/playground-nuxt | dev-only consumer | low |
+| nuxt 4.6.2 / 3.21.11 / 2.18.1 | SSR examples | examples/nuxt4, nuxt3, nuxt2 | dev-only consumers; Nuxt 2 = webpack 4 (no `exports`; MapLibre 6 unparseable → raster only) and needs its runtime packages as direct deps under pnpm; standalone install (`examples/nuxt2/pnpm-lock.yaml`, excluded from the workspace) because `vue-server-renderer` resolves the root's Vue 3 otherwise; install scripts of `nuxt`, `fsevents`, `core-js` blocked | low |
+| @vue/cli-service, @vue/cli-plugin-babel 5.0.9 | Vue 2.7 + webpack 5 example | examples/vue2-webpack | maintenance-mode tool; webpack 5 enforces ESM exports strictly | low |
 
 ## Integrations
 | Integration | Where | Notes |

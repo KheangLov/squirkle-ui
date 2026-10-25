@@ -1,0 +1,35 @@
+{
+  "name": "@squirkle-ui/example-nuxt2",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt dev --port 5188",
+    "build": "nuxt build",
+    "start": "nuxt start --port 5188"
+  },
+  "dependencies": {
+    "@squirkle-ui/calendar": "link:../../packages/calendar",
+    "@squirkle-ui/charts": "link:../../packages/charts",
+    "@squirkle-ui/core": "link:../../packages/core",
+    "@squirkle-ui/datagrid": "link:../../packages/datagrid",
+    "@squirkle-ui/editor": "link:../../packages/editor",
+    "@squirkle-ui/icons": "link:../../packages/icons",
+    "@squirkle-ui/map": "link:../../packages/map",
+    "@squirkle-ui/nuxt": "link:../../packages/nuxt",
+    "@squirkle-ui/swiper": "link:../../packages/swiper",
+    "@squirkle-ui/ui": "link:../../packages/ui",
+    "core-js": "^3.37.1",
+    "leaflet": "^1.9.4",
+    "node-fetch-native": "^1.6.4",
+    "nuxt": "2.18.1",
+    "ufo": "^1.5.3",
+    "unfetch": "^5.0.0",
+    "vue": "2.7.16",
+    "vue-client-only": "^2.1.0",
+    "vue-meta": "^2.4.0",
+    "vue-no-ssr": "^1.1.1",
+    "vue-router": "^3.6.5",
+    "vue-server-renderer": "2.7.16",
+    "vue-template-compiler": "2.7.16",
+    "vuex": "^3.6.2"
+  }
+}

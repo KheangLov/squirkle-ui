@@ -11,6 +11,7 @@ const ADDON_COMPONENTS = {
   calendar: ['SqCalendar'],
   map: ['SqMap'],
   icons: ['SqIconPicker'],
+  editor: ['SqEditor'],
 }
 
 export default defineNuxtModule({

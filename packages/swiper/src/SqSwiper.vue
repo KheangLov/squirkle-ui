@@ -16,7 +16,7 @@
     @mouseleave="hovering = false"
   >
     <SqShape clip />
-    <div class="sq-swiper__track" @pointerdown="onDown">
+    <div ref="track" class="sq-swiper__track" @pointerdown="onDown" @pointermove="onMove" @pointerup="onUp" @pointercancel="onCancel" @click.capture="onClickCapture" @dragstart.prevent>
       <div
         v-for="(item, i) in list"
         :key="keyOf(item, i)"
@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch, type PropType } from 'vue'
+import { computed, defineComponent, nextTick, onBeforeUnmount, onMounted, ref, watch, type PropType } from 'vue'
 import { getByPath } from '@squirkle-ui/core'
 import { SqBtn, SqShape, radiusValue, useProxiedModel, vModel } from '@squirkle-ui/ui'
 
@@ -54,6 +54,8 @@ interface Responsive { slidesPerView?: number; spaceBetween?: number }
 /**
  * Touch/mouse swiper. `loop` is a real infinite loop without cloned slides: every slide is positioned
  * at its wrapped offset from the active index, and slides that wrap around jump without animating.
+ * Dragging the `slide` effect writes a CSS variable on the track (no re-render per pointer move);
+ * the other effects need per-slide math and re-render at most once per animation frame.
  */
 export default defineComponent({
   name: 'SqSwiper',
@@ -85,6 +87,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const model = useProxiedModel<number>(props, emit)
     const root = ref<HTMLElement | null>(null)
+    const track = ref<HTMLElement | null>(null)
     const size = ref(800)
     const drag = ref(0)
     const dragging = ref(false)
@@ -118,6 +121,7 @@ export default defineComponent({
       return o
     }
     const prevOffsets = new Map<number, number>()
+    let autoStepping = false
     watch(normIndex, () => {
       const jumps = new Set<number>()
       for (let i = 0; i < n.value; i++) {
@@ -129,6 +133,9 @@ export default defineComponent({
       jumping.value = jumps
       requestAnimationFrame(() => requestAnimationFrame(() => (jumping.value = new Set())))
       emit('change', normIndex.value)
+      // A manual slide change gives the user a full autoplay delay before the next automatic one.
+      if (!autoStepping) restart()
+      autoStepping = false
     })
 
     const isVisible = (i: number) => {
@@ -137,25 +144,28 @@ export default defineComponent({
     }
     const slideStyle = (i: number) => {
       const o = offsetOf(i)
-      const dragFrac = drag.value / step.value
-      const pos = o + dragFrac
       const center = props.centered ? (size.value - slideSize.value) / 2 : 0
-      const axis = props.vertical ? 'Y' : 'X'
-      const s: Record<string, string> = { [props.vertical ? 'height' : 'width']: `${slideSize.value}px`, transitionDuration: dragging.value ? '0ms' : `${props.speed}ms` }
+      const s: Record<string, string> = { [props.vertical ? 'height' : 'width']: `${slideSize.value}px` }
+      if (props.effect === 'slide') {
+        const at = `calc(${center + o * step.value}px + var(--sq-drag, 0px))`
+        s.transform = props.vertical ? `translate3d(0, ${at}, 0)` : `translate3d(${at}, 0, 0)`
+        return s
+      }
+      const pos = o + drag.value / step.value
       if (props.effect === 'fade') {
         s.opacity = String(Math.max(0, 1 - Math.abs(pos)))
         s.zIndex = String(o === 0 ? 2 : 1)
       } else if (props.effect === 'coverflow') {
         const x = (size.value - slideSize.value) / 2 + pos * slideSize.value * 0.62
-        s.transform = `translate${axis}(${x}px) perspective(900px) rotateY(${Math.max(-1, Math.min(1, pos)) * -42}deg) scale(${1 - Math.min(1, Math.abs(pos)) * 0.18})`
+        s.transform = `translate3d(${x}px, 0, 0) perspective(900px) rotateY(${Math.max(-1, Math.min(1, pos)) * -42}deg) scale(${1 - Math.min(1, Math.abs(pos)) * 0.18})`
         s.zIndex = String(100 - Math.round(Math.abs(pos) * 10))
         s.opacity = Math.abs(pos) > 2.5 ? '0' : '1'
-      } else if (props.effect === 'cards') {
+      } else {
         const p = Math.max(-1, pos)
-        s.transform = p < 0 ? `translateX(${p * size.value}px) rotate(${p * 8}deg)` : `translateY(${Math.min(p, 3) * 14}px) scale(${1 - Math.min(p, 3) * 0.06})`
+        s.transform = p < 0 ? `translate3d(${p * size.value}px, 0, 0) rotate(${p * 8}deg)` : `translate3d(0, ${Math.min(p, 3) * 14}px, 0) scale(${1 - Math.min(p, 3) * 0.06})`
         s.zIndex = String(100 - Math.round(Math.abs(pos) * 10))
         s.opacity = pos > 3 ? '0' : '1'
-      } else s.transform = `translate${axis}(${center + pos * step.value}px)`
+      }
       return s
     }
 
@@ -175,38 +185,83 @@ export default defineComponent({
     const next = () => (canNext.value ? (props.loop ? (model.value = model.value + 1) : goTo(normIndex.value + 1)) : props.autoplay && goTo(0))
     const prev = () => canPrev.value && (props.loop ? (model.value = model.value - 1) : goTo(normIndex.value - 1))
 
-    // drag
+    // drag (pointer capture keeps events on the track; pointercancel = the browser took over to scroll)
+    let pointerId: number | null = null
     let start = 0
     let startT = 0
-    const onMove = (e: PointerEvent) => {
-      const d = (props.vertical ? e.clientY : e.clientX) - start
-      const edge = !props.loop && ((normIndex.value === 0 && d > 0) || (normIndex.value >= maxIndex.value && d < 0))
-      drag.value = edge ? d * 0.3 : d
+    let dragPx = 0
+    let moved = false
+    let frame = 0
+    const paint = () => {
+      frame = 0
+      if (props.effect === 'slide') track.value?.style.setProperty('--sq-drag', `${dragPx}px`)
+      else drag.value = dragPx
     }
-    const onUp = () => {
-      window.removeEventListener('pointermove', onMove)
-      window.removeEventListener('pointerup', onUp)
-      const d = drag.value
-      const fast = Math.abs(d) > 30 && Date.now() - startT < 250
-      const steps = Math.round(-d / step.value) || (fast ? -Math.sign(d) : 0)
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerId !== pointerId) return
+      const d = (props.vertical ? e.clientY : e.clientX) - start
+      if (Math.abs(d) > 5) moved = true
+      const edge = !props.loop && ((normIndex.value === 0 && d > 0) || (normIndex.value >= maxIndex.value && d < 0))
+      dragPx = edge ? d * 0.3 : d
+      if (!frame) frame = requestAnimationFrame(paint)
+    }
+    const release = () => {
+      if (track.value && pointerId != null && track.value.hasPointerCapture?.(pointerId)) track.value.releasePointerCapture(pointerId)
+      pointerId = null
+      if (frame) cancelAnimationFrame(frame)
+      frame = 0
+    }
+    const settle = (steps: number) => {
       dragging.value = false
-      drag.value = 0
       if (steps) props.loop ? (model.value = model.value + steps) : goTo(normIndex.value + steps)
+      // Reset the offset after the new positions render, in the same frame, so slides animate from where the finger left them.
+      nextTick(() => {
+        dragPx = 0
+        track.value?.style.setProperty('--sq-drag', '0px')
+        drag.value = 0
+      })
+    }
+    const onUp = (e: PointerEvent) => {
+      if (e.pointerId !== pointerId) return
+      release()
+      const fast = Math.abs(dragPx) > 30 && Date.now() - startT < 250
+      settle(Math.round(-dragPx / step.value) || (fast ? -Math.sign(dragPx) : 0))
+    }
+    const onCancel = (e: PointerEvent) => {
+      if (e.pointerId !== pointerId) return
+      release()
+      moved = false
+      settle(0)
     }
     const onDown = (e: PointerEvent) => {
-      if (e.button !== 0 || (e.target as HTMLElement).closest('button, a, input')) return
+      if (pointerId != null || e.button !== 0 || (e.target as HTMLElement).closest('button, a, input')) return
+      pointerId = e.pointerId
       start = props.vertical ? e.clientY : e.clientX
       startT = Date.now()
+      dragPx = 0
+      moved = false
       dragging.value = true
-      window.addEventListener('pointermove', onMove)
-      window.addEventListener('pointerup', onUp)
+      try { track.value?.setPointerCapture(e.pointerId) } catch { /* pointer already gone */ }
+    }
+    // A drag must not also click whatever slide content it started on.
+    const onClickCapture = (e: MouseEvent) => {
+      if (!moved) return
+      moved = false
+      e.preventDefault()
+      e.stopPropagation()
     }
 
     // autoplay
     let timer: ReturnType<typeof setInterval> | undefined
     const restart = () => {
       clearInterval(timer)
-      if (props.autoplay > 0) timer = setInterval(() => !(props.pauseOnHover && hovering.value) && !dragging.value && !document.hidden && next(), props.autoplay)
+      if (props.autoplay > 0) {
+        timer = setInterval(() => {
+          if ((props.pauseOnHover && hovering.value) || dragging.value || document.hidden) return
+          autoStepping = true
+          next()
+        }, props.autoplay)
+      }
     }
     watch(() => props.autoplay, restart)
 
@@ -218,10 +273,10 @@ export default defineComponent({
       for (let i = 0; i < n.value; i++) prevOffsets.set(i, offsetOf(i))
       restart()
     })
-    onBeforeUnmount(() => { clearInterval(timer); ro?.disconnect(); onUp() })
+    onBeforeUnmount(() => { clearInterval(timer); ro?.disconnect(); release() })
 
-    const rootStyle = computed(() => ({ height: typeof props.height === 'number' ? `${props.height}px` : props.height, '--sq-r': radiusValue(props.rounded as string), '--sq-bg': 'var(--sq-surface-variant)' }))
-    return { root, list, keyOf, normIndex, pageCount, canPrev, canNext, slideStyle, isVisible, goTo, next, prev, onDown, dragging, hovering, jumping, rootStyle }
+    const rootStyle = computed(() => ({ height: typeof props.height === 'number' ? `${props.height}px` : props.height, '--sq-swiper-speed': `${props.speed}ms`, '--sq-r': radiusValue(props.rounded as string), '--sq-bg': 'var(--sq-surface-variant)' }))
+    return { root, track, list, keyOf, normIndex, pageCount, canPrev, canNext, slideStyle, isVisible, goTo, next, prev, onDown, onMove, onUp, onCancel, onClickCapture, dragging, hovering, jumping, rootStyle }
   },
 })
 </script>
@@ -232,7 +287,9 @@ export default defineComponent({
 .sq-swiper:focus-visible { box-shadow: var(--sq-focus-ring); }
 .sq-swiper__track { position: relative; width: 100%; height: 100%; cursor: grab; }
 .sq-swiper--dragging .sq-swiper__track { cursor: grabbing; }
-.sq-swiper__slide { position: absolute; top: 0; left: 0; height: 100%; transition-property: transform, opacity; transition-timing-function: var(--sq-ease); will-change: transform; }
+.sq-swiper__slide { position: absolute; top: 0; left: 0; height: 100%; transition-property: transform, opacity; transition-duration: var(--sq-swiper-speed, 420ms); transition-timing-function: var(--sq-ease); will-change: transform; backface-visibility: hidden; }
+.sq-swiper--dragging .sq-swiper__slide { transition-duration: 0ms; }
+.sq-swiper__slide img { -webkit-user-drag: none; }
 .sq-swiper--vertical .sq-swiper__slide { width: 100%; height: auto; }
 .sq-swiper__slide--jump { transition: none !important; }
 .sq-swiper__slide > * { width: 100%; height: 100%; }

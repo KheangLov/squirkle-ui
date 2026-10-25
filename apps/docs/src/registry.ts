@@ -6,6 +6,7 @@ import { SqCalendar } from '@squirkle-ui/calendar'
 import { SqMap } from '@squirkle-ui/map'
 import { SqLineChart, SqBarChart, SqDonutChart, SqSparkline } from '@squirkle-ui/charts'
 import { SqIconPicker } from '@squirkle-ui/icons'
+import { SqEditor } from '@squirkle-ui/editor'
 
 export interface Example {
   title: string
@@ -153,6 +154,11 @@ doc('SqTimeline', 'Content', 'Vertical timeline; `align="alternate"` for two sid
   <SqTimelineItem title="Shipped" time="13:40" icon="arrowUp">Courier picked up the parcel</SqTimelineItem>
   <SqTimelineItem title="Out for delivery" time="—" small color="warning" />
 </SqTimeline>` },
+  { title: 'Alternate', code: `<SqTimeline align="alternate">
+  <SqTimelineItem title="Kick-off" icon="check" color="success"><template #opposite>Mon, Jan 6</template>Scope and goals agreed</SqTimelineItem>
+  <SqTimelineItem title="Design review" icon="star"><template #opposite>Wed, Jan 15</template>Figma handoff signed off</SqTimelineItem>
+  <SqTimelineItem title="Launch" small color="warning"><template #opposite>Mon, Feb 3</template>Public release</SqTimelineItem>
+</SqTimeline>` },
 ])
 doc('SqTimelineItem', 'Content', 'One timeline entry.', [])
 doc('SqEmptyState', 'Content', 'Illustrated placeholder for empty views.', [{ title: 'Empty', code: `<SqEmptyState title="No projects yet" text="Create your first project to get started." icon="lucide:folder-open"><template #actions><SqBtn prepend-icon="plus">New project</SqBtn></template></SqEmptyState>` }])
@@ -287,6 +293,11 @@ doc('SqDatePicker', 'Forms', 'Calendar picker: single, range, multiple, min/max,
   { title: 'Single & range', code: `<div class="sq-d-flex sq-gap-4 sq-flex-wrap"><SqDatePicker v-model="d" show-header title="Select date" /><SqDatePicker v-model="r" range color="secondary" /></div>`, setup: () => ({ d: ref(new Date().toISOString().slice(0, 10)), r: ref([]) }) },
 ])
 doc('SqDateField', 'Forms', 'Text field that opens a date picker.', [{ title: 'Date field', code: `<SqDateField v-model="d" label="Due date" clearable style="max-width:280px" />`, setup: () => ({ d: ref('') }) }])
+doc('SqDateTimeField', 'Forms', 'Text field that opens a date + time picker. v-model: local `YYYY-MM-DDTHH:mm`.', [
+  { title: 'Date & time field', code: `<SqDateTimeField v-model="dt" label="Meeting" clearable style="max-width:320px" /> {{ dt }}`, setup: () => ({ dt: ref('2026-10-25T14:30') }) },
+  { title: 'AM/PM', code: `<SqDateTimeField v-model="dt" label="Reminder" time-format="ampm" :minute-step="15" style="max-width:320px" />`, setup: () => ({ dt: ref('') }) },
+])
+doc('SqDateTimePicker', 'Forms', 'Inline date picker + time columns in one surface.', [{ title: 'Date & time', code: `<SqDateTimePicker v-model="dt" /> <div>{{ dt }}</div>`, setup: () => ({ dt: ref('2026-10-25T09:00') }) }])
 doc('SqTimePicker', 'Forms', 'Hour/minute columns, 24h or AM/PM.', [{ title: 'Time', code: `<div class="sq-d-flex sq-gap-4 sq-flex-wrap"><SqTimePicker v-model="t" /><SqTimePicker v-model="t" format="ampm" /></div> {{ t }}`, setup: () => ({ t: ref('14:30') }) }])
 
 /* ───────── Data & performance ───────── */
@@ -329,6 +340,7 @@ doc('SqSparkline', 'Add-ons', 'Inline trend line.', [], { component: SqSparkline
 doc('SqSwiper', 'Add-ons', 'Touch swiper with loop, effects, autoplay (@squirkle-ui/swiper).', [], { component: SqSwiper, pkg: '@squirkle-ui/swiper', route: '/swiper' })
 doc('SqCalendar', 'Add-ons', 'Event calendar (@squirkle-ui/calendar).', [], { component: SqCalendar, pkg: '@squirkle-ui/calendar', route: '/calendar' })
 doc('SqMap', 'Add-ons', 'Leaflet map with squircle markers (@squirkle-ui/map).', [], { component: SqMap, pkg: '@squirkle-ui/map', route: '/map' })
+doc('SqEditor', 'Add-ons', 'Rich-text editor on Tiptap (@squirkle-ui/editor).', [], { component: SqEditor, pkg: '@squirkle-ui/editor', route: '/editor' })
 doc('SqIconPicker', 'Add-ons', 'Iconify browser + helpers (@squirkle-ui/icons).', [], { component: SqIconPicker, pkg: '@squirkle-ui/icons', route: '/icons' })
 
 doc('SqIcon', 'Content', 'Built-in icons, any Iconify icon (`mdi:home`, `lucide:heart` — loaded on demand), `$aliases`, or raw SVG paths.', [

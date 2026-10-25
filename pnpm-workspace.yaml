@@ -1,5 +1,10 @@
 packages:
   - packages/*
   - apps/*
+  - examples/*
+  # Nuxt 2 needs its own Vue 2 install (its server renderer would pick up the root's Vue 3); see examples/nuxt2/README.md
+  - '!examples/nuxt2'
 allowBuilds:
   esbuild: true
+  # Vue CLI example: core-js banner script, not needed
+  core-js: false

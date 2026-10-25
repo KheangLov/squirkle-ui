@@ -1,17 +1,18 @@
 # squirkle-ui
 
-Squircle-first Vue component library — **one source, built for Vue 2.7 and Vue 3**, with a Nuxt 2 / 3 / 4 module. This package bundles everything: **86 components** plus the data grid, charts, carousel, calendar, map and icon picker add-ons.
+Squircle-first Vue component library — **one source, built for Vue 2.7 and Vue 3**, with a Nuxt 2 / 3 / 4 module. This package bundles everything: **88 components** plus the data grid, charts, carousel, calendar, map, icon picker and rich-text editor add-ons.
 
 - **Squircles everywhere:** native CSS `corner-shape: squircle` where supported, Figma-accurate SVG squircles elsewhere.
 - **Themeable:** light/dark, 7 colour presets, brand colours from one hex value, font and corner controls — all CSS variables.
-- **Big data:** virtual lists for 1M rows, 100k-option selects, infinite loading, and an AG Grid-style data grid.
+- **Big data:** virtual lists for 1M rows, 100k-option selects, infinite loading, and an enterprise data grid.
 - **TypeScript types** included for every entry.
 
 ## Install
 ```bash
 npm i squirkle-ui vue
+pnpm add squirkle-ui vue
 ```
-Using the map? Also `npm i maplibre-gl` (or `leaflet` for raster tiles).
+Using the map? Also `npm i maplibre-gl` / `pnpm add maplibre-gl` (or `leaflet` for raster tiles).
 
 ## Setup
 
@@ -84,7 +85,7 @@ theme.reset()
 | Layout | SqApp, SqAppBar, SqNavigationDrawer, SqMain, SqContainer, SqRow, SqCol, SqToolbar, SqBottomNavigation, SqFooter, SqThemeProvider |
 | Buttons | SqBtn, SqBtnGroup, SqBtnToggle, SqSpeedDial |
 | Content | SqCard (+ SqCardTitle, SqCardText, SqCardActions), SqSheet, SqAvatar, SqBadge, SqChip, SqChipGroup, SqDivider, SqKbd, SqImg, SqTimeline, SqTimelineItem, SqEmptyState, SqTable, SqIcon |
-| Forms | SqForm, SqField, SqTextField, SqTextarea, SqNumberInput, SqOtpInput, SqSelect, SqAutocomplete, SqCombobox, SqCheckbox, SqRadioGroup, SqRadio, SqSwitch, SqSlider, SqRangeSlider, SqFileInput, SqColorPicker, SqDatePicker, SqDateField, SqTimePicker |
+| Forms | SqForm, SqField, SqTextField, SqTextarea, SqNumberInput, SqOtpInput, SqSelect, SqAutocomplete, SqCombobox, SqCheckbox, SqRadioGroup, SqRadio, SqSwitch, SqSlider, SqRangeSlider, SqFileInput, SqColorPicker, SqDatePicker, SqDateField, SqTimePicker, SqDateTimePicker, SqDateTimeField |
 | Navigation | SqTabs, SqTab, SqWindow, SqWindowItem, SqBreadcrumbs, SqPagination, SqStepper, SqList, SqListItem, SqListSubheader, SqListGroup, SqTreeview, SqSlideGroup, SqExpansionPanels, SqExpansionPanel |
 | Overlays | SqDialog, SqBottomSheet, SqMenu, SqTooltip, SqOverlay |
 | Feedback | SqAlert, SqBanner, SqSnackbar, SqProgressLinear, SqProgressCircular, SqSkeleton, SqRating |
@@ -128,6 +129,7 @@ import 'squirkle-ui/datagrid/styles.css'
 | `squirkle-ui/calendar` | SqCalendar | Month / week / day calendar with events |
 | `squirkle-ui/map` | SqMap | MapLibre vector maps (or Leaflet raster) with squircle markers and clustering |
 | `squirkle-ui/icons` | SqIconPicker | Iconify icon picker and icon presets |
+| `squirkle-ui/editor` | SqEditor | Rich-text editor (Tiptap) |
 
 ### Map setup
 The map needs `maplibre-gl` (vector, default) or `leaflet` (`engine="raster"`). MapLibre loads a worker file that bundlers don't copy on their own; in Vite apps register it once:
@@ -139,7 +141,7 @@ setMapWorkerUrl(workerUrl)
 The Nuxt module does this for you.
 
 ## Separate packages
-Prefer smaller installs? Every part is also published on its own: [`@squirkle-ui/ui`](https://www.npmjs.com/package/@squirkle-ui/ui), [`@squirkle-ui/core`](https://www.npmjs.com/package/@squirkle-ui/core), [`@squirkle-ui/datagrid`](https://www.npmjs.com/package/@squirkle-ui/datagrid), [`@squirkle-ui/charts`](https://www.npmjs.com/package/@squirkle-ui/charts), [`@squirkle-ui/swiper`](https://www.npmjs.com/package/@squirkle-ui/swiper), [`@squirkle-ui/calendar`](https://www.npmjs.com/package/@squirkle-ui/calendar), [`@squirkle-ui/map`](https://www.npmjs.com/package/@squirkle-ui/map), [`@squirkle-ui/icons`](https://www.npmjs.com/package/@squirkle-ui/icons), [`@squirkle-ui/nuxt`](https://www.npmjs.com/package/@squirkle-ui/nuxt).
+Prefer smaller installs? Every part is also published on its own: [`@squirkle-ui/ui`](https://www.npmjs.com/package/@squirkle-ui/ui), [`@squirkle-ui/core`](https://www.npmjs.com/package/@squirkle-ui/core), [`@squirkle-ui/datagrid`](https://www.npmjs.com/package/@squirkle-ui/datagrid), [`@squirkle-ui/charts`](https://www.npmjs.com/package/@squirkle-ui/charts), [`@squirkle-ui/swiper`](https://www.npmjs.com/package/@squirkle-ui/swiper), [`@squirkle-ui/calendar`](https://www.npmjs.com/package/@squirkle-ui/calendar), [`@squirkle-ui/map`](https://www.npmjs.com/package/@squirkle-ui/map), [`@squirkle-ui/icons`](https://www.npmjs.com/package/@squirkle-ui/icons), [`@squirkle-ui/editor`](https://www.npmjs.com/package/@squirkle-ui/editor), [`@squirkle-ui/nuxt`](https://www.npmjs.com/package/@squirkle-ui/nuxt).
 
 ## License
 MIT © KheangLov · [Source and issues](https://github.com/KheangLov/squirkle-ui)

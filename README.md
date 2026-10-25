@@ -2,28 +2,39 @@
 
 Squircle-first Vue component library — **one source, compiled for Vue 2.7 and Vue 3**, with a Nuxt 2 / 3 / 4 module.
 
-- **86 core components** (`@squirkle-ui/ui`) in the spirit of Vuetify: layout, buttons, cards, forms & validation, pickers, overlays, navigation, feedback, lists, treeview, virtual & infinite scroll.
+- **88 core components** (`@squirkle-ui/ui`) in the spirit of Vuetify: layout, buttons, cards, forms & validation, pickers, overlays, navigation, feedback, lists, treeview, virtual & infinite scroll.
 - **Squircle engine**: native CSS `corner-shape: squircle` where supported, Figma-accurate SVG squircles (fill, inner stroke, drop shadow) everywhere else.
 - **Big data**: shared virtualization engine — 1M-row lists, 100k-option selects, infinite loading.
-- **Add-ons** (separate packages): `@squirkle-ui/datagrid` (AG Grid-style: grouping, aggregation, pivot, tree data, master/detail, pinning, editing + undo, range selection, clipboard, CSV, server-side infinite model), `@squirkle-ui/charts`, `@squirkle-ui/swiper`, `@squirkle-ui/calendar`, `@squirkle-ui/map` (MapLibre vector / Leaflet raster, clustering), `@squirkle-ui/icons` (Iconify).
+- **Add-ons** (separate packages): `@squirkle-ui/datagrid` (enterprise data grid: grouping, aggregation, pivot, tree data, master/detail, pinning, editing + undo, range selection, clipboard, CSV, server-side infinite model), `@squirkle-ui/charts`, `@squirkle-ui/swiper`, `@squirkle-ui/calendar`, `@squirkle-ui/map` (MapLibre vector / Leaflet raster, clustering), `@squirkle-ui/icons` (Iconify), `@squirkle-ui/editor` (Tiptap rich-text editor).
 
 ## Develop
 ```bash
 pnpm install
 pnpm dev            # docs + playground → http://localhost:5180
 pnpm build          # Vue 3 + Vue 2 builds of every package
-pnpm dev:vue2       # Vue 2.7 smoke playground (after build) → http://localhost:5181
+pnpm dev:vue2       # Vue 2.7 + Vite example (after build) → http://localhost:5181
+pnpm dev:nuxt       # Nuxt 4 example (after build) → http://localhost:5182
+pnpm examples:build # build every example app (after build)
 pnpm test
 pnpm typecheck
+pnpm storybook      # Storybook (Vue 3, sources) → http://localhost:6006
+pnpm build:storybook
 ```
+
+## Examples
+[`examples/`](examples/) has one app per supported framework, all rendering the same page with every package: Vue 3 + Vite, Vue 3 with the all-in-one `squirkle-ui` package, Vue 2.7 + Vite, Vue 2.7 + Vue CLI 5 (webpack 5), Nuxt 4, Nuxt 3 and Nuxt 2.
 
 ## Install
 ```bash
-npm i squirkle-ui vue                     # everything: components + add-ons (squirkle-ui/datagrid, …)
-# or pick packages:
-npm i @squirkle-ui/ui vue                 # core components
-npm i @squirkle-ui/datagrid @squirkle-ui/map # add-ons as needed
-npm i @squirkle-ui/nuxt                   # Nuxt 2 / 3 / 4 module
+# npm
+npm i squirkle-ui vue                          # everything: components + add-ons (squirkle-ui/datagrid, …)
+# pnpm
+pnpm add squirkle-ui vue
+
+# or pick packages (npm i … / pnpm add …):
+pnpm add @squirkle-ui/ui vue                   # core components
+pnpm add @squirkle-ui/datagrid @squirkle-ui/map # add-ons as needed
+pnpm add @squirkle-ui/nuxt                     # Nuxt 2 / 3 / 4 module
 ```
 Full documentation for npm users: [`packages/squirkle-ui/README.md`](packages/squirkle-ui/README.md).
 

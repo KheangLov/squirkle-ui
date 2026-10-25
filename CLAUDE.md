@@ -1,13 +1,15 @@
 # Squirkle UI
 
-Squircle-first Vue component library (one source → Vue 2.7 + Vue 3 builds, Nuxt 2/3/4 module) — pnpm monorepo: `packages/*` libraries, `apps/docs` docs + playground.
+Squircle-first Vue component library (one source → Vue 2.7 + Vue 3 builds, Nuxt 2/3/4 module) — pnpm monorepo: `packages/*` libraries, `apps/docs` docs + playground, `apps/storybook`, `examples/*` one app per framework.
 
 ## Commands
 ```
 pnpm install          # install workspace
 pnpm dev              # docs + playground (Vue 3, sources aliased) → http://localhost:5180
-pnpm dev:vue2         # Vue 2.7 smoke playground (uses built dist — run pnpm build first)
-pnpm dev:nuxt         # Nuxt 4 SSR playground for @squirkle-ui/nuxt (built dist) → :5182
+pnpm dev:vue2         # examples/vue2-vite: Vue 2.7 on built dist (run pnpm build first) → :5181
+pnpm dev:nuxt         # examples/nuxt4: Nuxt 4 SSR with @squirkle-ui/nuxt (built dist) → :5182
+pnpm examples:build   # build all examples/ (Vue 3, all-in-one, Vue 2 Vite + Vue CLI, Nuxt 2/3/4)
+pnpm storybook        # Storybook 10, Vue 3 only (sources aliased) → :6006
 pnpm build [pkg…]     # dual Vue 2/3 library builds (scripts/build.mjs)
 pnpm test             # Vitest (packages/*/test)
 pnpm typecheck        # vue-tsc over packages + docs

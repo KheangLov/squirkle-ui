@@ -1,0 +1,27 @@
+{
+  "name": "@squirkle-ui/example-vue2-vite",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@squirkle-ui/core": "workspace:*",
+    "@squirkle-ui/ui": "workspace:*",
+    "@squirkle-ui/datagrid": "workspace:*",
+    "@squirkle-ui/charts": "workspace:*",
+    "@squirkle-ui/swiper": "workspace:*",
+    "@squirkle-ui/calendar": "workspace:*",
+    "@squirkle-ui/map": "workspace:*",
+    "@squirkle-ui/icons": "workspace:*",
+    "@squirkle-ui/editor": "workspace:*",
+    "maplibre-gl": "^6.15.0",
+    "vue": "2.7.16"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue2": "^2.3.4",
+    "vite": "^7.1.0"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@squirkle-ui/example-vue2-webpack",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve --port 5189",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@squirkle-ui/core": "workspace:*",
+    "@squirkle-ui/ui": "workspace:*",
+    "@squirkle-ui/datagrid": "workspace:*",
+    "@squirkle-ui/charts": "workspace:*",
+    "@squirkle-ui/swiper": "workspace:*",
+    "@squirkle-ui/calendar": "workspace:*",
+    "@squirkle-ui/map": "workspace:*",
+    "@squirkle-ui/icons": "workspace:*",
+    "@squirkle-ui/editor": "workspace:*",
+    "core-js": "^3.37.1",
+    "maplibre-gl": "^6.15.0",
+    "vue": "2.7.16"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "5.0.9",
+    "@vue/cli-service": "5.0.9",
+    "vue-template-compiler": "2.7.16"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

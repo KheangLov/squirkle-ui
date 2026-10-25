@@ -9,7 +9,7 @@ Always binding: `.ai/GUARDRAILS.md` (compact copy in CLAUDE.md). Session rules: 
 | New UI component in `@squirkle-ui/ui` | DESIGN_SYSTEM, COMPONENTS (grep), CONVENTIONS | ARCHITECTURE, TESTING, PROMPT_ENGINEERING | DEPENDENCIES, SECURITY |
 | Change an existing component | COMPONENTS (grep the row), CONVENTIONS | FEATURES, CODE_REVIEW | PERFORMANCE |
 | UI from Figma (`/figma-ui`) | DESIGN_SYSTEM, FIGMA, COMPONENTS (grep) | CONVENTIONS, TESTING | DEPENDENCIES |
-| Vue 2 / dual-build bug | CONVENTIONS § Vue 2/3, ARCHITECTURE § Build model | TESTING (playground-vue2), PROMPT_ENGINEERING § G lessons | DESIGN_SYSTEM |
+| Vue 2 / dual-build bug | CONVENTIONS § Vue 2/3, ARCHITECTURE § Build model | TESTING (examples/vue2-vite, vue2-webpack), PROMPT_ENGINEERING § G lessons | DESIGN_SYSTEM |
 | DataGrid feature / bug | FEATURES (DataGrid row), ARCHITECTURE § Data flow | PERFORMANCE, TESTING | FIGMA |
 | Virtual / infinite scroll | PERFORMANCE, FEATURES | ARCHITECTURE | FIGMA |
 | Charts / swiper / calendar / map / icons | FEATURES, DESIGN_SYSTEM | DEPENDENCIES (map, icons) | SECURITY |

@@ -73,6 +73,7 @@ const showcases = [
   { title: 'Calendar', to: '/calendar', icon: 'calendar' },
   { title: 'Map', to: '/map', icon: 'place' },
   { title: 'Icons', to: '/icons', icon: 'lucide:smile' },
+  { title: 'Editor', to: '/editor', icon: 'edit' },
 ]
 const byCat = (c: string) => registry.filter((e) => e.category === c)
 const openCat = computed(() => registry.find((e) => route.path === '/components/' + e.slug)?.category)

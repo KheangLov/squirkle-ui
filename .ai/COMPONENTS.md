@@ -11,6 +11,7 @@ Read when: reusing or changing a component, or checking one exists. Grep for the
 | SqLineChart | `charts/…/components/SqLineChart.vue` | labels, series, title, subtitle, height, area, smooth | — | UNKNOWN |
 | SqSparkline | `charts/…/components/SqSparkline.vue` | data, width, height, color, fill, label | — | UNKNOWN |
 | SqDataGrid | `datagrid/…/SqDataGrid.vue` | rows, columns, defaultColDef, rowId, height, rowHeight, headerHeight | default, cell, detail, group, loading, no-rows, toolbar (+`cell-<colId>`, `header-<colId>`) | UNKNOWN |
+| SqEditor | `editor/…/SqEditor.vue` | v-model · output (html \| json), label, placeholder, hint, disabled, readonly, error, toolbar, labels, minHeight, maxHeight, starterKit, extensions | — | UNKNOWN |
 | SqIconPicker | `icons/…/SqIconPicker.vue` | v-model · prefixes, columns, height, limit, placeholder | — | UNKNOWN |
 | SqMap | `map/…/SqMap.vue` | engine (vector \| raster), mapStyle, center, zoom, markers, markerDefaults, cluster, clusterColor, fitMarkers, tileUrl, attribution, height, rounded | marker, popup | UNKNOWN |
 | SqSwiper | `swiper/…/SqSwiper.vue` | v-model · items, itemKey, slidesPerView, spaceBetween, breakpoints, effect, loop | default | UNKNOWN |
@@ -39,6 +40,8 @@ Read when: reusing or changing a component, or checking one exists. Grep for the
 | SqCombobox | `ui/…/components/SqCombobox.vue` | = SqSelect + | — | UNKNOWN |
 | SqContainer | `ui/…/components/SqContainer.vue` |  | default | UNKNOWN |
 | SqDateField | `ui/…/components/SqDateField.vue` | v-model · label, placeholder, range, clearable, disabled, min, max | — | UNKNOWN |
+| SqDateTimeField | `ui/…/components/SqDateTimeField.vue` | v-model (`YYYY-MM-DDTHH:mm`) · label, placeholder, clearable, disabled, min, max, timeFormat, useSeconds, minuteStep, format | — | UNKNOWN |
+| SqDateTimePicker | `ui/…/components/SqDateTimePicker.vue` | v-model (`YYYY-MM-DDTHH:mm`) · min, max, firstDayOfWeek, format, useSeconds, minuteStep, color, flat | — | UNKNOWN |
 | SqDatePicker | `ui/…/components/SqDatePicker.vue` | v-model · range, multiple, min, max, allowedDates, events, firstDayOfWeek | actions | UNKNOWN |
 | SqDialog | `ui/…/components/SqDialog.vue` | v-model · title, width, maxWidth, persistent, fullscreen, scrollable, closable | default, actions, activator, title | UNKNOWN |
 | SqDivider | `ui/…/components/SqDivider.vue` |  | default | UNKNOWN |
