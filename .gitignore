@@ -10,3 +10,5 @@ storybook-static
 # generated webpack 4 entry points (scripts/build.mjs)
 packages/*/vue2/
 packages/*/styles.css
+# GitHub Pages site assembled by scripts/pages.mjs
+_site

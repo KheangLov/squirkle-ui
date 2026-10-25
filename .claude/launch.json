@@ -148,6 +148,16 @@
         "start"
       ],
       "port": 5188
+    },
+    {
+      "name": "pages-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-c",
+        "import http.server,functools,os\nclass H(http.server.SimpleHTTPRequestHandler):\n    def translate_path(self, path):\n        p = path.split('?',1)[0].split('#',1)[0]\n        p = p[len('/squirkle-ui'):] if p.startswith('/squirkle-ui/') else '/__missing__'\n        return super().translate_path(p)\nhttp.server.ThreadingHTTPServer(('127.0.0.1',5195), functools.partial(H, directory=os.path.abspath('_site'))).serve_forever()\n"
+      ],
+      "port": 5195,
+      "url": "http://localhost:5195"
     }
   ]
 }

@@ -6,6 +6,7 @@ const require = createRequire(import.meta.url)
 // @squirkle-ui/nuxt on Nuxt 2.18 (Vue 2.7, webpack 4), using the built dist of each package (run `pnpm build` first).
 export default {
   telemetry: false,
+  router: { base: process.env.BASE_PATH || '/' }, // sub-path when generated for GitHub Pages (scripts/pages.mjs)
   components: true,
   buildModules: [['@squirkle-ui/nuxt/nuxt2', { addons: ['datagrid', 'charts', 'swiper', 'calendar', 'map', 'icons', 'editor'] }]],
   build: {

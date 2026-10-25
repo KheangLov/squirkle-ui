@@ -2,6 +2,8 @@
 
 Squircle-first Vue component library — **one source, compiled for Vue 2.7 and Vue 3**, with a Nuxt 2 / 3 / 4 module.
 
+**Live:** [Docs](https://kheanglov.github.io/squirkle-ui/) · [Storybook](https://kheanglov.github.io/squirkle-ui/storybook/) · [Examples](https://kheanglov.github.io/squirkle-ui/examples/)
+
 - **88 core components** (`@squirkle-ui/ui`) in the spirit of Vuetify: layout, buttons, cards, forms & validation, pickers, overlays, navigation, feedback, lists, treeview, virtual & infinite scroll.
 - **Squircle engine**: native CSS `corner-shape: squircle` where supported, Figma-accurate SVG squircles (fill, inner stroke, drop shadow) everywhere else.
 - **Big data**: shared virtualization engine — 1M-row lists, 100k-option selects, infinite loading.
@@ -15,6 +17,7 @@ pnpm build          # Vue 3 + Vue 2 builds of every package
 pnpm dev:vue2       # Vue 2.7 + Vite example (after build) → http://localhost:5181
 pnpm dev:nuxt       # Nuxt 4 example (after build) → http://localhost:5182
 pnpm examples:build # build every example app (after build)
+pnpm build:pages    # whole GitHub Pages site (docs, Storybook, examples) → _site/
 pnpm test
 pnpm typecheck
 pnpm storybook      # Storybook (Vue 3, sources) → http://localhost:6006

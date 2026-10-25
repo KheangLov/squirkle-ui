@@ -15,6 +15,7 @@
     "build:docs": "pnpm --filter @squirkle-ui/docs build",
     "build:storybook": "pnpm --filter @squirkle-ui/storybook build",
     "examples:build": "node scripts/examples.mjs",
+    "build:pages": "node scripts/pages.mjs",
     "test": "vitest run",
     "typecheck": "vue-tsc --noEmit -p tsconfig.json"
   },

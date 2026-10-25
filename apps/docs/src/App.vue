@@ -28,6 +28,10 @@
         <SqListItem v-for="g in guides" :key="g.to" :title="g.title" :prepend-icon="g.icon" :to="g.to" :active="route.path === g.to" />
         <SqListSubheader>Showcases</SqListSubheader>
         <SqListItem v-for="s in showcases" :key="s.to" :title="s.title" :prepend-icon="s.icon" :to="s.to" :active="route.path === s.to" />
+        <template v-if="siteLinks.length">
+          <SqListSubheader>More</SqListSubheader>
+          <SqListItem v-for="l in siteLinks" :key="l.href" :title="l.title" :prepend-icon="l.icon" :href="l.href" />
+        </template>
         <template v-for="cat in categories" :key="cat">
           <SqListGroup :title="cat" :model-value="openCat === cat">
             <SqListItem v-for="e in byCat(cat)" :key="e.slug" :title="e.name.replace(/^Sq/, '')" :to="'/components/' + e.slug" :active="route.path === '/components/' + e.slug" />
@@ -57,6 +61,13 @@ const customize = ref(false)
 const { isDark, toggle } = useTheme()
 const squircle = config.squircle
 const modes = [{ title: 'Auto squircle', value: 'auto' }, { title: 'SVG squircle', value: 'svg' }, { title: 'Native CSS', value: 'native' }, { title: 'Plain radius', value: 'css' }]
+// Only the GitHub Pages build (scripts/pages.mjs) ships Storybook and the examples next to the docs.
+const siteLinks = import.meta.env.VITE_PAGES === 'true'
+  ? [
+      { title: 'Storybook', href: `${import.meta.env.BASE_URL}storybook/`, icon: 'lucide:book-open' },
+      { title: 'Examples', href: `${import.meta.env.BASE_URL}examples/`, icon: 'lucide:app-window' },
+    ]
+  : []
 const guides = [
   { title: 'Introduction', to: '/', icon: 'home' },
   { title: 'Installation', to: '/guide/installation', icon: 'download' },

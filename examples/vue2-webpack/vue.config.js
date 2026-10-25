@@ -2,6 +2,7 @@ const path = require('path')
 
 // Vue CLI 5 (webpack 5) consuming the built packages (`pnpm build` first) through their `exports`.
 module.exports = {
+  publicPath: process.env.BASE_PATH || '/', // sub-path when built for GitHub Pages (scripts/pages.mjs)
   // Add-on dist files target ES2019 already; transpile them for the app's browserslist like any dependency.
   transpileDependencies: [/@squirkle-ui[\\/]/],
   chainWebpack: (config) => {

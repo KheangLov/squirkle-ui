@@ -92,7 +92,7 @@ theme.reset()
 | Data | SqVirtualScroll, SqInfiniteScroll, SqLazy |
 | Utilities | SqShape, SqPortal, SqExpandTransition, SqSpacer |
 
-Every component has live examples in the [docs app](https://github.com/KheangLov/squirkle-ui) (`pnpm dev`).
+Every component has live examples in the [docs](https://kheanglov.github.io/squirkle-ui/), plus [Storybook](https://kheanglov.github.io/squirkle-ui/storybook/) and [one example app per framework](https://kheanglov.github.io/squirkle-ui/examples/).
 
 ## Example
 ```vue
