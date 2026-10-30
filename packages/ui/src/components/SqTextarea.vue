@@ -9,6 +9,8 @@
       :disabled="isDisabled"
       :readonly="isReadonly"
       :maxlength="maxlength"
+      :aria-label="ariaLabel"
+      :aria-labelledby="ariaLabelledby"
       :style="{ resize: autoGrow || noResize ? 'none' : undefined }"
       :aria-invalid="hasError ? 'true' : undefined"
       @input="onInput"

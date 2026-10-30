@@ -27,6 +27,8 @@
         :readonly="(!searchable && !combobox) || isReadonly"
         :disabled="isDisabled"
         role="combobox"
+        :aria-label="ariaLabel"
+        :aria-labelledby="ariaLabelledby"
         aria-autocomplete="list"
         :aria-expanded="menu ? 'true' : 'false'"
         :aria-controls="`${id}-listbox`"
@@ -42,7 +44,7 @@
     </SqField>
     <SqPortal>
       <transition name="sq-scale">
-        <div v-if="menu" :id="`${id}-listbox`" ref="content" class="sq-select__menu sq-menu__content sq-surface" :style="[contentStyle, { '--sq-r': 'var(--sq-radius-lg)' }]" role="listbox" :aria-multiselectable="multiple ? 'true' : undefined" @mousedown.prevent>
+        <div v-if="menu" :id="`${id}-listbox`" ref="content" class="sq-select__menu sq-menu__content sq-surface" :style="[contentStyle, { '--sq-r': 'var(--sq-radius-lg)' }]" role="listbox" :aria-label="label || ariaLabel" :aria-multiselectable="multiple ? 'true' : undefined" @mousedown.prevent>
           <SqShape />
           <div v-if="loading && !filtered.length" class="sq-select__empty"><SqProgressCircular indeterminate :size="20" :width="3" /></div>
           <div v-else-if="!filtered.length" class="sq-select__empty"><slot name="no-data">{{ combobox && search ? `↵ ${search}` : messages.noResults }}</slot></div>

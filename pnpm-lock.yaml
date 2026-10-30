@@ -83,18 +83,36 @@ importers:
 
   apps/storybook:
     dependencies:
+      '@squirkle-ui/calendar':
+        specifier: workspace:*
+        version: link:../../packages/calendar
+      '@squirkle-ui/charts':
+        specifier: workspace:*
+        version: link:../../packages/charts
       '@squirkle-ui/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@squirkle-ui/datagrid':
+        specifier: workspace:*
+        version: link:../../packages/datagrid
       '@squirkle-ui/editor':
         specifier: workspace:*
         version: link:../../packages/editor
+      '@squirkle-ui/icons':
+        specifier: workspace:*
+        version: link:../../packages/icons
+      '@squirkle-ui/map':
+        specifier: workspace:*
+        version: link:../../packages/map
       '@squirkle-ui/swiper':
         specifier: workspace:*
         version: link:../../packages/swiper
       '@squirkle-ui/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      maplibre-gl:
+        specifier: ^6.15.0
+        version: 6.15.0
       vue:
         specifier: ^3.5.0
         version: 3.5.44(typescript@5.9.3)

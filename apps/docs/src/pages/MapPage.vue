@@ -5,7 +5,7 @@
 
     <div class="sq-d-flex sq-flex-wrap sq-gap-3 sq-align-center sq-mb-4">
       <SqBtnToggle v-model="engine" mandatory><SqBtn value="vector" variant="text">Vector</SqBtn><SqBtn value="raster" variant="text">Raster</SqBtn></SqBtnToggle>
-      <SqSelect v-if="engine === 'vector'" v-model="style" :items="styles" label="Style" density="compact" hide-details style="width:220px" />
+      <SqSelect v-if="engine === 'vector'" v-model="style" :items="styles" aria-label="Map style" prepend-inner-icon="lucide:layers" density="compact" hide-details style="width:240px" />
       <SqSwitch v-model="cluster" label="Cluster 2,000 points" />
     </div>
 

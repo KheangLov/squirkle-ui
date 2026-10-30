@@ -29,6 +29,8 @@
       :autocomplete="autocomplete"
       :name="name"
       :inputmode="inputmode"
+      :aria-label="ariaLabel"
+      :aria-labelledby="ariaLabelledby"
       :aria-invalid="hasError ? 'true' : undefined"
       :aria-describedby="`${id}-messages`"
       :aria-required="required ? 'true' : undefined"
