@@ -27,10 +27,13 @@ export const fieldShellProps = {
   loading: Boolean,
   required: Boolean,
   hideDetails: Boolean,
+  /** Accessible name for the native control when there is no visible `label` (declared so it doesn't land on the wrapper). */
+  ariaLabel: { type: String, default: undefined },
+  ariaLabelledby: { type: String, default: undefined },
 }
 
 export const pickShellProps = (props: Record<string, unknown>) => {
   const out: Record<string, unknown> = {}
-  for (const k of Object.keys(fieldShellProps)) if (!['disabled', 'readonly', 'placeholder', 'id'].includes(k)) out[k] = props[k]
+  for (const k of Object.keys(fieldShellProps)) if (!['disabled', 'readonly', 'placeholder', 'id', 'ariaLabel', 'ariaLabelledby'].includes(k)) out[k] = props[k]
   return out
 }

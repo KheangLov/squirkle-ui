@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { SqDateTimePicker, SqSelect } from '../src'
+import { SqAutocomplete, SqDateTimePicker, SqNumberInput, SqSelect, SqTextarea, SqTextField } from '../src'
 
 describe('SqSelect', () => {
   it('shows the placeholder when nothing is selected (non-searchable)', () => {
@@ -30,4 +30,22 @@ describe('SqDateTimePicker', () => {
     w.findComponent({ name: 'SqDatePicker' }).vm.$emit('update:modelValue', '2026-01-05')
     expect(w.emitted('update:modelValue')?.[0]).toEqual(['2026-01-05T00:00'])
   })
+})
+
+describe('field aria-label', () => {
+  const cases = [
+    ['SqTextField', SqTextField, 'input'],
+    ['SqTextarea', SqTextarea, 'textarea'],
+    ['SqNumberInput', SqNumberInput, 'input'],
+    ['SqSelect', SqSelect, 'input[role="combobox"]'],
+    ['SqAutocomplete', SqAutocomplete, 'input[role="combobox"]'],
+  ] as const
+  for (const [name, comp, control] of cases) {
+    it(`${name} names its focusable control, not the wrapper`, () => {
+      const w = mount(comp, { attrs: { 'aria-label': 'Map style', 'aria-labelledby': 'heading' } })
+      expect(w.find(control).attributes('aria-label')).toBe('Map style')
+      expect(w.find(control).attributes('aria-labelledby')).toBe('heading')
+      expect(w.attributes('aria-label')).toBeUndefined()
+    })
+  }
 })

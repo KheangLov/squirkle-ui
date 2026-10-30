@@ -29,6 +29,7 @@ Read when: writing or reviewing any component, composable or package code.
 - Non-scoped `<style>` in each SFC; tokens only (`.ai/DESIGN_SYSTEM.md`).
 - Surfaces: `class="sq-surface"` + `--sq-bg/--sq-bd/--sq-bw/--sq-r/--sq-shadow(-filter)` + `<SqShape />` child. Ex: `SqSheet.vue`.
 - Color props accept theme names or CSS colors via `colorValue`; variant matrix via `variantVars` (`composables/style.ts`).
+- Attributes meant for an inner native control (e.g. `aria-label`) must be declared props and bound on that control — undeclared attrs fall through to the wrapper root (Vue 2 + 3). Text-like fields get `ariaLabel` / `ariaLabelledby` from `fieldShellProps` (`composables/field.ts`).
 
 ## TypeScript / state / async
 - Strict TS; typed `PropType`; no `any`. Emit typing helper `Emit` in `composables/model.ts`.

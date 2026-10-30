@@ -12,6 +12,8 @@
       :aria-valuenow="model"
       :aria-valuemin="min"
       :aria-valuemax="max"
+      :aria-label="ariaLabel"
+      :aria-labelledby="ariaLabelledby"
       :placeholder="placeholder"
       :disabled="isDisabled"
       :readonly="isReadonly"
