@@ -9,8 +9,14 @@
   "dependencies": {
     "@squirkle-ui/core": "workspace:*",
     "@squirkle-ui/ui": "workspace:*",
-    "@squirkle-ui/swiper": "workspace:*",
+    "@squirkle-ui/calendar": "workspace:*",
+    "@squirkle-ui/charts": "workspace:*",
+    "@squirkle-ui/datagrid": "workspace:*",
     "@squirkle-ui/editor": "workspace:*",
+    "@squirkle-ui/icons": "workspace:*",
+    "@squirkle-ui/map": "workspace:*",
+    "@squirkle-ui/swiper": "workspace:*",
+    "maplibre-gl": "^6.15.0",
     "vue": "^3.5.0"
   },
   "devDependencies": {

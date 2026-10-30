@@ -4,6 +4,7 @@ import { SqTimeline, SqTimelineItem } from '@squirkle-ui/ui'
 const meta: Meta<typeof SqTimeline> = {
   title: 'Content/SqTimeline',
   component: SqTimeline,
+  subcomponents: { SqTimelineItem },
   argTypes: { align: { control: 'inline-radio', options: ['start', 'alternate'] } },
   args: { align: 'start', dense: false },
   render: (args) => ({

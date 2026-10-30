@@ -2,6 +2,11 @@ import type { Preview } from '@storybook/vue3-vite'
 import { setup } from '@storybook/vue3-vite'
 import { config, createSquirkle } from '@squirkle-ui/ui'
 import '@squirkle-ui/ui/styles.css'
+import { setMapWorkerUrl } from '@squirkle-ui/map'
+import mapWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
+
+// Bundlers don't copy MapLibre's worker file; `?url` serves it in dev and emits it on build.
+setMapWorkerUrl(mapWorkerUrl)
 
 setup((app) => {
   app.use(createSquirkle({ theme: { defaultTheme: 'light' } }))

@@ -6,6 +6,7 @@ import { aliases } from '../../build/aliases'
 // Stories run on the package sources (Vue 3 build only — Storybook has no Vue 2.7 renderer).
 export default defineConfig({
   plugins: [vue()],
+  optimizeDeps: { exclude: ['maplibre-gl'] },
   resolve: {
     alias: {
       ...aliases,
