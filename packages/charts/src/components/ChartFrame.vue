@@ -11,11 +11,14 @@
       </span>
     </div>
     <slot />
-    <table class="sq-sr-only">
-      <caption>{{ title || 'Chart data' }}</caption>
-      <thead><tr><th v-for="h in table.head" :key="h">{{ h }}</th></tr></thead>
-      <tbody><tr v-for="(r, i) in table.rows" :key="i"><td v-for="(c, j) in r" :key="j">{{ c }}</td></tr></tbody>
-    </table>
+    <!-- A table can't shrink below its content, so the sr-only clip sits on a wrapper (else it stretches the page). -->
+    <div class="sq-sr-only">
+      <table>
+        <caption>{{ title || 'Chart data' }}</caption>
+        <thead><tr><th v-for="h in table.head" :key="h">{{ h }}</th></tr></thead>
+        <tbody><tr v-for="(r, i) in table.rows" :key="i"><td v-for="(c, j) in r" :key="j">{{ c }}</td></tr></tbody>
+      </table>
+    </div>
   </figure>
 </template>
 
