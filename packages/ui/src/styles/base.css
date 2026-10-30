@@ -8,6 +8,9 @@
   border-radius: var(--sq-r, var(--sq-radius-md));
   box-shadow: var(--sq-shadow, none);
 }
+/* Shadow vars inherit: a nested surface would wear its container's elevation (fields in a drawer or dialog).
+   Zero specificity, so any surface that sets its own shadow (class or inline) still wins. */
+:where(.sq-surface) :where(.sq-surface) { --sq-shadow: none; --sq-shadow-filter: none; }
 @supports (corner-shape: squircle) {
   .sq-surface {
     border-radius: calc(var(--sq-r, var(--sq-radius-md)) * (1 + var(--sq-smoothing)));
