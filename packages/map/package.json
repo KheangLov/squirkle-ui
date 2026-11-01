@@ -1,6 +1,6 @@
 {
   "name": "@squirkle-ui/map",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vector (MapLibre) and raster (Leaflet) squircle maps with custom markers and clustering for Squirkle UI",
   "license": "MIT",
   "repository": {
