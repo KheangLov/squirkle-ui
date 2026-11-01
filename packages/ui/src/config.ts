@@ -34,7 +34,7 @@ export interface SquirkleOptions {
   /** Font, radius scale and corner smoothing, written as CSS variables on :root. */
   appearance?: Appearance
   icons?: {
-    /** Alias map, e.g. { home: 'mdi:home' } so `<SqIcon icon="$home">` works. */
+    /** Alias map, e.g. { home: 'mdi:home' } so `<SqIcon icon="$home">` works. A key that matches a built-in name (`close`, `chevronDown`) also replaces that icon wherever it is used, including inside components. */
     aliases?: Record<string, string>
     /** Iconify API host; `false` disables network loading (offline: use addIcons). */
     api?: string | false

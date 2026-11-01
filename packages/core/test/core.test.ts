@@ -11,7 +11,25 @@ describe('squircle', () => {
     expect(y).toBe(0)
   })
   it('degrades to straight edges with radius 0', () => {
-    expect(getSquirclePath({ width: 10, height: 10, radius: 0 })).not.toContain(' a ')
+    expect(getSquirclePath({ width: 10, height: 10, radius: 0 })).toBe('M 10 0 L 10 10 L 0 10 L 0 0 Z')
+    expect(getSquirclePath({ width: 10, height: 10, radius: 0, geometry: 'figma' })).not.toContain(' a ')
+  })
+  it('draws css corners on the superellipse |x|^4 + |y|^4 = 1, like corner-shape: squircle', () => {
+    const p = 12 * 1.6
+    const points = [...getSquirclePath({ width: 100, height: 40, radius: 12, smoothing: 0.6 }).matchAll(/L ([\d.]+) ([\d.]+)/g)]
+      .map((m) => [Number(m[1]), Number(m[2])])
+      .filter(([x, y]) => x > 100 - p && y < p) // top-right corner
+    expect(points.length).toBeGreaterThan(10)
+    for (const [x, y] of points) expect(((x - (100 - p)) / p) ** 4 + ((p - y) / p) ** 4).toBeCloseTo(1, 2)
+  })
+  it('shrinks overlapping css corners together, as CSS does', () => {
+    // 100 x 20 pill: both corners on a short side want 999 * 1.6, so all scale down to 10
+    expect(getSquirclePath({ width: 100, height: 20, radius: 999, smoothing: 0.6 }).startsWith('M 90 0 ')).toBe(true)
+  })
+  it('keeps the figma geometry on request', () => {
+    const d = getSquirclePath({ width: 100, height: 40, radius: 12, smoothing: 0.6, geometry: 'figma' })
+    expect(d).toContain(' a 12 12 ')
+    expect(Number(d.split(' ')[1])).toBeCloseTo(100 - 12 * 1.6, 3)
   })
   it('clamps the radius to half of the shortest side', () => {
     const d = getSquirclePath({ width: 100, height: 20, radius: 999, smoothing: 0.6 })
@@ -22,6 +40,10 @@ describe('squircle', () => {
   })
   it('insets stroke paths by half the stroke width', () => {
     expect(getSquircleStrokePath({ width: 50, height: 50, radius: 10, strokeWidth: 2 })).toMatch(/^M [\d.]+ 1 /)
+  })
+  it('shrinks the css stroke corner span by half the stroke width, like a CSS border', () => {
+    // outer corner spans 10 * 1.6 = 16; the stroke centre line spans 15, ending at 1 + 48 - 15
+    expect(getSquircleStrokePath({ width: 50, height: 50, radius: 10, smoothing: 0.6, strokeWidth: 2 }).startsWith('M 34 1 ')).toBe(true)
   })
 })
 

@@ -18,7 +18,9 @@ const ocean = presetThemes('ocean')         // presets: Object.keys(themePresets
 contrastRatio('#ffffff', '#5b5bd6')          // WCAG contrast ratio
 onColor('#5b5bd6')                           // best text colour (white or ink) on a background
 ```
-`getSquirclePath` options: `width`, `height`, `radius` (number or per-corner), `smoothing` (0 = rounded rect, 0.6 ≈ iOS, 1 = max), `preserveSmoothing`, `offset`.
+`getSquirclePath` options: `width`, `height`, `radius` (number or per-corner), `smoothing` (each corner spans `(1 + smoothing) · radius`; 0.6 ≈ iOS, 1 = max), `geometry`, `preserveSmoothing`, `offset`.
+
+`geometry: 'css'` (default) draws the superellipse browsers draw for `border-radius: (1 + smoothing) · radius; corner-shape: squircle`, so an SVG fallback matches native squircles; overlapping corners shrink together as in CSS. `geometry: 'figma'` draws Figma's corner smoothing instead (0 = plain rounded rect; `preserveSmoothing` applies only here).
 
 ## License
 MIT © KheangLov · [Source and issues](https://github.com/KheangLov/squirkle-ui)

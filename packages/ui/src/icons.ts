@@ -132,6 +132,9 @@ export function resolveIcon(icon: string | undefined): ResolvedIcon {
   if (name.startsWith('$')) {
     const key = name.slice(1)
     name = config.icons.aliases[key] ?? key
+  } else if (config.icons.aliases[name]) {
+    // Aliases also replace bare built-in names ("close", "chevronDown"), so an app can swap the icons components draw.
+    name = config.icons.aliases[name]
   }
   if (/^[mM][\d\s.-]/.test(name)) return { kind: 'path', d: name }
   if (builtinIcons[name]) return { kind: 'path', d: builtinIcons[name] }
