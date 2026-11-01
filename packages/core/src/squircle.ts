@@ -1,8 +1,9 @@
 /**
- * Squircle geometry — Figma-compatible "corner smoothing".
- * Math follows the published Figma squircle derivation (as in the MIT `figma-squircle` package):
- * a corner of radius r with smoothing s spans p = (1 + s) · r along each edge and is built from
- * a bezier lead-in, a circular arc and a bezier lead-out.
+ * Squircle geometry. A corner of radius r with smoothing s spans p = (1 + s) · r along each edge, drawn as one of:
+ * - `css` (default): the superellipse |x|⁴ + |y|⁴ = 1 that browsers draw for
+ *   `border-radius: p; corner-shape: squircle`, so the SVG fallback matches native squircles.
+ * - `figma`: Figma's "corner smoothing", following the published derivation (as in the MIT `figma-squircle`
+ *   package): a bezier lead-in, a circular arc and a bezier lead-out.
  */
 
 export interface SquircleCorners {
@@ -12,14 +13,18 @@ export interface SquircleCorners {
   bottomLeft?: number
 }
 
+export type SquircleGeometry = 'css' | 'figma'
+
 export interface SquircleOptions {
   width: number
   height: number
   /** Corner radius in px, or per-corner radii. */
   radius: number | SquircleCorners
-  /** 0 = plain rounded rect, 0.6 ≈ iOS, 1 = maximum smoothing. */
+  /** Each corner spans (1 + smoothing) · radius. 0.6 ≈ iOS, 1 = maximum; with `figma`, 0 = plain rounded rect. */
   smoothing?: number
-  /** Keep smoothing when the corner budget is exceeded (Figma's "preserve smoothing"). */
+  /** `css` (default) matches native `corner-shape: squircle`; `figma` matches Figma's corner smoothing. */
+  geometry?: SquircleGeometry
+  /** `figma` only: keep smoothing when the corner budget is exceeded (Figma's "preserve smoothing"). */
   preserveSmoothing?: boolean
   /** Shift the path by this offset (used to inset strokes). */
   offset?: number
@@ -74,10 +79,47 @@ function normalizeRadius(radius: SquircleOptions['radius']): Required<SquircleCo
   }
 }
 
+/** Line segments per `css` corner; enough for a smooth curve at any UI size. */
+const CSS_CORNER_STEPS = 24
+
+/** Superellipse corners, sized and scaled down the way CSS sizes `border-radius`. */
+function cssSquirclePath(w: number, h: number, radii: Required<SquircleCorners>, smoothing: number, o: number): string {
+  const span = (r: number) => Math.max(0, r) * (1 + smoothing)
+  const want = [radii.topLeft, radii.topRight, radii.bottomRight, radii.bottomLeft].map(span)
+  // When adjacent corners overlap, CSS shrinks every corner by the same factor.
+  const f = Math.min(1, w / (want[0] + want[1]), w / (want[3] + want[2]), h / (want[0] + want[3]), h / (want[1] + want[2]))
+  const [tl, tr, br, bl] = want.map((p) => p * f)
+
+  // Clockwise quarter of the superellipse around (cx, cy), from angle `from` (screen coords, y down).
+  const corner = (cx: number, cy: number, p: number, from: number) => {
+    if (!p) return ''
+    const root = (v: number) => Math.sign(v) * Math.sqrt(Math.abs(v))
+    let out = ''
+    for (let i = 1; i <= CSS_CORNER_STEPS; i++) {
+      const t = from + (i / CSS_CORNER_STEPS) * (Math.PI / 2)
+      out += ` L ${n(cx + p * root(Math.cos(t)))} ${n(cy + p * root(Math.sin(t)))}`
+    }
+    return out.slice(1)
+  }
+
+  return [
+    `M ${n(o + w - tr)} ${n(o)}`,
+    corner(o + w - tr, o + tr, tr, -Math.PI / 2),
+    `L ${n(o + w)} ${n(o + h - br)}`,
+    corner(o + w - br, o + h - br, br, 0),
+    `L ${n(o + bl)} ${n(o + h)}`,
+    corner(o + bl, o + h - bl, bl, Math.PI / 2),
+    `L ${n(o)} ${n(o + tl)}`,
+    corner(o + tl, o + tl, tl, Math.PI),
+    'Z',
+  ].filter(Boolean).join(' ')
+}
+
 /** Returns an SVG path `d` string describing a squircle of the given size. */
 export function getSquirclePath(opts: SquircleOptions): string {
-  const { width: w, height: h, smoothing = 0.6, preserveSmoothing = true, offset = 0 } = opts
+  const { width: w, height: h, smoothing = 0.6, geometry = 'css', preserveSmoothing = true, offset = 0 } = opts
   if (w <= 0 || h <= 0) return ''
+  if (geometry === 'css') return cssSquirclePath(w, h, normalizeRadius(opts.radius), smoothing, offset)
   const budget = Math.min(w, h) / 2
   const radii = normalizeRadius(opts.radius)
   const clamp = (r: number) => Math.max(0, Math.min(r, budget))
@@ -113,7 +155,9 @@ export function getSquirclePath(opts: SquircleOptions): string {
 export function getSquircleStrokePath(opts: SquircleOptions & { strokeWidth: number }): string {
   const half = opts.strokeWidth / 2
   const radii = normalizeRadius(opts.radius)
-  const shrink = (r: number) => Math.max(0, r - half)
+  // `css` corners span r · (1 + s); shrink that span by `half`, as CSS sizes the inner edge of a border.
+  const step = (opts.geometry ?? 'css') === 'css' ? half / (1 + (opts.smoothing ?? 0.6)) : half
+  const shrink = (r: number) => Math.max(0, r - step)
   return getSquirclePath({
     ...opts,
     width: opts.width - opts.strokeWidth,
