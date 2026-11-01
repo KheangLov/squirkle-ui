@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { SqAutocomplete, SqDateTimePicker, SqNumberInput, SqSelect, SqTextarea, SqTextField } from '../src'
+import { SqAutocomplete, SqDateTimePicker, SqNumberInput, SqSelect, SqTextarea, SqTextField, addIcons, builtinIcons, config, resolveIcon } from '../src'
 
 describe('SqSelect', () => {
   it('shows the placeholder when nothing is selected (non-searchable)', () => {
@@ -48,4 +48,19 @@ describe('field aria-label', () => {
       expect(w.attributes('aria-label')).toBeUndefined()
     })
   }
+})
+
+describe('resolveIcon', () => {
+  it('lets an alias replace a built-in name, bare or with $', () => {
+    addIcons({ 'test:x': { body: '<path d="M0 0h1"/>' } })
+    config.icons.aliases.close = 'test:x'
+    try {
+      expect(resolveIcon('close')).toMatchObject({ kind: 'svg', data: { body: '<path d="M0 0h1"/>' } })
+      expect(resolveIcon('$close')).toMatchObject({ kind: 'svg' })
+      expect(resolveIcon('search')).toEqual({ kind: 'path', d: builtinIcons.search })
+    } finally {
+      delete config.icons.aliases.close
+    }
+    expect(resolveIcon('close')).toEqual({ kind: 'path', d: builtinIcons.close })
+  })
 })
