@@ -6,6 +6,7 @@ Read when: reviewing any diff.
 - [ ] Package boundaries hold: `core` imports nothing from Vue; add-ons import `@squirkle-ui/ui` / `@squirkle-ui/core` only via package names (never relative paths across packages) — see `.ai/ARCHITECTURE.md`.
 - [ ] Datagrid data logic lives in `packages/datagrid/src/engine.ts` (pure, tested), not in the `.vue` file.
 - [ ] No breaking change to a public prop/emit/slot without a note in the report.
+- [ ] A change to a publishable package (`packages/*`) has a `.changeset/*.md` (`pnpm changeset`; 0.x: `patch` = fix/addition, `minor` = breaking), or `pnpm changeset --empty` when it needs no release (ADR 0006).
 
 ## Vue 2.7 / Vue 3 dual build (most common defect source)
 - [ ] Single root element in every template (Vue 2 has no fragments).

@@ -10,6 +10,7 @@ Read when: adding/upgrading a dependency (CONFIRM per G4) or touching an integra
 | @vitejs/plugin-vue 6.0.10 / plugin-vue2 2.3.4 | SFC compilation | build | — | medium |
 | typescript 5.9.3, vue-tsc 3.3.13 | type-check + `.d.ts` emit in `scripts/build.mjs` | root | TS 7 not adopted | low |
 | vitest 3.2.7, happy-dom 20 | tests | root | — | low |
+| @changesets/cli 3.0.3 | changesets, version bumps, CHANGELOG (ADR 0006) | root (dev) | Node `^22.11 \|\| ^24 \|\| >=26`; `init` is interactive | low |
 | vue-router 4.6.4 | docs routing | apps/docs | — | low |
 | leaflet 1.9.4 | raster maps | @squirkle-ui/map (optional peer, lazy) | browser-only | medium |
 | maplibre-gl 6.15.0 | vector maps (default engine) | @squirkle-ui/map (optional peer + dev, lazy chunk ~800 kB) | browser-only; WebGL; worker file is not bundled → `setMapWorkerUrl` with a bundler `?url` (README); `optimizeDeps.exclude` as a safety net | medium |
