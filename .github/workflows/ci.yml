@@ -1,0 +1,68 @@
+# Checks every pull request and every push to main: tests, types, both library builds and every example app.
+# Pages (pages.yml) still builds and deploys the site on main; this workflow only reports pass/fail.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# A newer push to the same branch or PR cancels the run still in progress.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Nothing here pushes; don't leave the token in .git/config while install scripts run.
+          persist-credentials: false
+      # Version comes from `packageManager` in package.json.
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Test
+        run: pnpm test
+      - name: Typecheck
+        run: pnpm typecheck
+      # Vue 3 + Vue 2 builds and .d.ts for every package (examples need them).
+      - name: Build packages
+        run: pnpm build
+      # Every framework consumer: Vue 3, all-in-one, Vue 2 Vite + webpack, Nuxt 4/3/2.
+      - name: Build examples
+        run: pnpm examples:build
+
+  # A PR that changes a published package needs a .changeset/*.md (`pnpm changeset`).
+  changeset:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Full history, so the base branch is there to compare against.
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile
+      - name: Changeset present
+        # Branch name through env, never interpolated into the script.
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: pnpm changeset status --since="origin/$BASE_REF"

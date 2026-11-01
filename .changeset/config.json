@@ -1,0 +1,29 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@4.0.1/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "fixed": [
+    [
+      "@squirkle-ui/calendar",
+      "@squirkle-ui/charts",
+      "@squirkle-ui/core",
+      "@squirkle-ui/datagrid",
+      "@squirkle-ui/editor",
+      "@squirkle-ui/icons",
+      "@squirkle-ui/map",
+      "@squirkle-ui/nuxt",
+      "@squirkle-ui/swiper",
+      "@squirkle-ui/ui",
+      "squirkle-ui"
+    ]
+  ],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": [],
+  "privatePackages": {
+    "version": false,
+    "tag": false
+  }
+}

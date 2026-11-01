@@ -14,6 +14,8 @@ pnpm storybook        # Storybook 10, Vue 3 only (sources aliased) → :6006
 pnpm build [pkg…]     # dual Vue 2/3 library builds (scripts/build.mjs)
 pnpm test             # Vitest (packages/*/test)
 pnpm typecheck        # vue-tsc over packages + docs
+pnpm changeset        # record a package change (.changeset/*.md) — ADR 0006
+pnpm version-packages # user only: bump all packages together + CHANGELOG
 ```
 
 ## Guardrails (compact — full text: .ai/GUARDRAILS.md)

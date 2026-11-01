@@ -23,13 +23,16 @@ Read when: first task in a session, or any task touching build/scripts/packages.
 | `pnpm storybook` / `pnpm build:storybook` | Storybook 10 on :6006 (Vue 3, sources) / static build to `apps/storybook/storybook-static` | verified |
 | `pnpm typecheck` | vue-tsc over packages + docs | verified (0 errors) |
 | lint | none configured | UNKNOWN — no ESLint in repo |
+| `pnpm changeset` | write a `.changeset/*.md` for a package change (bump type + summary; ADR 0006) | verified 2026-11-01 |
+| `pnpm version-packages` | user only: `changeset version` → bumps all 11 packages together + `CHANGELOG.md` | verified via `changeset status` (version NOT RUN — user-only) |
+| CI | `.github/workflows/ci.yml` on every PR and push to `main`: test → typecheck → build → examples:build; PRs also need a changeset (`changeset status`) | verified locally (GitHub run NOT RUN) |
 | `node scripts/gen-index.mjs` | regenerate `packages/*/src/components/index.ts` after adding an SFC | verified |
 
 ## Constraints
 - Every SFC must compile for Vue 2.7 and Vue 3 (`.ai/CONVENTIONS.md`).
 - Publishing: npm, scope `@squirkle-ui` (npm org `squirkle-ui`, owner `kheanglov`; the `squirkle` org belongs to another account), npm 2FA (`auth-and-writes`) required to publish, `publishConfig.access: public`, internal deps `workspace:^` → `^x.y.z` on publish (ADR 0005). The agent never publishes or bumps versions (G3/G4); the user runs it.
 - Release check (agent may run): `node scripts/release.mjs` (build → `pnpm pack` per package into git-ignored `.release/` → prints `npm publish` commands, never runs them); install the tarballs in a scratch Vue 3 app (`vue-tsc` with `skipLibCheck: false` + `vite build`) and a Vue 2.7 app (`vite build`).
-- Release (user): bump versions (e.g. `pnpm -r --filter "./packages/*" exec npm pkg set version=0.1.1`) → `node scripts/release.mjs` → run the printed `npm publish .release/<tgz> --access public --otp=<code>` in order → check `npm view <pkg> readmeFilename`. Upload with `npm publish` (its tarball read includes the README); `pnpm publish` 0.1.0 reached npm without READMEs.
+- Release (user): `pnpm version-packages` (Changesets: every package moves to one new version, `CHANGELOG.md` written; ADR 0006) → commit straight to `main` (not via a PR: the release commit removes the changesets it consumed, so CI's PR-only changeset job would fail it) → `node scripts/release.mjs` → run the printed `npm publish .release/<tgz> --access public --otp=<code>` in order → check `npm view <pkg> readmeFilename`. Upload with `npm publish` (its tarball read includes the README); `pnpm publish` 0.1.0 reached npm without READMEs.
 - Nuxt 3/4 module: verified on Nuxt 4.6.2 and 3.21.11 (`examples/nuxt4`, `examples/nuxt3`: prod build, SSR HTML, hydration). Nuxt 2.18.1 module: verified (`examples/nuxt2`, standalone install: prod build, SSR HTML, hydration, editor, raster map; vector maps unsupported on webpack 4).
 
 Last synced: UNKNOWN (no commits yet — `/sync-ai` falls back to `git status`)

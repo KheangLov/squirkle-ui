@@ -17,9 +17,12 @@
     "examples:build": "node scripts/examples.mjs",
     "build:pages": "node scripts/pages.mjs",
     "test": "vitest run",
-    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+    "changeset": "changeset",
+    "version-packages": "changeset version"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vitejs/plugin-vue2": "^2.3.4",
     "@vue/test-utils": "^2.4.6",
