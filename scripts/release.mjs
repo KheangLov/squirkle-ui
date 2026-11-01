@@ -11,7 +11,7 @@ import { resolve } from 'node:path'
 const root = fileURLToPath(new URL('..', import.meta.url))
 const out = resolve(root, '.release')
 // Dependency order: a package is published only after everything it depends on.
-const ORDER = ['core', 'ui', 'datagrid', 'swiper', 'calendar', 'map', 'charts', 'icons', 'nuxt', 'squirkle-ui']
+const ORDER = ['core', 'ui', 'editor', 'datagrid', 'swiper', 'calendar', 'map', 'charts', 'icons', 'nuxt', 'squirkle-ui']
 
 execFileSync('node', [resolve(root, 'scripts/build.mjs')], { stdio: 'inherit' })
 rmSync(out, { recursive: true, force: true })
