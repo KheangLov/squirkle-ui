@@ -4,8 +4,7 @@
     class="sq-list-item sq-squircle"
     :class="{ 'sq-list-item--link sq-focusable': isLink, 'sq-list-item--active': isActive, 'sq-disabled': disabled, 'sq-list-item--two-line': !!subtitle }"
     :style="{ '--sq-c': colorValue(color) }"
-    :href="href"
-    :to="to"
+    v-bind="linkBindings"
     :type="tag === 'button' ? 'button' : undefined"
     :role="selectable ? 'option' : undefined"
     :aria-selected="selectable ? String(isActive) : undefined"
@@ -32,6 +31,7 @@ import SqIcon from './SqIcon.vue'
 import SqAvatar from './SqAvatar.vue'
 import { colorValue } from '../composables/style'
 import type { GroupContext } from '../composables/group'
+import { linkAttrs } from '../composables/link'
 
 export default defineComponent({
   name: 'SqListItem',
@@ -57,12 +57,13 @@ export default defineComponent({
     const isActive = computed(() => props.active ?? (selectable.value ? group!.isSelected(props.value) : false))
     const isLink = computed(() => props.link || !!props.href || !!props.to || selectable.value)
     const tag = computed(() => (props.to ? 'router-link' : props.href ? 'a' : isLink.value ? 'button' : 'div'))
+    const linkBindings = computed(() => linkAttrs(props.to, props.href))
     const onClick = (e: MouseEvent) => {
       if (props.disabled) return
       if (selectable.value) group!.toggle(props.value)
       emit('click', e)
     }
-    return { tag, isActive, isLink, selectable, onClick, colorValue, has: (n: string) => !!slots[n] }
+    return { tag, linkBindings, isActive, isLink, selectable, onClick, colorValue, has: (n: string) => !!slots[n] }
   },
 })
 </script>

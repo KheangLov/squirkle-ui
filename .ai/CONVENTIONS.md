@@ -14,6 +14,7 @@ Read when: writing or reviewing any component, composable or package code.
 - DOM-element props use `type: null as unknown as PropType<…>`. Ex: `activator` in `SqMenu.vue`.
 - Transition CSS lists both `-enter` and `-enter-from`. Ex: `packages/ui/src/styles/base.css`.
 - Extending a component: spread the SFC object and override props. Ex: `packages/ui/src/components/SqAutocomplete.vue`.
+- Components that render `router-link` / `<a>` bind links with `v-bind="linkAttrs(to, href)"` (`composables/link.ts`), never `:href` + `:to`: on Vue 3 an `href: undefined` falls through onto RouterLink's `<a>` and erases its href. Ex: `SqBtn.vue`, `SqBreadcrumbs.vue`; test: "router links keep their href" in `packages/ui/test/components.test.ts`.
 
 ## SSR safety
 - No timers, `document`/`window` access or network calls in `setup()` or immediate watchers — use `onMounted` or guard with `isBrowser`. Ex: clock in `packages/calendar/src/SqCalendar.vue`.

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { SqAutocomplete, SqDateTimePicker, SqNumberInput, SqSelect, SqTextarea, SqTextField, addIcons, builtinIcons, config, resolveIcon } from '../src'
+import { defineComponent, h } from 'vue'
+import { SqAutocomplete, SqBreadcrumbs, SqBtn, SqCard, SqDateTimePicker, SqListItem, SqNumberInput, SqSelect, SqTextarea, SqTextField, addIcons, builtinIcons, config, resolveIcon } from '../src'
 
 describe('SqSelect', () => {
   it('shows the placeholder when nothing is selected (non-searchable)', () => {
@@ -62,5 +63,46 @@ describe('resolveIcon', () => {
       delete config.icons.aliases.close
     }
     expect(resolveIcon('close')).toEqual({ kind: 'path', d: builtinIcons.close })
+  })
+})
+
+// Stands in for vue-router's RouterLink: renders <a> with the href it resolves from `to`. Like the real
+// one, it leaves fallthrough attrs on that <a>, so a parent binding `href: undefined` would erase it.
+const RouterLinkStub = defineComponent({
+  name: 'RouterLink',
+  props: { to: { type: [String, Object], required: true } },
+  setup(props, { slots }) {
+    return () => h('a', { href: typeof props.to === 'string' ? props.to : '/resolved' }, slots.default?.())
+  },
+})
+const withRouter = { global: { components: { 'router-link': RouterLinkStub } } }
+
+describe('router links keep their href', () => {
+  const cases = [
+    ['SqBtn', SqBtn],
+    ['SqCard', SqCard],
+    ['SqListItem', SqListItem],
+  ] as const
+  for (const [name, component] of cases) {
+    it(`${name} with to renders the router's href`, () => {
+      const w = mount(component, { props: { to: '/courses' }, ...withRouter })
+      expect(w.element.tagName).toBe('A')
+      expect(w.attributes('href')).toBe('/courses')
+    })
+    it(`${name} with href renders a plain link`, () => {
+      const w = mount(component, { props: { href: 'https://example.com' }, ...withRouter })
+      expect(w.element.tagName).toBe('A')
+      expect(w.attributes('href')).toBe('https://example.com')
+    })
+    it(`${name} without to or href has no href`, () => {
+      const w = mount(component, withRouter)
+      expect(w.attributes('href')).toBeUndefined()
+    })
+  }
+  it('SqBreadcrumbs gives each item the right href', () => {
+    const items = [{ title: 'Home', to: '/' }, { title: 'Docs', href: '/docs' }, { title: 'Here' }]
+    const w = mount(SqBreadcrumbs, { props: { items }, ...withRouter })
+    const links = w.findAll('.sq-breadcrumbs__link')
+    expect(links.map((link) => link.attributes('href'))).toEqual(['/', '/docs', undefined])
   })
 })
