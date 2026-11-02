@@ -4,8 +4,7 @@
     class="sq-btn sq-surface sq-interactive sq-focusable"
     :class="classes"
     :style="style"
-    :href="href"
-    :to="to"
+    v-bind="linkBindings"
     :type="tag === 'button' ? type : undefined"
     :disabled="tag === 'button' ? isDisabled : undefined"
     :aria-disabled="isDisabled ? 'true' : undefined"
@@ -30,6 +29,7 @@ import SqIcon from './SqIcon.vue'
 import SqProgressCircular from './SqProgressCircular.vue'
 import { colorProp, elevationVars, radiusValue, roundedProp, sizeProp, variantProp, variantVars } from '../composables/style'
 import { useGroupItem, type GroupContext } from '../composables/group'
+import { linkAttrs } from '../composables/link'
 
 export default defineComponent({
   name: 'SqBtn',
@@ -62,6 +62,7 @@ export default defineComponent({
     const isActive = computed(() => props.active ?? groupItem?.isSelected.value ?? false)
     const isDisabled = computed(() => props.disabled || !!groupItem?.group?.disabled.value)
     const tag = computed(() => (props.to ? 'router-link' : props.href ? 'a' : 'button'))
+    const linkBindings = computed(() => linkAttrs(props.to, props.href))
     const iconName = computed(() => (typeof props.icon === 'string' ? props.icon : undefined))
     const style = computed(() => ({
       ...variantVars(props.variant, props.color),
@@ -84,7 +85,7 @@ export default defineComponent({
       groupItem?.toggle()
       emit('click', e)
     }
-    return { tag, style, classes, iconName, isActive, isDisabled, toggleable, onClick }
+    return { tag, linkBindings, style, classes, iconName, isActive, isDisabled, toggleable, onClick }
   },
 })
 </script>

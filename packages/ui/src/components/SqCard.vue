@@ -4,8 +4,7 @@
     class="sq-card sq-surface"
     :class="{ 'sq-card--hover': hover || !!href || !!to || link, 'sq-interactive': hover || !!href || !!to || link, 'sq-card--flat': variant === 'flat', 'sq-disabled': disabled }"
     :style="style"
-    :href="href"
-    :to="to"
+    v-bind="linkBindings"
     :tabindex="link ? 0 : undefined"
     @click="$emit('click', $event)"
   >
@@ -32,6 +31,7 @@ import SqShape from './SqShape.vue'
 import SqIcon from './SqIcon.vue'
 import SqProgressLinear from './SqProgressLinear.vue'
 import { colorValue, elevationVars, radiusValue, roundedProp } from '../composables/style'
+import { linkAttrs } from '../composables/link'
 
 export default defineComponent({
   name: 'SqCard',
@@ -56,6 +56,7 @@ export default defineComponent({
   emits: ['click'],
   setup(props, { slots }) {
     const tag = computed(() => (props.to ? 'router-link' : props.href ? 'a' : 'div'))
+    const linkBindings = computed(() => linkAttrs(props.to, props.href))
     const style = computed(() => {
       const c = colorValue(props.color)
       const base: Record<string, string | undefined> = { '--sq-r': radiusValue(props.rounded) }
@@ -66,7 +67,7 @@ export default defineComponent({
       if (props.elevation != null && props.variant !== 'elevated') Object.assign(base, elevationVars(props.elevation))
       return base
     })
-    return { tag, style, has: (n: string) => !!slots[n] }
+    return { tag, linkBindings, style, has: (n: string) => !!slots[n] }
   },
 })
 </script>

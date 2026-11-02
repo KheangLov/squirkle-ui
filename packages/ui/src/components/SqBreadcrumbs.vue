@@ -2,7 +2,7 @@
   <nav class="sq-breadcrumbs" aria-label="Breadcrumb">
     <ol>
       <li v-for="(item, i) in items" :key="i" class="sq-breadcrumbs__item">
-        <component :is="item.to ? 'router-link' : item.href ? 'a' : 'span'" :to="item.to" :href="item.href" class="sq-breadcrumbs__link" :class="{ 'sq-breadcrumbs__link--active': i === items.length - 1 || item.disabled }" :aria-current="i === items.length - 1 ? 'page' : undefined">
+        <component :is="item.to ? 'router-link' : item.href ? 'a' : 'span'" v-bind="linkAttrs(item.to, item.href)" class="sq-breadcrumbs__link" :class="{ 'sq-breadcrumbs__link--active': i === items.length - 1 || item.disabled }" :aria-current="i === items.length - 1 ? 'page' : undefined">
           <SqIcon v-if="item.icon" :icon="item.icon" size="16px" />{{ item.title }}
         </component>
         <span v-if="i < items.length - 1" class="sq-breadcrumbs__divider" aria-hidden="true"><SqIcon v-if="divider === 'chevron'" icon="chevronRight" size="16px" /><template v-else>{{ divider }}</template></span>
@@ -14,6 +14,7 @@
 <script lang="ts">
 import { defineComponent, type PropType } from 'vue'
 import SqIcon from './SqIcon.vue'
+import { linkAttrs } from '../composables/link'
 
 export interface BreadcrumbItem { title: string; href?: string; to?: string | object; icon?: string; disabled?: boolean }
 
@@ -24,6 +25,7 @@ export default defineComponent({
     items: { type: Array as PropType<BreadcrumbItem[]>, default: () => [] },
     divider: { type: String, default: 'chevron' },
   },
+  setup: () => ({ linkAttrs }),
 })
 </script>
 
