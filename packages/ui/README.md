@@ -106,5 +106,15 @@ theme.reset()
 </template>
 ```
 
+## Public API and versioning
+From 1.0.0, semver covers the root exports of each `@squirkle-ui/*` package:
+- Import by name (`import { SqBtn, createSquirkle } from '@squirkle-ui/ui'`). Default exports exist, but named imports are the documented form.
+- Import each package's stylesheet explicitly (`import '@squirkle-ui/ui/styles.css'`).
+- `componentNames`, exported by every add-on, is public: the components that package registers (the Nuxt module uses it).
+
+Not covered by semver, and they may change in any release:
+- `./dist/types/*` subpaths. The build uses them for cross-package types; import types from the package root.
+- Add-on plumbing exported by `@squirkle-ui/ui`: `useProxiedModel`, `vModel`, `useUid`, `colorValue`, `onColorValue`, `radiusValue`, `variantVars`, `elevationVars`, `computePosition`, `nextZIndex`, `lockScroll`, `unlockScroll`, `iconStoreVersion`, `isVue2`.
+
 ## License
 MIT © KheangLov · [Source and issues](https://github.com/KheangLov/squirkle-ui)

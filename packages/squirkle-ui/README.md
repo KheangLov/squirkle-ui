@@ -143,5 +143,8 @@ The Nuxt module does this for you.
 ## Separate packages
 Prefer smaller installs? Every part is also published on its own: [`@squirkle-ui/ui`](https://www.npmjs.com/package/@squirkle-ui/ui), [`@squirkle-ui/core`](https://www.npmjs.com/package/@squirkle-ui/core), [`@squirkle-ui/datagrid`](https://www.npmjs.com/package/@squirkle-ui/datagrid), [`@squirkle-ui/charts`](https://www.npmjs.com/package/@squirkle-ui/charts), [`@squirkle-ui/swiper`](https://www.npmjs.com/package/@squirkle-ui/swiper), [`@squirkle-ui/calendar`](https://www.npmjs.com/package/@squirkle-ui/calendar), [`@squirkle-ui/map`](https://www.npmjs.com/package/@squirkle-ui/map), [`@squirkle-ui/icons`](https://www.npmjs.com/package/@squirkle-ui/icons), [`@squirkle-ui/editor`](https://www.npmjs.com/package/@squirkle-ui/editor), [`@squirkle-ui/nuxt`](https://www.npmjs.com/package/@squirkle-ui/nuxt).
 
+## Public API and versioning
+From 1.0.0, semver covers the root exports of `squirkle-ui` and its add-on entries (`squirkle-ui/<addon>`). The same rules as the separate packages apply: named imports, explicit `styles.css` imports, `componentNames` public, and internal helpers excluded. See [the `@squirkle-ui/ui` README](https://www.npmjs.com/package/@squirkle-ui/ui#public-api-and-versioning).
+
 ## License
 MIT © KheangLov · [Source and issues](https://github.com/KheangLov/squirkle-ui)
