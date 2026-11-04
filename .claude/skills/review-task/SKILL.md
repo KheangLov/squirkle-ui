@@ -1,8 +1,9 @@
 ---
 name: review-task
-description: Code review of a task's diff against its approved prompt and .ai/CODE_REVIEW.md. Runs the `code-reviewer` subagent in a fresh context; report only.
-argument-hint: [slug]
+description: Independent adversarial code review of a finished task's diff by the code-reviewer subagent (includes the G12 security pass).
+argument-hint: "[slug]"
+model: sonnet
+effort: low
 ---
-Slug: $ARGUMENTS (empty → newest file in `.ai/tasks/`).
-
-Launch the `code-reviewer` subagent (`.claude/agents/code-reviewer.md`) with the task file path `.ai/tasks/<slug>.md`. Relay its findings table and verdict. Its output is never approval (G2); fixes go through `/task` → STOP → `go`.
+Slug: $ARGUMENTS (empty = newest .ai/tasks/ file). Launch the code-reviewer agent with the slug (and the commit, if the work is committed).
+The agent is read-only: append its 3–5 line summary under ## Checks in the task file yourself. Show its verdict and BLOCKER/MAJOR findings only. Never fix anything here.

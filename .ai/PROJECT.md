@@ -1,38 +1,89 @@
-# PROJECT
-Purpose: what Squirkle UI is, its stack, entry points and verified commands.
-Read when: first task in a session, or any task touching build/scripts/packages.
+# Project
 
-- **What**: squircle-first Vue component library + add-ons, inspired by Vuetify (component breadth), with an enterprise data grid. App type: library monorepo with a docs/playground app.
-- **Stack**: TypeScript 5.9, Vue SFCs (`defineComponent` + `setup()`, templates), Vite 7 library mode, pnpm 11 workspaces, Vitest 3 + happy-dom, vue-tsc 3. Node ≥ 20.19 (`package.json` engines).
-- **Targets**: Vue 3.3+ (`@squirkle-ui/<pkg>`), Vue 2.7 (`@squirkle-ui/<pkg>/vue2`), Nuxt 3/4 (`@squirkle-ui/nuxt`), Nuxt 2.17 (`@squirkle-ui/nuxt/nuxt2`).
-- **Packages**: `squirkle-ui` (all-in-one re-export package), `core` (framework-free), `ui` (88 components), `datagrid`, `charts`, `swiper`, `calendar`, `map` (Leaflet peer), `icons`, `editor` (Tiptap), `nuxt`. Apps: `apps/docs` (Vue 3 docs + playground), `apps/storybook` (Storybook 10, Vue 3), `examples/*` (one consumer app per framework: Vue 3 Vite, all-in-one, Vue 2.7 Vite, Vue 2.7 Vue CLI 5, Nuxt 4/3/2).
-- **Entry points**: `packages/<pkg>/src/index.ts`; plugin `packages/ui/src/plugin.ts` (`createSquirkle`); docs `apps/docs/src/main.ts`; Nuxt `packages/nuxt/src/module.mjs`, `packages/nuxt/src/nuxt2.cjs`.
+**Purpose:** facts about this codebase: stack, commands, structure, architecture, data flow, integrations, tests. **Read when:** a task needs a fact not in its task file; read only the matching section.
 
-## Commands (verified 2026-10-24)
-| Command | What | Status |
-|---|---|---|
-| `pnpm install` | install workspace | verified |
-| `pnpm dev` | docs on http://localhost:5180 (sources aliased via `build/aliases.ts`) | verified |
-| `pnpm dev:vue2` | `examples/vue2-vite` on :5181, uses `dist/vue2` (run `pnpm build` first) | verified |
-| `pnpm build [pkg…]` | `scripts/build.mjs`: core → ui → add-ons, each Vue 3 + Vue 2 + `dist/types` | verified |
-| `pnpm dev:nuxt` | `examples/nuxt4` on :5182 (built dist; `pnpm --filter @squirkle-ui/example-nuxt4 build` for prod) | verified |
-| `pnpm build:pages` | builds packages, docs, Storybook and every example with sub-path bases and assembles `_site/` (`PAGES_BASE`, default `/squirkle-ui/`); deployed by `.github/workflows/pages.yml` | verified locally (CI run NOT RUN) |
-| `pnpm examples:build [name…]` | builds every `examples/*` app against built packages; fails if a Showcase copy drifts | verified (all 7; `nuxt2` is installed in place with its own lockfile) |
-| `pnpm build:docs` | production docs build | verified |
-| `pnpm test` | Vitest, `packages/*/test/**/*.test.ts` (47 tests) | verified |
-| `pnpm storybook` / `pnpm build:storybook` | Storybook 10 on :6006 (Vue 3, sources) / static build to `apps/storybook/storybook-static` | verified |
-| `pnpm typecheck` | vue-tsc over packages + docs | verified (0 errors) |
-| lint | none configured | UNKNOWN — no ESLint in repo |
-| `pnpm changeset` | write a `.changeset/*.md` for a package change (bump type + summary; ADR 0006) | verified 2026-11-01 |
-| `pnpm version-packages` | user only: `changeset version` → bumps all 11 packages together + `CHANGELOG.md` | verified via `changeset status` (version NOT RUN — user-only) |
-| CI | `.github/workflows/ci.yml` on every PR and push to `main`: test → typecheck → build → examples:build; PRs also need a changeset (`changeset status`) | verified locally (GitHub run NOT RUN) |
-| `node scripts/gen-index.mjs` | regenerate `packages/*/src/components/index.ts` after adding an SFC | verified |
+## Summary
+Squirkle UI is a squircle-first Vue component library published as `@squirkle-ui/*`. One source tree compiles to a Vue 3 build and a Vue 2.7 build; a Nuxt module (Nuxt 2/3/4) registers it. No backend, auth, database or payments.
 
-## Constraints
-- Every SFC must compile for Vue 2.7 and Vue 3 (`.ai/CONVENTIONS.md`).
-- Publishing: npm, scope `@squirkle-ui` (npm org `squirkle-ui`, owner `kheanglov`; the `squirkle` org belongs to another account), npm 2FA (`auth-and-writes`) required to publish, `publishConfig.access: public`, internal deps `workspace:^` → `^x.y.z` on publish (ADR 0005). The agent never publishes or bumps versions (G3/G4); the user runs it.
-- Release check (agent may run): `node scripts/release.mjs` (build → `pnpm pack` per package into git-ignored `.release/` → prints `npm publish` commands, never runs them); install the tarballs in a scratch Vue 3 app (`vue-tsc` with `skipLibCheck: false` + `vite build`) and a Vue 2.7 app (`vite build`).
-- Release (user): `pnpm version-packages` (Changesets: every package moves to one new version, `CHANGELOG.md` written; ADR 0006) → commit straight to `main` (not via a PR: the release commit removes the changesets it consumed, so CI's PR-only changeset job would fail it) → `node scripts/release.mjs` → run the printed `npm publish .release/<tgz> --access public --otp=<code>` in order → check `npm view <pkg> readmeFilename`. Upload with `npm publish` (its tarball read includes the README); `pnpm publish` 0.1.0 reached npm without READMEs.
-- Nuxt 3/4 module: verified on Nuxt 4.6.2 and 3.21.11 (`examples/nuxt4`, `examples/nuxt3`: prod build, SSR HTML, hydration). Nuxt 2.18.1 module: verified (`examples/nuxt2`, standalone install: prod build, SSR HTML, hydration, editor, raster map; vector maps unsupported on webpack 4).
+## Stack
+- pnpm `11.10.0` (`package.json` packageManager), Node `>=20.19` (CI uses Node 24, `.github/workflows/ci.yml`).
+- Vue `^3.5.0` plus Vue `2.7.16` via the `vue2` alias; Vite `^7.1.0`; TypeScript `~5.9.0` with vue-tsc 3; Vitest `^3.2.0` + happy-dom + `@vue/test-utils`.
+- Storybook 10 (`apps/storybook/package.json`); Nuxt 4.6.2 (`examples/nuxt4/package.json`) and 2.18.1 (`examples/nuxt2/package.json`); `@nuxt/kit` 4 in `packages/nuxt/package.json`.
+- Add-on libraries: Tiptap (editor), MapLibre + Leaflet (map), Iconify (icons).
+- Workspaces: `pnpm-workspace.yaml` (packages, apps, examples; `examples/nuxt2` excluded).
 
-Last synced: UNKNOWN (no commits yet — `/sync-ai` falls back to `git status`)
+## Commands (verified against package scripts)
+| Command | Does |
+| --- | --- |
+| `pnpm install` | install the workspace |
+| `pnpm dev` | docs + playground (`apps/docs`), Vue 3, sources aliased, port 5180 |
+| `pnpm dev:vue2` | `examples/vue2-vite` on built dist (run `pnpm build` first), port 5181 |
+| `pnpm dev:nuxt` | `examples/nuxt4` SSR on built dist, port 5182 |
+| `pnpm storybook` | Storybook, Vue 3, sources aliased, port 6006 |
+| `pnpm build` | `node scripts/build.mjs`: dual builds in order core → ui → add-ons |
+| `pnpm build:docs` / `pnpm build:storybook` | static docs / Storybook builds |
+| `pnpm examples:build` | `node scripts/examples.mjs`: build every example |
+| `pnpm build:pages` | `node scripts/pages.mjs`: GitHub Pages site into `_site/` |
+| `pnpm test` | `vitest run` |
+| `pnpm typecheck` | `vue-tsc --noEmit -p tsconfig.json` |
+| `pnpm changeset` | record a package change in `.changeset/` |
+| `pnpm version-packages` | user only: `changeset version` |
+
+Scoped test (UNVERIFIED form): `pnpm vitest run packages/ui/test/components.test.ts --reporter=dot`. No lint or format script.
+
+## Structure (important paths only)
+| Path | Purpose | Notes / risks |
+| --- | --- | --- |
+| `packages/core` | framework-free squircle geometry, theme CSS, color, dates, utils | no Vue imports |
+| `packages/ui` | `Sq*` components, plugin, composables, tokens | `packages/ui/src/components/index.ts` re-exports every component |
+| `packages/ui/src/composables` | style, group, model, field, validation, overlay, link, theme helpers | reuse before adding |
+| `packages/ui/src/styles` | `tokens.css`, `base.css` (squircle surface), utilities | token source |
+| `packages/ui/vue2` | Vue 2 subpath entry (dist/vue2) | generated by the build |
+| `packages/datagrid`, `packages/swiper`, `packages/calendar`, `packages/map`, `packages/charts`, `packages/icons`, `packages/editor` | add-ons | depend on ui + core only |
+| `packages/squirkle-ui` | umbrella re-export of every package | |
+| `packages/nuxt` | Nuxt 2/3/4 module (`packages/nuxt/src/module.mjs`, `packages/nuxt/src/nuxt2.cjs`) | injects theme CSS into head (G12) |
+| `build/aliases.ts`, `build/vite.lib.mjs` | source aliases for tests/docs/typecheck; shared library Vite config | |
+| `scripts/` | build, examples, pages, release, gen-index | release only prints the publish command (G12) |
+| `apps/docs` | docs + playground (`apps/docs/src/router.ts`, `apps/docs/src/registry.ts`) | |
+| `apps/storybook` | stories per category in `apps/storybook/stories` | coverage test needs a story per component |
+| `examples/` | one consumer app per framework, on built dist | |
+| `.changeset/` | Changesets, one fixed group for all packages | CI requires a changeset per PR |
+
+## Architecture and boundaries
+- Dependency direction: core (no Vue) ← ui (components, plugin, composables, tokens) ← add-ons (import ui + core by package name only) ← nuxt (Node-side module) ← apps and examples (consumers).
+- ui never imports an add-on; add-ons never import each other.
+- Cross-package imports use package names; `build/aliases.ts` maps them to sources for docs, tests and typecheck. Never import from `dist`.
+- Build model: the same src folder compiles twice, dist/vue3 with `@vitejs/plugin-vue` and dist/vue2 with `@vitejs/plugin-vue2` (target es2019 for webpack 4); see `build/vite.lib.mjs` and `scripts/build.mjs`.
+
+## Data flow
+- core: pure TS (squircle paths, theme → CSS variables).
+- ui: components read config from the plugin (`packages/ui/src/config.ts`), render squircle surfaces via CSS or `SqShape` SVG.
+- add-ons: build on ui components and core utils.
+- nuxt: registers components and injects theme CSS at SSR.
+- apps/examples: consume sources (docs, Storybook) or built dist (examples).
+
+## Features
+- About 90 `Sq*` components (buttons, forms, date/time pickers, feedback, layout, content, utility): `.ai/DESIGN_SYSTEM.md` Components.
+- Themes: light/dark presets, brand theme generation, appearance (font, radius scale, smoothing) in `packages/core/src/theme.ts`.
+- Add-ons: data grid, carousel, calendar, maps (vector + raster, markers, clustering), SVG charts, Iconify icon picker, Tiptap editor.
+
+## Integrations and env var names
+- No `.env.example`; no env vars used.
+- Iconify API: `packages/ui/src/icons.ts:98`, host from `config.icons.api` (default in `packages/ui/src/config.ts:70`; `false` disables).
+- Map tiles and styles: `packages/map/src/adapters.ts:45-51` (CARTO, OpenFreeMap), `tileUrl` prop default OSM (`packages/map/src/SqMap.vue:50`).
+- Google Fonts in `apps/docs/index.html`.
+
+## Dependencies to know (purpose, constraints)
+- `vue2` alias (`npm:vue@2.7.16`) builds the Vue 2 output; never upgrade it past 2.7.
+- `@changesets/cli` with one fixed version group for all 11 packages (`.changeset/config.json`).
+- `maplibre-gl` is loaded with a dynamic import (`packages/map/src/adapters.ts:64`).
+- `pnpm-workspace.yaml` allowBuilds: esbuild only.
+
+## Testing
+- Vitest config `vitest.config.ts` (includes `packages/*/test/**/*.test.ts`), aliases from `build/aliases.ts`, happy-dom environment.
+- Tests in `packages/ui/test` (components, surface, storybook-coverage) and one folder per add-on.
+- CI (`.github/workflows/ci.yml`): frozen install → test → typecheck → build → examples:build; PRs also run `pnpm changeset status`.
+
+## Performance notes (evidence only)
+- Virtualized rendering exists (`SqVirtualScroll`, data grid engine `packages/datagrid/src/engine.ts`); reuse them for long lists.
+- No measured performance budgets recorded.

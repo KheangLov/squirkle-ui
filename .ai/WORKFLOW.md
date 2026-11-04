@@ -1,58 +1,71 @@
-# WORKFLOW
-Purpose: the phase rules for every implementation task. How to write the prompt lives in `.ai/PROMPT_ENGINEERING.md`.
-Read when: any task that changes code.
+# Workflow
 
-```
-TASK → CONTEXT → ANALYSIS → IMPLEMENTATION PROMPT (+ self-review)
-→ IMPLEMENTATION PLAN → CONFIDENCE → STOP → GO
-→ IMPLEMENT → TEST → REVIEW → DOCUMENT (+ prompt lessons) → REPORT
-```
+**Purpose:** modes, phases 0–10, token rules, model routing, splitting, git check. **Read when:** starting or resuming any task.
 
-## Phase 1 — Analysis
-- Restate the task in one precise sentence.
-- Read `.ai/CONTEXT_MAP.md`, then only the files it points to (`.ai/TOKEN_BUDGET.md`).
-- Identify affected packages, files, patterns, constraints, deps, risks, tests. Always ask: does this change behave the same under the Vue 2.7 build? (`.ai/CONVENTIONS.md` § Vue 2/3 compatibility)
-- Pick the tier S / M / L (`.ai/PROMPT_ENGINEERING.md` § J) and state it with a one-line reason; decide whether an ADR is needed.
-- Blocking open question → ask now instead of guessing.
+## Modes (Phase 0 picks one)
+| Mode | When | Flow |
+| --- | --- | --- |
+| Direct | a question; a command the user named; one file, 20 changed lines or fewer, no behavior/API/state change; or `/quick` and nothing below applies | do it, show the diff; no prompt or plan |
+| Light | 1–3 files, a clear behavior change | Role, Objective, Files, Changes, Acceptance + confidence → STOP |
+| Full | 4+ files, a feature, an API/state/data-flow change, any G12 path, a dependency or security config | full template (TASK_CONTRACT) → STOP |
+| Split | more than 8 files or 400 changed lines; separately testable layers; task file over 200 lines | parent plan, then each subtask in its own mode |
 
-## Phase 2 — Implementation prompt
-Per `.ai/PROMPT_ENGINEERING.md`, based only on the request, real source, `.ai/` knowledge and existing patterns. Never invent files, APIs, components, tokens or behavior. Run the Prompt Self-Review before showing it.
+Direct work that grows past Direct → stop, say why in one line, switch to Light. Never shrink a description to dodge the gate.
 
-## Phase 3 — Implementation plan
-Template H in `.ai/PROMPT_ENGINEERING.md`.
+## Phases
+0. **Route** — rate complexity (Trivial · Simple · Medium · Complex), pick mode and tiers (Routing), print one line: `Route: medium · Full · writer → <writer> · implement → claude BUILD · checks → REVIEW + CHECK`. Handoff chosen → give the writer command (TASK_CONTRACT) and stop. Tier too low → print the escalation line and wait.
+1. **Analyze** — restate the task in one sentence; read CONTEXT_MAP, then only routed sections; find affected files, patterns and declarations to reuse; ask blocking questions now.
+2. **Prompt** — write it per TASK_CONTRACT into `.ai/tasks/<YYYY-MM-DD>-<slug>.md`; never invent files, APIs, tokens or behavior; run the Quality Check.
+3. **Plan** — steps, `files_to_read` with line ranges, `implement_tier`.
+4. **Confidence** — a number with evidence (paths read, commands run) and every open question; a blocking question caps it below 75%.
+5. **STOP** — no code until the approval word (GUARDRAILS G2).
+6. **Execute** — `status: in-progress`; record `approved_hash` (TASK_CONTRACT seal); implement exactly the approved scope; tests, typecheck, lint, build; log files read and commands run.
+7. **Review** — CONVENTIONS checklist on your own diff; fix what it finds. G12 paths: security pass.
+   Complexity medium or complex → `/check-all <slug>` after your own review; its rows go under `## Checks`; not run → a `NOT RUN` row with the reason.
+8. **Document** — update `.ai/` only when structure, boundaries, data flow, security, integrations, tokens or workflow changed; decisions go to the repo's decision log (none → create `DECISIONS.md` in `.ai/`); add a Prompt Lesson when a prompt caused rework.
+9. **Report** — `status: done`; a table: summary, files, check results, `.ai/` updates, risks, tiers used, Metrics; then the installed check commands with the slug filled.
+10. **Git check** — read-only `git status -sb`, `git diff --stat`, `git log --oneline -5`; one table (6 rows max) flagging the default branch, files outside the plan, secret-like or build files; ask commit / new branch / leave; wait.
 
-## Phase 4 — Confidence
-| Score | Meaning |
-|---|---|
-| 100% | fully verified |
-| 90–99% | very clear, minor uncertainty |
-| 75–89% | mostly understood |
-| 50–74% | important uncertainty |
-| 1–49% | insufficient understanding |
-Never inflate. Below 75%, list what would raise it.
+**Plan change before approval:** revise prompt and plan, re-run the Quality Check and confidence, STOP again. **After approval:** a discovery that breaks the plan → STOP with what changed and new confidence; recommend escalation; wait.
 
-## Phase 5 — STOP
-After prompt + plan + confidence: STOP. No code changes, no partial implementation.
-Accepted approval: `go`, `GO`, `go ahead`, `approved`, `proceed`. Unclear → ask for explicit `go`. Accepting a plan in plan mode counts only if the user also says `go`.
+**Split:** parent plan `.ai/tasks/<date>-<slug>-plan.md` (40 lines max) with 2–5 subtasks, each shippable alone with its `depends_on`; one task file, session, approval and git check per subtask; `/clear` between them.
 
-## Phase 6 — Execute
-Only after `go`: save prompt + plan to `.ai/tasks/<YYYY-MM-DD>-<slug>.md`, re-check assumptions, implement exactly the approved scope, then run `pnpm test`, `pnpm typecheck`, and `pnpm build` when a package's public surface or build config changed (commands in `.ai/PROJECT.md`).
+## Token rules
+- Before each read, name the question it answers. Search with line numbers, then read about 60 lines around the hit; whole files only at 300 lines or fewer when most of it is needed.
+- Never re-read an unchanged file; never read lockfiles, build output, coverage, snapshots or minified files.
+- Search subagents only for sweeps across many directories; they return conclusions and `file:line`, never dumps.
+- Diffs: `--stat` first, then only the paths you must inspect. Tests: scoped first, quiet reporter, read only failures.
+- No restating the task, no echoing files, no narration; `N/A — <reason>` for template sections that don't apply.
+- One task per session; `/clear` between unrelated tasks; resume from the task file, not by re-analysis. Prefer `/sync-ai` over full re-analysis.
+- A model switch drops the prompt cache: switch only between phases or sessions.
+- Handed-off tasks: Claude reads only the task file and `files_to_read`; a missing fact → STOP and list it for the writer.
 
-## Phase 7 — Code review
-Review against `.ai/CODE_REVIEW.md`. Fix what it finds.
+## Routing (tiers)
+| Tier | Used for | Claude (`model` / `effort`) | Writer |
+| --- | --- | --- | --- |
+| PLAN-HIGH | complex prompts, migrations, architecture | opus / high | gpt-6-luna / medium (Codex CLI) |
+| PLAN | medium prompts, analysis, docs | opus / medium | gpt-6-luna / medium (Codex CLI) |
+| BUILD | implementing an approved task | sonnet / medium | — |
+| BUILD-SECURE | implementing a G12-path task | opus / medium (high in profile `high`) | — |
+| BUILD-LOW | Direct, `/sync-ai`, reports | sonnet / low | — |
+| REVIEW | code-reviewer | sonnet / high (opus / high for G12 in profile `high`) | — |
+| CHECK | test-verifier, visual-tester | sonnet / low | — |
 
-## Phase 8 — Documentation
-Update `.ai/` only when architecture, boundaries, package structure, data flow, security, performance, integrations, dependency strategy, workflow, tokens or components changed. New/changed component → update `.ai/COMPONENTS.md` and the docs page in `apps/docs/src/pages/`. Record Prompt Lessons and confirmed Figma mappings. ADR only for meaningful architectural decisions.
+| Complexity | Prompt written by | Implement | Checks |
+| --- | --- | --- | --- |
+| Trivial | Claude, Direct | BUILD-LOW | none |
+| Simple | Claude (writer if Claude's budget is tight) | BUILD | CHECK |
+| Medium | writer, PLAN | BUILD (BUILD-SECURE on G12) | REVIEW + CHECK |
+| Complex | writer, PLAN-HIGH | BUILD; PLAN for migrations | REVIEW + CHECK |
 
-## Phase 9 — Final report
-Compact table: summary, files changed, tests/validation, review, `.ai/` updates, prompt lessons, ADR, remaining risks. Then end with the next check for the task's tier (`.ai/PROMPT_ENGINEERING.md` § J; slug filled):
-- S: none required — state that tests/typecheck ran (or `N/A — no code`) and the CODE_REVIEW self-check passed.
-- M: `/review-task <slug>` (one agent); add `/visual-test <slug>` when `.vue`/`.css` changed.
-- L: `/check-all <slug>` (all agents in parallel).
-The user may run any check on any tier; never skip one they ask for.
+Escalation line (skills can't switch their own tier): `Route: complex → run /task after /model opus and /effort high, or hand off to <writer>`. Never claim a switch that didn't happen. Escalate on a Scope Protection STOP, two failed fix loops or confidence below 75%.
 
-## Plan modification (before `go`)
-Update prompt → re-run self-review → update plan → recalculate confidence → show the revision → STOP again.
-
-## Scope protection (after `go`)
-A discovery that invalidates the plan → STOP: what was found, why the plan no longer holds, what must change, new confidence. Wait for `go`. Record a Prompt Lesson if it was knowable during analysis.
+## Cheat sheet
+| I want to… | Do |
+| --- | --- |
+| fix a typo or tweak one style | `/quick <request>` |
+| plan a change | `/task <request>` → review → type the approval word |
+| implement a writer's task file | `/implement <slug>` → review → approval word, or `/implement <slug> go` (one-step, GUARDRAILS G2-1) |
+| check finished work | `/check-all <slug>` |
+| build a screen from Figma | `/figma-ui <url>` |
+| refresh the docs | `/sync-ai` |

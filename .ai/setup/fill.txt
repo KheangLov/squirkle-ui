@@ -1,0 +1,271 @@
+=== AGENTS.md PROJECT_NAME
+Squirkle UI
+=== AGENTS.md ONE_LINE_SUMMARY
+Squircle-first Vue component library: one source compiled to Vue 2.7 and Vue 3 builds plus a Nuxt 2/3/4 module, in a pnpm monorepo (`packages/` libraries, `apps/docs`, `apps/storybook`, `examples/` one app per framework).
+=== AGENTS.md EXISTING_PRECEDENCE
+The preserved block below (from the previous `CLAUDE.md`) wins over this kit where they conflict, until the user decides (`.ai/CONTEXT_MAP.md` Known drift).
+=== AGENTS.md COMMANDS
+- `pnpm install` — install the workspace (lockfile changes need G4-2 confirmation)
+- `pnpm dev` — docs + playground, Vue 3, sources aliased, port 5180
+- `pnpm test` — Vitest over `packages/*/test`
+- `pnpm typecheck` — vue-tsc over packages + docs
+- `pnpm build` — dual Vue 2/3 library builds (`scripts/build.mjs`)
+- `pnpm examples:build` — build every app in `examples/` (Vue 3, Vue 2 Vite + webpack, Nuxt 2/3/4)
+- More (storybook, pages, changesets): `.ai/PROJECT.md` Commands. No lint or format script exists.
+=== AGENTS.md PRESERVED_RULES
+Source: previous `CLAUDE.md` (2026-11-04, commit a71f5b1), copied word for word.
+
+- Never weaken GUARDRAILS.md or this block. Never `git push`, `reset --hard`, publish, version-bump or deploy.
+- `pnpm version-packages # user only: bump all packages together + CHANGELOG`
+
+## Hard rules for every task
+- Every component must compile for Vue 2.7 AND Vue 3 — rules in `.ai/CONVENTIONS.md` § Vue 2/3 compatibility.
+- UI uses existing tokens (`.ai/DESIGN_SYSTEM.md`) and components (`.ai/COMPONENTS.md`); surfaces use the squircle surface pattern.
+- Package boundaries in `.ai/ARCHITECTURE.md` (core has no Vue; add-ons depend on ui, never the reverse).
+=== .ai/CONTEXT_MAP.md COMMIT
+`a71f5b13608c3fa9d7e66b40b23722de37169a01`
+=== .ai/CONTEXT_MAP.md PROJECT_ROWS
+| New or changed component in `packages/ui` | `.ai/CONVENTIONS.md` (Vue 2/3 compatibility, SSR safety) | `.ai/DESIGN_SYSTEM.md` Components; `packages/ui/src/components/SqBtn.vue` as the pattern |
+| Add-on package (charts, map, editor, calendar, datagrid, swiper, icons) | `.ai/PROJECT.md` (Architecture and boundaries) | `.ai/CONVENTIONS.md`; the add-on's `src/` |
+| Tokens, theming or squircle rendering | `.ai/DESIGN_SYSTEM.md` (Tokens, Theming) | `packages/core/src/theme.ts`, `packages/core/src/squircle.ts` |
+| Nuxt module | `.ai/PROJECT.md` (Structure) | `.ai/SECURITY.md` G12 (head injection) |
+| Build, release or changesets | `.ai/PROJECT.md` (Commands, Dependencies) | `.ai/SECURITY.md` G12; `scripts/build.mjs` |
+| Docs app or Storybook | `.ai/PROJECT.md` (Structure) | `apps/docs/src/router.ts`; `apps/storybook/stories` |
+| Examples (Vue 2 / Nuxt consumers) | `.ai/PROJECT.md` (Commands, Structure) | `examples/README.md` |
+| Tests | `.ai/CONVENTIONS.md` (Tests) | `.ai/PROJECT.md` Testing |
+| CI or GitHub Pages | `.ai/SECURITY.md` (G12, Enforcement status) | `.github/workflows/ci.yml`, `.github/workflows/pages.yml` |
+=== .ai/CONTEXT_MAP.md RESERVED_WORDS
+none
+=== .ai/CONTEXT_MAP.md KIT_FILES
+- Kit: CONTEXT-ENGINEER-PROMPT v2.1, tier Standard, flags `fe`, `figma`; setup state in `.ai/setup/SETUP_STATE.md`.
+- No other prompt or agent kit (no `.cursor/`, `.codex/`, `docs/prompting/`, `.github/agents/`).
+- Decision log: none in the tree (the previous ADRs 0001–0006 were removed with the old `.ai/`; they remain in git history at commit a71f5b1). Create `.ai/DECISIONS.md` on the first real decision.
+=== .ai/CONTEXT_MAP.md MERGES
+- The previous `.ai/` kit (removed 2026-11-04 at the user's request) → its unique rules merged: Vue 2/3 compatibility and SSR safety → `.ai/CONVENTIONS.md`; package boundaries → `.ai/PROJECT.md` Architecture; SqIcon raw-HTML exception → `.ai/SECURITY.md` ARCH; Figma rules (old G7) → `.ai/DESIGN_SYSTEM.md` Figma.
+- Previous `CLAUDE.md` project rules → AGENTS.md preserved block.
+- Previous `.claude/skills/` and `.claude/agents/` → replaced by the kit versions (same names plus quick, implement, verify-setup, run-evals).
+=== .ai/CONTEXT_MAP.md DRIFT
+- Preserved rule "Never `git push`" is stricter than G4-9 (push allowed when the user asks in chat). The preserved rule wins until the user decides.
+- Preserved rules cite `.ai/COMPONENTS.md` and `.ai/ARCHITECTURE.md`, which no longer exist: read `.ai/DESIGN_SYSTEM.md` Components and `.ai/PROJECT.md` Architecture and boundaries instead.
+- G10-1 forbids AI attribution, but git history has 21 Claude co-author trailers in the last 50 commits; history is not rewritten, the rule applies from now on.
+- No lint or format tooling: G9-2 (TOOL lint) and S2-1 (TOOL lint) are enforced by review only.
+=== .ai/PROJECT.md SUMMARY
+Squirkle UI is a squircle-first Vue component library published as `@squirkle-ui/*`. One source tree compiles to a Vue 3 build and a Vue 2.7 build; a Nuxt module (Nuxt 2/3/4) registers it. No backend, auth, database or payments.
+=== .ai/PROJECT.md STACK
+- pnpm `11.10.0` (`package.json` packageManager), Node `>=20.19` (CI uses Node 24, `.github/workflows/ci.yml`).
+- Vue `^3.5.0` plus Vue `2.7.16` via the `vue2` alias; Vite `^7.1.0`; TypeScript `~5.9.0` with vue-tsc 3; Vitest `^3.2.0` + happy-dom + `@vue/test-utils`.
+- Storybook 10 (`apps/storybook/package.json`); Nuxt 4.6.2 (`examples/nuxt4/package.json`) and 2.18.1 (`examples/nuxt2/package.json`); `@nuxt/kit` 4 in `packages/nuxt/package.json`.
+- Add-on libraries: Tiptap (editor), MapLibre + Leaflet (map), Iconify (icons).
+- Workspaces: `pnpm-workspace.yaml` (packages, apps, examples; `examples/nuxt2` excluded).
+=== .ai/PROJECT.md COMMANDS_FULL
+| Command | Does |
+| --- | --- |
+| `pnpm install` | install the workspace |
+| `pnpm dev` | docs + playground (`apps/docs`), Vue 3, sources aliased, port 5180 |
+| `pnpm dev:vue2` | `examples/vue2-vite` on built dist (run `pnpm build` first), port 5181 |
+| `pnpm dev:nuxt` | `examples/nuxt4` SSR on built dist, port 5182 |
+| `pnpm storybook` | Storybook, Vue 3, sources aliased, port 6006 |
+| `pnpm build` | `node scripts/build.mjs`: dual builds in order core → ui → add-ons |
+| `pnpm build:docs` / `pnpm build:storybook` | static docs / Storybook builds |
+| `pnpm examples:build` | `node scripts/examples.mjs`: build every example |
+| `pnpm build:pages` | `node scripts/pages.mjs`: GitHub Pages site into `_site/` |
+| `pnpm test` | `vitest run` |
+| `pnpm typecheck` | `vue-tsc --noEmit -p tsconfig.json` |
+| `pnpm changeset` | record a package change in `.changeset/` |
+| `pnpm version-packages` | user only: `changeset version` |
+
+Scoped test (UNVERIFIED form): `pnpm vitest run packages/ui/test/components.test.ts --reporter=dot`. No lint or format script.
+=== .ai/PROJECT.md STRUCTURE_ROWS
+| `packages/core` | framework-free squircle geometry, theme CSS, color, dates, utils | no Vue imports |
+| `packages/ui` | `Sq*` components, plugin, composables, tokens | `packages/ui/src/components/index.ts` re-exports every component |
+| `packages/ui/src/composables` | style, group, model, field, validation, overlay, link, theme helpers | reuse before adding |
+| `packages/ui/src/styles` | `tokens.css`, `base.css` (squircle surface), utilities | token source |
+| `packages/ui/vue2` | Vue 2 subpath entry (`dist/vue2`) | generated by the build |
+| `packages/datagrid`, `packages/swiper`, `packages/calendar`, `packages/map`, `packages/charts`, `packages/icons`, `packages/editor` | add-ons | depend on ui + core only |
+| `packages/squirkle-ui` | umbrella re-export of every package | |
+| `packages/nuxt` | Nuxt 2/3/4 module (`packages/nuxt/src/module.mjs`, `packages/nuxt/src/nuxt2.cjs`) | injects theme CSS into head (G12) |
+| `build/aliases.ts`, `build/vite.lib.mjs` | source aliases for tests/docs/typecheck; shared library Vite config | |
+| `scripts/` | build, examples, pages, release, gen-index | release only prints the publish command (G12) |
+| `apps/docs` | docs + playground (`apps/docs/src/router.ts`, `apps/docs/src/registry.ts`) | |
+| `apps/storybook` | stories per category in `apps/storybook/stories` | coverage test needs a story per component |
+| `examples/` | one consumer app per framework, on built dist | |
+| `.changeset/` | Changesets, one fixed group for all packages | CI requires a changeset per PR |
+=== .ai/PROJECT.md ARCHITECTURE
+- Dependency direction: core (no Vue) ← ui (components, plugin, composables, tokens) ← add-ons (import ui + core by package name only) ← nuxt (Node-side module) ← apps and examples (consumers).
+- ui never imports an add-on; add-ons never import each other.
+- Cross-package imports use package names; `build/aliases.ts` maps them to sources for docs, tests and typecheck. Never import from `dist`.
+- Build model: the same `src/` compiles twice, `dist/vue3` with `@vitejs/plugin-vue` and `dist/vue2` with `@vitejs/plugin-vue2` (target es2019 for webpack 4); see `build/vite.lib.mjs` and `scripts/build.mjs`.
+=== .ai/PROJECT.md DATA_FLOW
+- core: pure TS (squircle paths, theme → CSS variables).
+- ui: components read config from the plugin (`packages/ui/src/config.ts`), render squircle surfaces via CSS or `SqShape` SVG.
+- add-ons: build on ui components and core utils.
+- nuxt: registers components and injects theme CSS at SSR.
+- apps/examples: consume sources (docs, Storybook) or built dist (examples).
+=== .ai/PROJECT.md FEATURES
+- About 90 `Sq*` components (buttons, forms, date/time pickers, feedback, layout, content, utility): `.ai/DESIGN_SYSTEM.md` Components.
+- Themes: light/dark presets, brand theme generation, appearance (font, radius scale, smoothing) in `packages/core/src/theme.ts`.
+- Add-ons: data grid, carousel, calendar, maps (vector + raster, markers, clustering), SVG charts, Iconify icon picker, Tiptap editor.
+=== .ai/PROJECT.md INTEGRATIONS
+- No `.env.example`; no env vars used.
+- Iconify API: `packages/ui/src/icons.ts:98`, host from `config.icons.api` (default in `packages/ui/src/config.ts:70`; `false` disables).
+- Map tiles and styles: `packages/map/src/adapters.ts:45-51` (CARTO, OpenFreeMap), `tileUrl` prop default OSM (`packages/map/src/SqMap.vue:50`).
+- Google Fonts in `apps/docs/index.html`.
+=== .ai/PROJECT.md DEPENDENCIES
+- `vue2` alias (`npm:vue@2.7.16`) builds the Vue 2 output; never upgrade it past 2.7.
+- `@changesets/cli` with one fixed version group for all 11 packages (`.changeset/config.json`).
+- `maplibre-gl` is loaded with a dynamic import (`packages/map/src/adapters.ts:64`).
+- `pnpm-workspace.yaml` allowBuilds: esbuild only.
+=== .ai/PROJECT.md TESTING
+- Vitest config `vitest.config.ts` (includes `packages/*/test/**/*.test.ts`), aliases from `build/aliases.ts`, happy-dom environment.
+- Tests in `packages/ui/test` (components, surface, storybook-coverage) and one folder per add-on.
+- CI (`.github/workflows/ci.yml`): frozen install → test → typecheck → build → examples:build; PRs also run `pnpm changeset status`.
+=== .ai/PROJECT.md PERFORMANCE
+- Virtualized rendering exists (`SqVirtualScroll`, data grid engine `packages/datagrid/src/engine.ts`); reuse them for long lists.
+- No measured performance budgets recorded.
+=== .ai/CONVENTIONS.md CODE_CONVENTIONS
+- SFC: `<template>` then `<script lang="ts">` with `defineComponent({ name, props, emits, setup })`; no `<script setup>` in packages. Ex: `packages/ui/src/components/SqBtn.vue`.
+- Shared props from `packages/ui/src/composables/style.ts` (variant, color, size, rounded); JSDoc on props.
+- State: local refs/computed plus provide/inject groups (`packages/ui/src/composables/group.ts`); no Pinia or Vuex.
+- Forms: `packages/ui/src/composables/field.ts` and `packages/ui/src/composables/validation.ts`.
+- Styling: `--sq-*` CSS variables via style helpers; surfaces use `sq-surface` (`packages/ui/src/styles/base.css`).
+- UI strings: `t(key)` with English defaults in `packages/ui/src/config.ts`.
+
+### Vue 2/3 compatibility
+- Single root element; no `<template v-for>`; no `v-if` + `v-for` on one element; no Teleport, Suspense or fragments (use `SqPortal`).
+- `v-model` components: `model: vModel` + `useProxiedModel` (`packages/ui/src/composables/model.ts`). Ex: `packages/ui/src/components/SqSwitch.vue`.
+- Second models: prop + `update:x` emit (`v-model:x` in Vue 3, `.sync` in Vue 2). Ex: `selected` in `packages/datagrid/src/SqDataGrid.vue`.
+- Listen with the exact emitted name `@update:modelValue`. Ex: `packages/datagrid/src/GridFilter.vue`.
+- Slots via `setup(_, { slots })` + a `has(name)` helper, never `$slots` or `$scopedSlots`. Ex: `packages/ui/src/components/SqCard.vue`.
+- ARIA booleans as strings (`'true'` / `'false'`): Vue 2 drops `false` attributes.
+- Plain JS in templates (no `as`, no `!`); no template bindings named like Object.prototype members.
+- DOM-element props use `type: null as unknown as PropType<…>`. Ex: `activator` in `packages/ui/src/components/SqMenu.vue`.
+- Transition CSS lists both `-enter` and `-enter-from` classes (`packages/ui/src/styles/base.css`).
+- Extending a component: spread the SFC object and override props. Ex: `packages/ui/src/components/SqAutocomplete.vue`.
+- Links: bind `v-bind="linkAttrs(to, href)"` from `packages/ui/src/composables/link.ts`, never `:href` + `:to` (Vue 3 erases RouterLink's href). Ex: `packages/ui/src/components/SqBreadcrumbs.vue`.
+
+### SSR safety
+- No timers, `document`/`window` access or network calls in `setup()` or immediate watchers: use `onMounted` or an `isBrowser` guard.
+- Ids via `useUid(prefix)`; text-like fields pass an `id` prop to the native input.
+=== .ai/CONVENTIONS.md NAMING
+- Components `Sq` + PascalCase file names (`SqBtn.vue`); BEM classes `sq-btn__content`, `sq-btn--icon`.
+- CSS variables `--sq-<group>-<step>`; theme classes `sq-theme--<name>`.
+- Events: declared `emits` arrays; v-model event `update:modelValue`.
+- Packages `@squirkle-ui/<name>`.
+=== .ai/CONVENTIONS.md TEST_PATTERNS
+- `describe`/`it` with `mount` from `@vue/test-utils`. Ex: `packages/ui/test/components.test.ts`.
+- One test folder per package: `packages/<name>/test/*.test.ts`.
+- A new component needs a story under `apps/storybook/stories` (checked by `packages/ui/test/storybook-coverage.test.ts`).
+=== .ai/CONVENTIONS.md COMMIT_CONVENTION
+- Conventional commits with a package scope: `fix(ui): …`, `fix(core): …`, `feat(storybook): …`, `ci: …`, `chore: …`.
+- Branches `fix/…`, `feat/…`, `chore/…`, merged by PR; every PR that changes a package adds a changeset (`pnpm changeset`).
+=== .ai/CONVENTIONS.md ANTI_PATTERNS
+- Importing from `dist` instead of package names (aliases in `build/aliases.ts`).
+- A v-model component without the `model` option breaks Vue 2.
+- Empty `catch {}` in `packages/ui/src/icons.ts:102` (swallowed Iconify fetch errors); don't copy it into new code (S1-4).
+- `:href` + `:to` on one element (fixed in `packages/ui/src/composables/link.ts`).
+=== .ai/CONVENTIONS.md PROJECT_REVIEW_LINES
+- Vue 2/3: the change builds with `pnpm build` (both outputs) and follows the Vue 2/3 compatibility list above.
+- Package boundaries respected (PROJECT Architecture); a package change has a changeset.
+- New component: exported from its package index, has a story and a docs page.
+=== .ai/SECURITY.md PROFILE
+standard
+=== .ai/SECURITY.md DATE
+2026-11-04
+=== .ai/SECURITY.md ACTIVE_SECTIONS
+S1 Universal, S2 Frontend, S5 Supply chain. S3 and S4 are inactive: no server, API, auth, database or payments in this repo.
+=== .ai/SECURITY.md G12_PATHS
+- `.github/workflows/ci.yml`, `.github/workflows/pages.yml`
+- `scripts/release.mjs`, `scripts/build.mjs`, `scripts/pages.mjs`, `scripts/examples.mjs`
+- `.changeset/config.json`, `pnpm-workspace.yaml`, `package.json` and each `packages/<name>/package.json` (exports, publishConfig, dependencies)
+- Raw-HTML sinks: `packages/ui/src/components/SqIcon.vue`, `packages/map/src/markers.ts`, `packages/map/src/SqMap.vue` (attribution HTML), `packages/editor/src/SqEditor.vue`
+- Network code: `packages/ui/src/icons.ts`, `packages/ui/src/config.ts`, `packages/icons/src/SqIconPicker.vue`, `packages/map/src/adapters.ts`
+- Nuxt head injection: `packages/nuxt/src/module.mjs`, `packages/nuxt/src/nuxt2.cjs`, `packages/nuxt/src/runtime/nuxt2-plugin.js`
+- `apps/docs/index.html`
+=== .ai/SECURITY.md TRUST_BOUNDARIES
+- Library code runs in the consumer's app; every prop, slot and config value comes from the consuming developer, and in some components from end users (editor content, field values).
+- Iconify SVG bodies: trusted only from `addIcons`/`addCollection` data or the Iconify API host the app configures (`packages/ui/src/components/SqIcon.vue:11`).
+- Editor HTML: Tiptap parses it against its schema (`packages/editor/src/SqEditor.vue:160`); the consumer renders the emitted HTML.
+- No auth, tokens or sessions anywhere.
+=== .ai/SECURITY.md ARCH_VARIANTS
+- SqIcon raw HTML (S2-1 exception): `packages/ui/src/components/SqIcon.vue:16` and `packages/map/src/markers.ts:43` write Iconify SVG bodies as HTML. Residual risk: a compromised or app-misconfigured icon host injects markup. Evidence: host from `config.icons.api`, `false` disables fetching (`packages/ui/src/icons.ts:93`).
+- Nuxt theme CSS: `packages/nuxt/src/module.mjs:43` injects generated CSS; Nuxt 2 disables the vue-meta sanitizer for that tag (`packages/nuxt/src/runtime/nuxt2-plugin.js:12`). Residual risk: a theme value from untrusted input could break out of the style tag. Evidence: values come from the app's own config.
+- Map attribution: the `attribution` prop is rendered as HTML by Leaflet (`packages/map/src/adapters.ts:114`). Residual risk: caller-supplied HTML. UNVERIFIED for the MapLibre path.
+- Editor links: `packages/editor/src/SqEditor.vue:124` accepts any `scheme:` prefix; `javascript:` blocking is UNVERIFIED (S2-3).
+- Headers (S1-8): GitHub Pages can't set headers; no CSP. Accepted for the docs site.
+=== .ai/SECURITY.md ENFORCEMENT_ROWS
+| Lockfile + frozen install in CI (S5-1) | SET (`.github/workflows/ci.yml`) |
+| Workflow `permissions:` (S5-3) | SET (`contents: read` in both workflows) |
+| Actions pinned to SHAs (S5-3) | PROPOSED (pinned to major tags) |
+| Dependency audit in CI (S5-3) | PROPOSED |
+| Release-age cooldown (S5-2) | PROPOSED (`minimumReleaseAge` absent) |
+| Install-script allowlist (S5-2) | SET (`pnpm-workspace.yaml` allowBuilds) |
+| Secret scan | PROPOSED |
+| Settings deny rules (G3-1, G4-9) | UNVERIFIED (`.ai/setup/proposals/settings.json` pending) |
+| Lint (S2-1, G9-2) | PROPOSED (no linter) |
+| Hooks / pre-commit | PROPOSED (none) |
+=== .ai/SECURITY.md SCRIPT_INVENTORY
+- `apps/docs/index.html`: Google Fonts stylesheet (no SRI; fonts only, no script). No external scripts in the docs or examples.
+=== .ai/DESIGN_SYSTEM.md TOKEN_SOURCES
+- Non-color tokens: `packages/ui/src/styles/tokens.css` (`:root`, prefix `--sq-`).
+- Colors: `packages/core/src/theme.ts` (`defaultThemes`, presets, `createBrandTheme`, `themeVars` emits `--sq-<name>`, `--sq-on-*` generated).
+- Squircle surface: `packages/ui/src/styles/base.css` (native `corner-shape`), SVG fallback `packages/ui/src/components/SqShape.vue`, geometry `packages/core/src/squircle.ts`.
+=== .ai/DESIGN_SYSTEM.md TOKEN_ROWS
+| `--sq-<color>` (primary, secondary, accent, success, info, warning, error, background, surface, surface-variant, surface-raised, muted, border, border-strong, overlay) + `--sq-on-<color>` | Iris palette | light, dark | `packages/core/src/theme.ts:11` | UNMAPPED |
+| `--sq-smoothing`, `--sq-radius-none` … `--sq-radius-pill` (× `--sq-radius-scale`) | 0.6; 6px–36px | all | `packages/ui/src/styles/tokens.css:4-12` | UNMAPPED |
+| `--sq-space-0` … `--sq-space-12` | 4px scale | all | `packages/ui/src/styles/tokens.css:15-24` | UNMAPPED |
+| `--sq-font`, `--sq-font-mono`, `--sq-text-*`, `--sq-weight-*` | Geist first | all | `packages/ui/src/styles/tokens.css:28-39` | UNMAPPED |
+| `--sq-control-xs` … `--sq-control-xl` | 24–56px | all | `packages/ui/src/styles/tokens.css:46-50` | UNMAPPED |
+| `--sq-elevation-0` … `--sq-elevation-4` (+ `-filter` for SVG) | shadows | all | `packages/ui/src/styles/tokens.css:53-62` | UNMAPPED |
+| `--sq-ease`, `--sq-ease-spring`, `--sq-duration-*` | 120/200/320ms | all | `packages/ui/src/styles/tokens.css:65-69` | UNMAPPED |
+| `--sq-z-*` | app-bar, drawer, overlay, tooltip, snackbar | all | `packages/ui/src/styles/tokens.css:72-76` | UNMAPPED |
+| `--sq-hover-opacity`, `--sq-press-opacity`, `--sq-selected-opacity`, `--sq-disabled-opacity`, `--sq-focus-ring` | state layers | all | `packages/ui/src/styles/tokens.css:79-83` | UNMAPPED |
+| `--sq-bp-sm/md/lg/xl` | 600/960/1280/1920 (reference) | all | `packages/ui/src/styles/tokens.css:86-89` | UNMAPPED |
+| `--sq-series-1` … `--sq-series-8` (fixed chart palette, DS-1a) | hex | light, dark | `packages/charts/src/styles.css:2-9` | UNMAPPED |
+=== .ai/DESIGN_SYSTEM.md THEMING
+- Theme classes `.sq-theme--<name>`, default theme also on `:root` (`createThemeCss` in `packages/core/src/theme.ts`).
+- Global: `syncThemeToDocument` in `packages/ui/src/config.ts` injects `<style id="sq-theme-vars">` and sets the class on `<html>`.
+- Scoped: `SqThemeProvider` (`packages/ui/src/components/SqThemeProvider.vue`).
+- API: `useTheme()` (`packages/ui/src/composables/theme.ts`): toggle, setBrand, applyPreset, setColors, setAppearance.
+- Squircle surface pattern: class `sq-surface` with `--sq-r`; native `corner-shape: squircle` when supported (`packages/ui/src/styles/base.css:14-19`), else `SqShape` SVG per `config.squircle.mode`; nested surfaces drop the parent shadow.
+=== .ai/DESIGN_SYSTEM.md COMPONENT_ROWS
+| Shared style props | `packages/ui/src/composables/style.ts` | variant flat/elevated/tonal/outlined/text/plain; size x-small…x-large; color; rounded | UNMAPPED |
+| Buttons: SqBtn, SqBtnGroup, SqBtnToggle, SqSpeedDial, SqChip, SqChipGroup | `packages/ui/src/components` | variant, color, size, rounded, loading | UNMAPPED |
+| Forms: SqTextField, SqTextarea, SqSelect, SqAutocomplete, SqCombobox, SqNumberInput, SqOtpInput, SqCheckbox, SqRadio(Group), SqSwitch, SqSlider, SqRangeSlider, SqRating, SqFileInput, SqColorPicker, SqDate/DateTime/Time pickers and fields, SqField, SqForm | `packages/ui/src/components` | modelValue, label, rules, id | UNMAPPED |
+| Feedback: SqAlert, SqBanner, SqSnackbar, SqDialog, SqBottomSheet, SqTooltip, SqProgressCircular, SqProgressLinear, SqSkeleton, SqEmptyState | `packages/ui/src/components` | type, variant, modelValue | UNMAPPED |
+| Layout: SqApp, SqAppBar, SqToolbar, SqMain, SqFooter, SqContainer, SqRow, SqCol, SqSpacer, SqDivider, SqNavigationDrawer, SqBottomNavigation, SqSheet, SqShape, SqThemeProvider | `packages/ui/src/components` | | UNMAPPED |
+| Content: SqCard(+Title/Text/Actions), SqAvatar, SqBadge, SqImg, SqIcon, SqKbd, SqList(+Item/Group/Subheader), SqTable, SqTreeview, SqTimeline, SqBreadcrumbs, SqPagination, SqStepper, SqTabs, SqWindow, SqExpansionPanels, SqSlideGroup, SqMenu | `packages/ui/src/components` | variant (card: elevated/outlined/flat/tonal) | UNMAPPED |
+| Utility: SqOverlay, SqPortal, SqLazy, SqInfiniteScroll, SqVirtualScroll, SqExpandTransition | `packages/ui/src/components` | | UNMAPPED |
+| Charts: SqBarChart, SqLineChart, SqDonutChart, SqSparkline | `packages/charts/src/components` | series via `--sq-series-*` | UNMAPPED |
+| SqMap | `packages/map/src/SqMap.vue` | tileUrl, attribution, markers | UNMAPPED |
+| SqEditor | `packages/editor/src/SqEditor.vue` | modelValue (HTML) | UNMAPPED |
+| SqCalendar, SqDataGrid, SqSwiper, SqIconPicker | `packages/calendar/src/SqCalendar.vue`, `packages/datagrid/src/SqDataGrid.vue`, `packages/swiper/src/SqSwiper.vue`, `packages/icons/src/SqIconPicker.vue` | | UNMAPPED |
+=== .ai/DESIGN_SYSTEM.md ICONS_I18N
+- Icons: `packages/ui/src/icons.ts` (`builtinIcons`, `addIcons`, `addCollection`, `resolveIcon`), rendered by `SqIcon`; picker and alias presets in `packages/icons/src/index.ts`.
+- i18n: English defaults `enMessages` and `t(key, …args)` in `packages/ui/src/config.ts`; apps override via plugin options. No locale files.
+- Breakpoints: `--sq-bp-*` reference values only.
+- Docs: component pages via `apps/docs/src/registry.ts` and `apps/docs/src/examples`; stories in `apps/storybook/stories`.
+=== .ai/TASK_CONTRACT.md WRITER
+Codex (CLI `codex-cli 0.166.0`)
+=== .ai/TASK_CONTRACT.md WRITER_COMMANDS
+- Task file (CLI): `codex exec "You are the writer. Follow AGENTS.md and .ai/TASK_CONTRACT.md. Write one task file under .ai/tasks/ for: <request>. Copy writer_model exactly from .ai/WORKFLOW.md Routing. Edit no other file."`
+- Docs refresh (CLI): `codex exec "You are the writer. Follow AGENTS.md. Refresh the .ai/ knowledge files from code changed since Last synced in .ai/CONTEXT_MAP.md. Never edit .ai/GUARDRAILS.md or source. Copy writer_model exactly from .ai/WORKFLOW.md Routing."`
+- Then in Claude Code: `/implement <slug>`.
+=== .ai/WORKFLOW.md WRITER_STRONGEST
+UNKNOWN
+=== .ai/WORKFLOW.md WRITER_STRONG
+UNKNOWN
+=== .ai/TOOL_FACTS.md TOOL_ROWS
+| claude | 2.1.318 | SET | 2026-11-04 |
+| node | v26.13.0 (CI: 24) | SET | 2026-11-04 |
+| pnpm | 11.10.0 | SET | 2026-11-04 |
+| codex | codex-cli 0.166.0 | SET | 2026-11-04 |
+| writer model | UNKNOWN (user: later) | UNVERIFIED | 2026-11-04 |
+| Figma MCP | connected (`claude mcp list`) | SET | 2026-11-04 |
+=== .claude/agents/visual-tester.md BROWSER_TOOLS
+mcp__Claude_Browser__preview_start, mcp__Claude_Browser__navigate, mcp__Claude_Browser__computer, mcp__Claude_Browser__read_page, mcp__Claude_Browser__resize_window, mcp__Claude_Browser__read_console_messages, mcp__Claude_Browser__preview_stop, mcp__figma__get_screenshot
+=== .ai/setup/proposals/settings.json DENY_PATHS
+"Read(./pnpm-lock.yaml)",
+      "Read(./node_modules/**)",
+      "Read(./**/dist/**)",
+      "Read(./_site/**)",
+      "Read(./.release/**)",
