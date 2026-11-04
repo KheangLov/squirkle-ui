@@ -165,5 +165,10 @@ Approved with `go` typed by the user in this session (2026-11-04). One-step refu
 | test-verifier | PASS with minor gaps: 0 blockers; generated plugin and Nuxt 3 check have no unit test |
 | visual-tester | NOT RUN: no UI change |
 
+### /check-all re-run (2026-11-04, commit fbee5c1)
+- code-reviewer: PASS WITH NOTES, 0 blockers. Read the diff only; ran nothing. Diff matches the spec. G12 pass found no injection path. Open MINORs: `assertPrefix` duplicated in `module.mjs` and `nuxt2.cjs`; no unit test for the Nuxt 3/4 check or the generated Nuxt 2 plugin; explicit `prefix: undefined` or `null` throws on Nuxt 2 but falls back on Nuxt 3. NITs: test (e) checks source `components`, not the built `ui/vue2` entry; README example shows the default `Sq`.
+- test-verifier: PASS with minor gaps, 0 blockers. Re-ran `pnpm test` (78/78) and `pnpm typecheck` (exit 0); diff confirms head and sanitizer lines unchanged. Not re-run, log only: builds, examples, prefixed build, nuxt4 type check, `changeset status`. Gaps: no Nuxt 3/4 validator test, no runtime render of `XBtn`.
+- visual-tester: NOT RUN: no UI change.
+
 ## Metrics
 - Files: 5 modified, 2 created (as listed). Acceptance: 5/5 criteria pass.
