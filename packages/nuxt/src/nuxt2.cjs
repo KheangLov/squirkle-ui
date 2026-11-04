@@ -5,8 +5,13 @@ const { createRequire } = require('module')
 
 const ADDONS = ['datagrid', 'charts', 'swiper', 'calendar', 'map', 'icons', 'editor']
 
+function assertPrefix(p) {
+  if (typeof p !== 'string' || !/^[A-Za-z][A-Za-z0-9]*$/.test(p)) throw new Error('[squirkle] prefix must match /^[A-Za-z][A-Za-z0-9]*$/, got ' + JSON.stringify(p))
+}
+
 module.exports = function squirkleNuxt2(moduleOptions) {
-  const options = { addons: [], css: true, ...(this.options.squirkle || {}), ...(moduleOptions || {}) }
+  const options = { addons: [], css: true, prefix: 'Sq', ...(this.options.squirkle || {}), ...(moduleOptions || {}) }
+  assertPrefix(options.prefix)
   const addons = (options.addons || []).filter((a) => ADDONS.includes(a))
   const pkgs = ['ui'].concat(addons)
   if (options.css) for (const pkg of pkgs) this.options.css.push(`@squirkle-ui/${pkg}/styles.css`)
@@ -22,7 +27,7 @@ module.exports = function squirkleNuxt2(moduleOptions) {
   this.addPlugin({
     src: path.resolve(__dirname, 'runtime/nuxt2-plugin.js'),
     fileName: 'squirkle.js',
-    options: { addons, runtime: { theme: options.theme, squircle: options.squircle, appearance: options.appearance, icons: options.icons, locale: options.locale } },
+    options: { addons, prefix: options.prefix, runtime: { theme: options.theme, squircle: options.squircle, appearance: options.appearance, icons: options.icons, locale: options.locale } },
   })
 }
 // `@tiptap/pm/<sub>` exists only in its `exports` map, which webpack 4 ignores; resolve each subpath the way Node does.

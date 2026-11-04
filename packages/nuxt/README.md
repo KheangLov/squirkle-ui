@@ -39,7 +39,7 @@ Nuxt 2: annotate the options with `/** @type {import('@squirkle-ui/nuxt/nuxt2').
 ```js
 // nuxt.config.js
 export default {
-  buildModules: [['@squirkle-ui/nuxt/nuxt2', { addons: ['datagrid'] }]],
+  buildModules: [['@squirkle-ui/nuxt/nuxt2', { addons: ['datagrid'], prefix: 'Sq' }]],
 }
 ```
 Nuxt 2 bundles with webpack 4, which ignores package `exports`; the packages ship `vue2/` and `styles.css` fallbacks for it, and the module:

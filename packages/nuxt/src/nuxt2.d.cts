@@ -8,6 +8,8 @@ declare namespace squirkleNuxt2 {
   interface ModuleOptions extends Pick<SquirkleOptions, 'theme' | 'squircle' | 'appearance' | 'icons' | 'locale'> {
     /** Add-ons to register; only what you installed. Default `[]`. */
     addons?: SquirkleAddon[]
+    /** Component name prefix, replacing `Sq` (`'X'` gives `XBtn`). Letters and digits, starting with a letter. Default `'Sq'`. */
+    prefix?: string
     /** Add each package's stylesheet. Default `true`. */
     css?: boolean
   }
