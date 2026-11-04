@@ -79,3 +79,4 @@ Chat-only writers: build a context pack in your own terminal (never secret files
 
 ## Prompt Lessons (40 max; add only after rework, drift, a wrong assumption or a failed check)
 `- <date> | <writer> | <task type> | what went wrong | rule going forward`
+- 2026-11-04 | claude | manifest peer change | assumed pnpm-lock.yaml doesn't record workspace peerDependencies; frozen install failed | a peerDependencies change in a workspace manifest lists pnpm-lock.yaml in files_to_modify and `pnpm install --lockfile-only --offline` as a named G4 action

@@ -523,7 +523,7 @@ importers:
         specifier: ^6.0.0
         version: 6.15.0
       vue:
-        specifier: ^2.7.0 || ^3.3.0
+        specifier: ^2.7.16 || ^3.5.0
         version: 3.5.44(typescript@5.9.3)
 
   packages/swiper:
@@ -545,7 +545,7 @@ importers:
         specifier: workspace:^
         version: link:../core
       vue:
-        specifier: ^2.7.0 || ^3.3.0
+        specifier: ^2.7.16 || ^3.5.0
         version: 3.5.44(typescript@5.9.3)
 
 packages:

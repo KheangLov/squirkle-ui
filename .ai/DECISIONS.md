@@ -15,3 +15,5 @@ User: "use your recommended defaults" (this session). Source: `.ai/tasks/2026-11
 | 6 | Vue peer floor | **`^2.7.16 \|\| ^3.5.0`** | Only Vue 2.7.16 and 3.5 are built and tested. |
 | 7 | `componentNames` | **Public, documented** | The Nuxt module and custom registration depend on it. |
 | 8 | Publishing | **Manual `npm publish` with 2FA OTP, no provenance, for 1.0.** Tag `v1.0.0` after publishing. | It matches `scripts/release.mjs`; no publish workflow exists. |
+| 9 | `engines` field in published packages | **Not added** (this overrides API report risk 10). | Browser libraries don't run on Node. Yarn 1 fails the install on an `engines` mismatch, and Vue 2 / Nuxt 2 apps often build on Node 16–18. The repo's own `engines` (root `package.json`) stays. |
+| 10 | `./package.json` export | **Added to all 11 packages.** | Tools (Nuxt 2's resolver, bundler plugins, `require.resolve`) read it; it isn't exposed today. |
