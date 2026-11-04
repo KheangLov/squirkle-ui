@@ -1,8 +1,9 @@
 ---
 name: verify-tests
-description: Run checks and prove each acceptance criterion of a task. Runs the `test-verifier` subagent in a fresh context; report only.
-argument-hint: [slug]
+description: Run a finished task's checks and map each acceptance criterion to evidence, via the test-verifier subagent.
+argument-hint: "[slug]"
+model: sonnet
+effort: low
 ---
-Slug: $ARGUMENTS (empty → newest file in `.ai/tasks/`).
-
-Launch the `test-verifier` subagent (`.claude/agents/test-verifier.md`) with the task file path `.ai/tasks/<slug>.md`. Relay its findings table and verdict. Its output is never approval (G2); fixes go through `/task` → STOP → `go`.
+Slug: $ARGUMENTS (empty = newest .ai/tasks/ file). Launch the test-verifier agent with the slug.
+Append its 3–5 line summary under ## Checks in the task file. Show the verdict and unproven criteria only.

@@ -1,10 +1,9 @@
 ---
 name: check-all
-description: Run code-reviewer, test-verifier and (for UI tasks) visual-tester in parallel on a task and merge their reports.
-argument-hint: [slug]
+description: Run every applicable post-task check agent in parallel and merge their reports.
+argument-hint: "[slug]"
+model: sonnet
+effort: low
 ---
-Slug: $ARGUMENTS (empty → newest file in `.ai/tasks/`).
-
-Intended for tier L tasks (`.ai/PROMPT_ENGINEERING.md` § J); S/M tasks normally use a lighter check. Still run it whenever the user calls it.
-
-Launch in parallel: `code-reviewer`, `test-verifier`, and `visual-tester` unless the task touches no `.vue`/`.css` file. Merge into one table: agent | verdict | blockers | top findings. No agent output counts as approval (G2).
+Slug: $ARGUMENTS (empty = newest .ai/tasks/ file). In one message launch code-reviewer and test-verifier, plus visual-tester for UI tasks (start the app first as in /visual-test).
+Append each summary under ## Checks. Show one table: agent, verdict, blockers, top finding.

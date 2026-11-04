@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/.env)",
+      "Read(./**/*.pem)",
+      "Read(./**/*.key)",
+      "Read(./pnpm-lock.yaml)",
+      "Read(./node_modules/**)",
+      "Read(./**/dist/**)",
+      "Read(./_site/**)",
+      "Read(./.release/**)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git push --delete:*)",
+      "Bash(git push -d:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(npm publish:*)",
+      "Bash(pnpm publish:*)",
+      "Bash(rm -rf:*)"
+    ]
+  },
+  "attribution": { "commit": "", "pr": "" }
+}

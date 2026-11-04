@@ -129,12 +129,13 @@
       "import": "./dist/editor/vue2.mjs",
       "require": "./dist/editor/vue2.cjs"
     },
-    "./editor/styles.css": "./dist/editor/styles.css"
+    "./editor/styles.css": "./dist/editor/styles.css",
+    "./package.json": "./package.json"
   },
   "peerDependencies": {
     "leaflet": "^1.9.0",
     "maplibre-gl": "^6.0.0",
-    "vue": "^2.7.0 || ^3.3.0"
+    "vue": "^2.7.16 || ^3.5.0"
   },
   "peerDependenciesMeta": {
     "leaflet": {

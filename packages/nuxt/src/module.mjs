@@ -14,10 +14,15 @@ const ADDON_COMPONENTS = {
   editor: ['SqEditor'],
 }
 
+function assertPrefix(p) {
+  if (typeof p !== 'string' || !/^[A-Za-z][A-Za-z0-9]*$/.test(p)) throw new Error('[squirkle] prefix must match /^[A-Za-z][A-Za-z0-9]*$/, got ' + JSON.stringify(p))
+}
+
 export default defineNuxtModule({
   meta: { name: '@squirkle-ui/nuxt', configKey: 'squirkle', compatibility: { nuxt: '>=3.0.0' } },
   defaults: { addons: [], prefix: 'Sq', css: true, theme: undefined, squircle: undefined, appearance: undefined, icons: undefined, locale: undefined },
   async setup(options, nuxt) {
+    assertPrefix(options.prefix)
     const addons = (options.addons ?? []).filter((a) => a in ADDON_COMPONENTS)
     const pkgs = ['ui', ...addons]
     const { componentNames: uiNames } = await import('@squirkle-ui/ui')
