@@ -25,9 +25,13 @@
   "main": "./src/nuxt2.cjs",
   "exports": {
     ".": {
+      "types": "./src/module.d.mts",
       "import": "./src/module.mjs"
     },
-    "./nuxt2": "./src/nuxt2.cjs",
+    "./nuxt2": {
+      "types": "./src/nuxt2.d.cts",
+      "default": "./src/nuxt2.cjs"
+    },
     "./package.json": "./package.json"
   },
   "dependencies": {

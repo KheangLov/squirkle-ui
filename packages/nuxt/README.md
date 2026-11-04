@@ -31,6 +31,10 @@ export default defineNuxtConfig({
 - `SqMap` is client-only. With `map` enabled the module registers MapLibre's worker and keeps it out of Vite's dependency pre-bundling.
 - `useTheme()` works in components; theme CSS is rendered into `<head>` with `<html class="sq-theme--light">`.
 
+### Types
+`squirkle` options are typed automatically: an unknown add-on name is a type error in `nuxt.config.ts`.
+Nuxt 2: annotate the options with `/** @type {import('@squirkle-ui/nuxt/nuxt2').ModuleOptions} */`.
+
 ## Nuxt 2
 ```js
 // nuxt.config.js
