@@ -386,7 +386,7 @@ importers:
         specifier: workspace:^
         version: link:../core
       vue:
-        specifier: ^2.7.0 || ^3.3.0
+        specifier: ^2.7.16 || ^3.5.0
         version: 3.5.44(typescript@5.9.3)
     devDependencies:
       '@squirkle-ui/ui':
@@ -399,7 +399,7 @@ importers:
         specifier: workspace:^
         version: link:../core
       vue:
-        specifier: ^2.7.0 || ^3.3.0
+        specifier: ^2.7.16 || ^3.5.0
         version: 3.5.44(typescript@5.9.3)
     devDependencies:
       '@squirkle-ui/ui':
@@ -414,7 +414,7 @@ importers:
         specifier: workspace:^
         version: link:../core
       vue:
-        specifier: ^2.7.0 || ^3.3.0
+        specifier: ^2.7.16 || ^3.5.0
         version: 3.5.44(typescript@5.9.3)
     devDependencies:
       '@squirkle-ui/ui':
@@ -433,7 +433,7 @@ importers:
         specifier: ^3.32.0
         version: 3.32.0
       vue:
-        specifier: ^2.7.0 || ^3.3.0
+        specifier: ^2.7.16 || ^3.5.0
         version: 3.5.44(typescript@5.9.3)
     devDependencies:
       '@squirkle-ui/ui':
@@ -446,7 +446,7 @@ importers:
         specifier: workspace:^
         version: link:../core
       vue:
-        specifier: ^2.7.0 || ^3.3.0
+        specifier: ^2.7.16 || ^3.5.0
         version: 3.5.44(typescript@5.9.3)
     devDependencies:
       '@squirkle-ui/ui':
@@ -462,7 +462,7 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0
       vue:
-        specifier: ^2.7.0 || ^3.3.0
+        specifier: ^2.7.16 || ^3.5.0
         version: 3.5.44(typescript@5.9.3)
     devDependencies:
       '@squirkle-ui/ui':
@@ -532,7 +532,7 @@ importers:
         specifier: workspace:^
         version: link:../core
       vue:
-        specifier: ^2.7.0 || ^3.3.0
+        specifier: ^2.7.16 || ^3.5.0
         version: 3.5.44(typescript@5.9.3)
     devDependencies:
       '@squirkle-ui/ui':

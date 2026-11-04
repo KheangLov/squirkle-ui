@@ -1,6 +1,6 @@
 ---
 slug: 2026-11-04-manifests-plan
-status: ready
+status: done
 writer: claude
 writer_access: repo
 writer_model: claude-opus-5-5 / low

@@ -45,11 +45,12 @@
     "./styles.css": "./dist/styles.css",
     "./dist/types/*": {
       "types": "./dist/types/*.d.ts"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "peerDependencies": {
     "@squirkle-ui/ui": "workspace:^",
-    "vue": "^2.7.0 || ^3.3.0"
+    "vue": "^2.7.16 || ^3.5.0"
   },
   "dependencies": {
     "@tiptap/core": "^3.32.0",
