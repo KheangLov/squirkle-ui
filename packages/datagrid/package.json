@@ -1,6 +1,6 @@
 {
   "name": "@squirkle-ui/datagrid",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Enterprise-grade virtualized data grid for Squirkle UI",
   "license": "MIT",
   "repository": {

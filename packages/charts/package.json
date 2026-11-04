@@ -1,6 +1,6 @@
 {
   "name": "@squirkle-ui/charts",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Lightweight SVG charts with squircle styling for Squirkle UI",
   "license": "MIT",
   "repository": {
