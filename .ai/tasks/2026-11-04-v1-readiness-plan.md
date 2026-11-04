@@ -1,6 +1,6 @@
 ---
 slug: 2026-11-04-v1-readiness-plan
-status: ready
+status: done
 writer: Codex
 writer_access: repo
 writer_model: gpt-6-luna / medium (Codex CLI)
